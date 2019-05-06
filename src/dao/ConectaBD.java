@@ -4,10 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author kauan
- */
+
 public class ConectaBD {
 
     private static Connection conn = null;
@@ -23,7 +20,7 @@ public class ConectaBD {
                 String driverName = "com.mysql.jdbc.Driver";
                 Class.forName(driverName);
 
-                String url = "jdbc:mysql://localhost:3306/cruzeiro?useSSL=false";
+                String url = "jdbc:mysql://localhost:3306/projetointerdisciplinar?useSSL=false";
                 conn = DriverManager.getConnection(url, username, password);
             } catch (ClassNotFoundException e) {
                 System.out.println("Driver não encontrado " + e.toString());

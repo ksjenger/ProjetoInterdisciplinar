@@ -1,6 +1,6 @@
 package model.entities;
 
-public class Perfumaria {
+public class Perfumaria extends Produtos{
 
 	private Integer codigo;
 	private Integer quantidade;

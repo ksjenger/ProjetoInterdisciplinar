@@ -1,6 +1,6 @@
 package model.entities;
 
-public class Infantil {
+public class Infantil extends Produtos{
 
 	private Integer codigo;
 	private Integer quantidade;
