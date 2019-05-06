@@ -4,18 +4,18 @@ public class Remedios extends Produtos {
 
 	private Integer codigo;
 	private Integer quantidade;
-	private Integer tamanhoML;
+	private String tipoRemedio;
 	private String prescricao;
 
 	public Remedios() {
 		super();
 	}
 
-	public Remedios(Integer codigo, Integer quantidade, Integer tamanhoML, String prescricao) {
+	public Remedios(Integer codigo, Integer quantidade, String tipoRemedio, String prescricao) {
 		super();
 		this.codigo = codigo;
 		this.quantidade = quantidade;
-		this.tamanhoML = tamanhoML;
+		this.tipoRemedio = tipoRemedio;
 		this.prescricao = prescricao;
 	}
 
@@ -35,12 +35,12 @@ public class Remedios extends Produtos {
 		this.quantidade = quantidade;
 	}
 
-	public Integer getTamanhoML() {
-		return tamanhoML;
+	public String getTipoRemedio() {
+		return tipoRemedio;
 	}
 
-	public void setTamanhoML(Integer tamanhoML) {
-		this.tamanhoML = tamanhoML;
+	public void setTipoRemedio(String tipoRemedio) {
+		this.tipoRemedio = tipoRemedio;
 	}
 
 	public String getPrescricao() {
