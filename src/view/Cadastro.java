@@ -349,6 +349,7 @@ public class Cadastro extends javax.swing.JFrame {
                 ClienteDao clienteDao = new ClienteDao();
                 clienteDao.CreateCliente(cliente);
                 JOptionPane.showMessageDialog(this, "Cadastrado concluido!");
+                
             }
 
         }
