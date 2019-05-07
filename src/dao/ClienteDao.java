@@ -17,7 +17,7 @@ public class ClienteDao {
 		try {
 			st = conn.prepareStatement("insert into cliente (firstName, "
                                 + "lastName, logradouro, numero, bairro, "
-                                + "complemento, CEP, uf, telefone, convenio) values"
+                                + "complemento, CEP, uf, telefone, idconvenio) values"
                                 + " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			st.setString(1, cliente.getFirstName());
 			st.setString(2, cliente.getLastName());
@@ -28,18 +28,12 @@ public class ClienteDao {
                         st.setString(7, cliente.getCEP());
                         st.setString(8, cliente.getUf());
                         st.setString(9, cliente.getTelefone());
-                        st.setString(10, cliente.getConvenio());
-                                
-			
+                        st.setString(10, "1");
 			st.execute();
 			st.close();
-			
 			ConectaBD.closeConnection();
 		}catch(SQLException e) {
 			e.printStackTrace();
-		}
-		
+                }	
 	}
-	
-
 }

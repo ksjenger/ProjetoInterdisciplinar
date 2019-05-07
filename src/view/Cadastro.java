@@ -1,9 +1,12 @@
 package view;
 
+import com.sun.java.swing.plaf.windows.resources.windows;
+import dao.ClienteDao;
+import javax.swing.JOptionPane;
 import model.entities.Cliente;
 
 public class Cadastro extends javax.swing.JFrame {
-    
+
     public Cadastro() {
         initComponents();
         jPanelCadastro.setVisible(false);
@@ -16,7 +19,7 @@ public class Cadastro extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lbnTituloCadastro = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jPanelCadastro = new javax.swing.JPanel();
         txtSobronome = new javax.swing.JTextField();
         txtComplemento = new javax.swing.JTextField();
@@ -53,7 +56,7 @@ public class Cadastro extends javax.swing.JFrame {
 
         jLabel1.setText("O que deseja cadastrar?");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Clientes", "Produtos", "Funcionarios" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Selecione", "Clientes", "Produtos", "Funcionarios" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -209,6 +212,11 @@ public class Cadastro extends javax.swing.JFrame {
         txtConvenio.setBounds(70, 220, 150, 30);
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
         jPanelCadastro.add(btnCancelar);
         btnCancelar.setBounds(250, 303, 150, 30);
 
@@ -313,33 +321,46 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         int selecao = jComboBox1.getSelectedIndex();
-        
-        if(selecao == 1){
+
+        if (selecao == 1) {
             jPanelCadastro.setVisible(true);
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
         int selecao = jComboBox1.getSelectedIndex();
-        
-        if(selecao == 1){
-            String firstName = txtNome.getText();
-            String lastName = txtSobronome.getText();
-            String logradouro = txtLogradouro.getText();
-            Integer numero = Integer.parseInt(txtNumero.getText());
-            String complemento = txtComplemento.getText();
-            String Cep = txtCep.getText();
-            String bairro = txtBairro.getText();
-            String uf = txtUf.getText();
-            String telefone = txtTelefone.getText();
-            String convenio = txtConvenio.getText();
-            String email = txtEmail.getText();
-            
-            Cliente cliente = new Cliente(firstName, lastName, logradouro, numero, bairro, complemento, Cep, uf, telefone, convenio, email);
-            
-            
+
+        if (selecao == 1) {
+            int resposta = JOptionPane.showConfirmDialog(this, "Deseja incluir novo cliente?", "Cadastro", WIDTH);
+            if (resposta == 1) {
+                String firstName = txtNome.getText();
+                String lastName = txtSobronome.getText();
+                String logradouro = txtLogradouro.getText();
+                Integer numero = Integer.parseInt(txtNumero.getText());
+                String complemento = txtComplemento.getText();
+                String Cep = txtCep.getText();
+                String bairro = txtBairro.getText();
+                String uf = txtUf.getText();
+                String telefone = txtTelefone.getText();
+                String convenio = txtConvenio.getText();
+                String email = txtEmail.getText();
+
+                Cliente cliente = new Cliente(firstName, lastName, logradouro, numero, bairro, complemento, Cep, uf, telefone, convenio, email);
+                ClienteDao clienteDao = new ClienteDao();
+                clienteDao.CreateCliente(cliente);
+                JOptionPane.showMessageDialog(this, "Cadastrado concluido!");
+            }
+
         }
     }//GEN-LAST:event_btnIncluirActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cancelar?", "Confirma", WIDTH);
+
+        if (decisao != 1) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

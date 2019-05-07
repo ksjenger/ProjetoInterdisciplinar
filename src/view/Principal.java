@@ -1,19 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
-/**
- *
- * @author kauan
- */
 public class Principal extends javax.swing.JFrame {
     
     Sobre sobre = new Sobre();
     Pesquisar pesquisar = new Pesquisar();
-    
+    Cadastro cadastro = new Cadastro();
+        
     public Principal() {
         initComponents();
     }
@@ -87,6 +79,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel2.add(btnCadastro);
         btnCadastro.setBounds(10, 150, 100, 60);
 
+        btnTemp2.setText("Relatorios");
         btnTemp2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTemp2ActionPerformed(evt);
@@ -151,7 +144,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtendimentoActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
-        // TODO add your handling code here:
+        cadastro.setVisible(true);
     }//GEN-LAST:event_btnCadastroActionPerformed
 
     private void btnTemp2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTemp2ActionPerformed
