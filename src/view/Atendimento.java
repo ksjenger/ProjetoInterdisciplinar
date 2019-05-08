@@ -38,10 +38,10 @@ public class Atendimento extends javax.swing.JFrame {
         lbnTituloCadastro.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lbnTituloCadastro.setText("Finalizar Compra");
         jPanel1.add(lbnTituloCadastro);
-        lbnTituloCadastro.setBounds(120, 10, 340, 44);
+        lbnTituloCadastro.setBounds(210, 10, 340, 44);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 570, 490);
+        jPanel1.setBounds(0, 0, 780, 710);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

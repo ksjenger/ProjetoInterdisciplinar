@@ -1,8 +1,10 @@
 package model.entities;
 
-public class Cliente {
+import java.sql.Date;
 
-    private Integer idCliente;
+public class Funcionarios {
+    
+    private Integer idFuncionario;
     private String firstName;
     private String lastName;
     private String logradouro;
@@ -13,19 +15,14 @@ public class Cliente {
     private String uf;
     private String telefone;
     private String email;
-    
-    private Convenios convenio;
+    private Date dataContrato;
+    private String Cargo;
 
-    public Convenios getConvenio() {
-        return convenio;
+    public Funcionarios() {
     }
 
-    public void setConvenio(Convenios convenio) {
-        this.convenio = convenio;
-    }
-
-    public Cliente(Integer idCliente, String firstName, String lastName, String logradouro, Integer numero, String bairro, String complemento, String CEP, String uf, String telefone, String convenio, String email) {
-        this.idCliente = idCliente;
+    public Funcionarios(Integer idFuncionario, String firstName, String lastName, String logradouro, Integer numero, String bairro, String complemento, String CEP, String uf, String telefone, String email, Date dataContrato, String Cargo) {
+        this.idFuncionario = idFuncionario;
         this.firstName = firstName;
         this.lastName = lastName;
         this.logradouro = logradouro;
@@ -36,18 +33,11 @@ public class Cliente {
         this.uf = uf;
         this.telefone = telefone;
         this.email = email;
+        this.dataContrato = dataContrato;
+        this.Cargo = Cargo;
     }
 
-    public Cliente() {
-    }
-    
-    public String getEmail(){
-        return email;
-    }
-    
-    public void setEmail(String email){
-        this.email = email;
-    }
+   
 
     public String getFirstName() {
         return firstName;
@@ -75,14 +65,6 @@ public class Cliente {
 
     public Integer getNumero() {
         return numero;
-    }
-
-    public Integer getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Integer idCliente) {
-        this.idCliente = idCliente;
     }
 
     public void setNumero(Integer numero) {
@@ -129,4 +111,31 @@ public class Cliente {
         this.telefone = telefone;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getDataContrato() {
+        return dataContrato;
+    }
+
+    public void setDataContrato(Date dataContrato) {
+        this.dataContrato = dataContrato;
+    }
+
+    public String getCargo() {
+        return Cargo;
+    }
+
+    public void setCargo(String Cargo) {
+        this.Cargo = Cargo;
+    }
+    
+    
+    
+    
 }

@@ -6,11 +6,11 @@ import dao.ConveniosDao;
 import javax.swing.JOptionPane;
 import model.entities.Cliente;
 
-public class Cadastro extends javax.swing.JFrame {
+public class CadastroCliente extends javax.swing.JFrame {
 
-    public Cadastro() {
+    public CadastroCliente() {
         initComponents();
-
+ 
     }
 
     @SuppressWarnings("unchecked")
@@ -45,7 +45,7 @@ public class Cadastro extends javax.swing.JFrame {
         lbnConvenio = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnIncluir = new javax.swing.JButton();
-        jComboBoxConvenio = new javax.swing.JComboBox<>();
+        jComboBoxConvenio = new javax.swing.JComboBox<String>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -211,7 +211,7 @@ public class Cadastro extends javax.swing.JFrame {
         jPanelCadastro.add(btnIncluir);
         btnIncluir.setBounds(70, 303, 150, 30);
 
-        jComboBoxConvenio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Notredame" }));
+        jComboBoxConvenio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Notredame" }));
         jPanelCadastro.add(jComboBoxConvenio);
         jComboBoxConvenio.setBounds(70, 220, 140, 30);
 
@@ -307,7 +307,7 @@ public class Cadastro extends javax.swing.JFrame {
             int id = jComboBoxConvenio.getSelectedIndex();
             ConveniosDao conveniosDao = new ConveniosDao();
 
-            Cliente cliente = new Cliente(firstName, lastName, logradouro, numero,
+            Cliente cliente = new Cliente(null, firstName, lastName, logradouro, numero,
                     bairro, complemento, Cep, uf, telefone, Cep, email);
             cliente.setConvenio(conveniosDao.getConvenios(id));
 
@@ -333,6 +333,7 @@ public class Cadastro extends javax.swing.JFrame {
             jComboBoxConvenio.setSelectedIndex(0);
         }else if(novocliente == 1){
             dispose();
+            
         }
     }//GEN-LAST:event_btnIncluirActionPerformed
 
@@ -361,20 +362,21 @@ public class Cadastro extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cadastro().setVisible(true);
+                new CadastroCliente().setVisible(true);
             }
         });
     }
