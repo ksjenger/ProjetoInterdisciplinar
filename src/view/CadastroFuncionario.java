@@ -1,8 +1,9 @@
 package view;
 
+import dao.FuncionariosDao;
 import javax.swing.JOptionPane;
 import model.entities.Funcionarios;
-import java.util.Date;
+import java.sql.Date;
 
 public class CadastroFuncionario extends javax.swing.JFrame {
 
@@ -290,32 +291,32 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             String telefone = txtTelefone.getText();
             String email = txtEmail.getText();
             int id = jComboBoxCargo.getSelectedIndex();
-            if(id == 0){
+            String cargo = null;
+            if (id == 0) {
                 JOptionPane.showMessageDialog(this, "Selecione um Cargo!!");
-            }else if(id == 1){
-                String cargo = "Gerente";
-            }else if(id == 2){
-                String cargo = "Caixa";
-            }else if(id == 3){
-                String cargo = "Balconista";
-            }else if(id == 4){
-                String cargo = "Farmaceutico";
-            }else if(id == 5){
-                String cargo = "Atendente";
+            } else if (id == 1) {
+                cargo = "Gerente";
+            } else if (id == 2) {
+                cargo = "Caixa";
+            } else if (id == 3) {
+                cargo = "Balconista";
+            } else if (id == 4) {
+                cargo = "Farmaceutico";
+            } else if (id == 5) {
+                cargo = "Atendente";
             }
-            
-            Date date = new Date();
-            
-            
-        
-            Funcionarios funcionario = new Funcionarios(null, firstName, lastName, logradouro, 
-                    numero, bairro, complemento, Cep, uf, telefone, email, (java.sql.Date) date, bairro);
-                       
 
+            Date date = new java.sql.Date(new java.util.Date().getTime());
+
+            Funcionarios funcionario = new Funcionarios(null, firstName, lastName, logradouro,
+                    numero, bairro, complemento, Cep, uf, telefone, email, date, cargo);
+            
+            FuncionariosDao funcionariosDao = new FuncionariosDao();
+            funcionariosDao.CreateFuncionario(funcionario);
         }
         
         int novo = JOptionPane.showConfirmDialog(this, "Cadastro Concluido!! Deseja cadastrar um novo Funcionario?", "Cadastro de Clientes", WIDTH);
-        if(novo == 0){
+        if (novo == 0) {
             txtNome.setText("");
             txtSobronome.setText("");
             txtBairro.setText("");
@@ -328,9 +329,9 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             txtTelefone.setText("");
             txtUf.setText("");
             jComboBoxCargo.setSelectedIndex(0);
-        }else if(novo == 1){
+        } else if (novo == 1) {
             dispose();
-            
+
         }
     }//GEN-LAST:event_btnIncluirActionPerformed
 
@@ -346,37 +347,8 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxCargoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CadastroFuncionario().setVisible(true);

@@ -7,7 +7,7 @@ public class SelecioneCadastro extends javax.swing.JFrame {
     public SelecioneCadastro() {
         initComponents();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -81,12 +81,21 @@ public class SelecioneCadastro extends javax.swing.JFrame {
                 cadastro.setVisible(true);
             } else {
                 jComboBoxCadastro.setSelectedIndex(0);
-                }
+            }
         }
-    }//GEN-LAST:event_jComboBoxCadastroActionPerformed
+        if (jComboBoxCadastro.getSelectedIndex() == 2) {
+            int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Funcionario?", "Cadastrar Funcionario", 2);
 
+            if (decisao == 0) {
+                CadastroFuncionario cadastroFuncionario = new CadastroFuncionario();
+                cadastroFuncionario.setVisible(true);
+            } else {
+                jComboBoxCadastro.setSelectedIndex(0);
+            }
+    }//GEN-LAST:event_jComboBoxCadastroActionPerformed
+    }
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**

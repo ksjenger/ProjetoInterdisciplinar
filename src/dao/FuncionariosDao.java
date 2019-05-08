@@ -17,7 +17,7 @@ public class FuncionariosDao {
 			st = conn.prepareStatement("insert into funcionarios (firstName, "
                                 + "lastName, logradouro, numero, bairro, "
                                 + "complemento, CEP, uf, telefone, email, dataContratacao , cargo) values"
-                                + " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
+                                + " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
 			st.setString(1, funcionario.getFirstName());
 			st.setString(2, funcionario.getLastName());
 			st.setString(3, funcionario.getLogradouro());

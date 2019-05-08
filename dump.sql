@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.16, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
 -- Host: localhost    Database: projetointerdisciplinar
 -- ------------------------------------------------------
--- Server version	8.0.16
+-- Server version	8.0.15
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -76,6 +76,42 @@ LOCK TABLES `convenios` WRITE;
 /*!40000 ALTER TABLE `convenios` DISABLE KEYS */;
 INSERT INTO `convenios` VALUES (1,'NotreDame');
 /*!40000 ALTER TABLE `convenios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `funcionarios`
+--
+
+DROP TABLE IF EXISTS `funcionarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `funcionarios` (
+  `IdFuncionario` int(5) NOT NULL AUTO_INCREMENT,
+  `Firstname` varchar(50) DEFAULT NULL,
+  `LastName` varchar(50) DEFAULT NULL,
+  `Logradouro` varchar(50) DEFAULT NULL,
+  `Numero` int(5) DEFAULT NULL,
+  `Bairro` varchar(50) DEFAULT NULL,
+  `Complemento` varchar(50) DEFAULT NULL,
+  `CEP` varchar(9) DEFAULT NULL,
+  `UF` char(2) DEFAULT NULL,
+  `Telefone` varchar(15) DEFAULT NULL,
+  `Email` varchar(50) DEFAULT NULL,
+  `DataContratacao` date DEFAULT NULL,
+  `Cargo` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`IdFuncionario`),
+  UNIQUE KEY `IdFuncionario` (`IdFuncionario`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `funcionarios`
+--
+
+LOCK TABLES `funcionarios` WRITE;
+/*!40000 ALTER TABLE `funcionarios` DISABLE KEYS */;
+INSERT INTO `funcionarios` VALUES (1,'Maria','Duarte','Loefgreen',123,'Vila Clementino','','01203-001','SP','11998661341','maria@gmail.com','2019-05-08','Gerente'),(2,'Pedro','Pé Preto','dos Bobos',123,'Bairro','','01203-001','SP','11998661341','pedro@gmail.com','2019-05-08','Atendente');
+/*!40000 ALTER TABLE `funcionarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -181,6 +217,10 @@ LOCK TABLES `remedios` WRITE;
 /*!40000 ALTER TABLE `remedios` DISABLE KEYS */;
 /*!40000 ALTER TABLE `remedios` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'projetointerdisciplinar'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -191,4 +231,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-08  3:15:34
+-- Dump completed on 2019-05-08 18:36:37
