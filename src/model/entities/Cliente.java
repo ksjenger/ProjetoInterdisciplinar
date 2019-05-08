@@ -11,8 +11,17 @@ public class Cliente {
     private String CEP;
     private String uf;
     private String telefone;
-    private String convenio;
     private String email;
+    
+    private Convenios convenio;
+
+    public Convenios getConvenio() {
+        return convenio;
+    }
+
+    public void setConvenio(Convenios convenio) {
+        this.convenio = convenio;
+    }
 
     public Cliente(String firstName, String lastName, String logradouro, Integer numero, String bairro, String complemento, String CEP, String uf, String telefone, String convenio, String email) {
         this.firstName = firstName;
@@ -24,7 +33,6 @@ public class Cliente {
         this.CEP = CEP;
         this.uf = uf;
         this.telefone = telefone;
-        this.convenio = convenio;
         this.email = email;
     }
 
@@ -109,14 +117,6 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getConvenio() {
-        return convenio;
-    }
-
-    public void setConvenio(String convenio) {
-        this.convenio = convenio;
     }
 
 }

@@ -28,7 +28,7 @@ public class ClienteDao {
                         st.setString(7, cliente.getCEP());
                         st.setString(8, cliente.getUf());
                         st.setString(9, cliente.getTelefone());
-                        st.setString(10, "1");
+                        st.setInt(10, cliente.getConvenio().getIdConvenio());
 			st.execute();
 			st.close();
 			ConectaBD.closeConnection();

@@ -19,7 +19,7 @@ public class Cadastro extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lbnTituloCadastro = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<String>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jPanelCadastro = new javax.swing.JPanel();
         txtSobronome = new javax.swing.JTextField();
         txtComplemento = new javax.swing.JTextField();
@@ -44,9 +44,9 @@ public class Cadastro extends javax.swing.JFrame {
         lbnCodigo = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         lbnConvenio = new javax.swing.JLabel();
-        txtConvenio = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         btnIncluir = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -56,7 +56,7 @@ public class Cadastro extends javax.swing.JFrame {
 
         jLabel1.setText("O que deseja cadastrar?");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Selecione", "Clientes", "Produtos", "Funcionarios" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Clientes", "Produtos", "Funcionarios" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -161,7 +161,7 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
         jPanelCadastro.add(txtCodigo);
-        txtCodigo.setBounds(70, 260, 150, 30);
+        txtCodigo.setBounds(140, 260, 150, 30);
 
         lbnUf.setText("UF:");
         jPanelCadastro.add(lbnUf);
@@ -187,9 +187,9 @@ public class Cadastro extends javax.swing.JFrame {
         jPanelCadastro.add(txtCep);
         txtCep.setBounds(50, 140, 130, 30);
 
-        lbnCodigo.setText("Codigo:");
+        lbnCodigo.setText("Numero do Convenio:");
         jPanelCadastro.add(lbnCodigo);
-        lbnCodigo.setBounds(10, 270, 70, 14);
+        lbnCodigo.setBounds(10, 270, 120, 14);
 
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,14 +202,6 @@ public class Cadastro extends javax.swing.JFrame {
         lbnConvenio.setText("Convenio: ");
         jPanelCadastro.add(lbnConvenio);
         lbnConvenio.setBounds(10, 230, 70, 14);
-
-        txtConvenio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtConvenioActionPerformed(evt);
-            }
-        });
-        jPanelCadastro.add(txtConvenio);
-        txtConvenio.setBounds(70, 220, 150, 30);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -228,6 +220,10 @@ public class Cadastro extends javax.swing.JFrame {
         });
         jPanelCadastro.add(btnIncluir);
         btnIncluir.setBounds(70, 303, 150, 30);
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Notredame" }));
+        jPanelCadastro.add(jComboBox2);
+        jComboBox2.setBounds(70, 220, 140, 30);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -261,8 +257,6 @@ public class Cadastro extends javax.swing.JFrame {
                     .addComponent(jPanelCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-
-        jPanelCadastro.getAccessibleContext().setAccessibleName("Cadastro de Clientes");
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 620, 430);
@@ -314,10 +308,6 @@ public class Cadastro extends javax.swing.JFrame {
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
-
-    private void txtConvenioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConvenioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtConvenioActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         int selecao = jComboBox1.getSelectedIndex();
@@ -402,6 +392,7 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnIncluir;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCadastro;
@@ -422,7 +413,6 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JTextField txtCep;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtComplemento;
-    private javax.swing.JTextField txtConvenio;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtLogradouro;
     private javax.swing.JTextField txtNome;
