@@ -13,17 +13,17 @@ public class Convenios {
     
     private Integer IdConvenio;
     private String nomeConvenio;
-    private String Carterinha;
+    private String carterinha;
 
-    public Convenios(Integer IdConvenio, String nomeConvenio, String Carterinha) {
+    public Convenios(Integer IdConvenio, String nomeConvenio, String carterinha) {
         this.IdConvenio = IdConvenio;
         this.nomeConvenio = nomeConvenio;
-        this.Carterinha = Carterinha;
+        this.carterinha = carterinha;
     }
 
-    public Convenios(String nomeConvenio, String Carterinha) {
+    public Convenios(String nomeConvenio, Integer IdConvenio) {
         this.nomeConvenio = nomeConvenio;
-        this.Carterinha = Carterinha;
+        this.IdConvenio = IdConvenio;
     }
 
     public Convenios() {
@@ -38,11 +38,11 @@ public class Convenios {
     }
 
     public String getCarterinha() {
-        return Carterinha;
+        return carterinha;
     }
 
     public void setCarterinha(String Carterinha) {
-        this.Carterinha = Carterinha;
+        this.carterinha = Carterinha;
     }
 
     public Integer getIdConvenio() {

@@ -2,6 +2,7 @@ package view;
 
 import com.sun.java.swing.plaf.windows.resources.windows;
 import dao.ClienteDao;
+import dao.ConveniosDao;
 import javax.swing.JOptionPane;
 import model.entities.Cliente;
 
@@ -9,7 +10,7 @@ public class Cadastro extends javax.swing.JFrame {
 
     public Cadastro() {
         initComponents();
-        jPanelCadastro.setVisible(false);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -18,8 +19,6 @@ public class Cadastro extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lbnTituloCadastro = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jPanelCadastro = new javax.swing.JPanel();
         txtSobronome = new javax.swing.JTextField();
         txtComplemento = new javax.swing.JTextField();
@@ -46,22 +45,13 @@ public class Cadastro extends javax.swing.JFrame {
         lbnConvenio = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnIncluir = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBoxConvenio = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         lbnTituloCadastro.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        lbnTituloCadastro.setText("Cadastros");
-
-        jLabel1.setText("O que deseja cadastrar?");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Clientes", "Produtos", "Funcionarios" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
+        lbnTituloCadastro.setText("Novo Cliente");
 
         jPanelCadastro.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Clientes"));
         jPanelCadastro.setToolTipText("");
@@ -221,47 +211,38 @@ public class Cadastro extends javax.swing.JFrame {
         jPanelCadastro.add(btnIncluir);
         btnIncluir.setBounds(70, 303, 150, 30);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Notredame" }));
-        jPanelCadastro.add(jComboBox2);
-        jComboBox2.setBounds(70, 220, 140, 30);
+        jComboBoxConvenio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Notredame" }));
+        jPanelCadastro.add(jComboBoxConvenio);
+        jComboBoxConvenio.setBounds(70, 220, 140, 30);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(222, Short.MAX_VALUE)
-                .addComponent(lbnTituloCadastro)
-                .addGap(216, 216, 216))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanelCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(lbnTituloCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbnTituloCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 305, Short.MAX_VALUE))
-                    .addComponent(jPanelCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
         );
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 620, 430);
 
-        setSize(new java.awt.Dimension(635, 472));
+        setSize(new java.awt.Dimension(466, 472));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -309,39 +290,49 @@ public class Cadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        int selecao = jComboBox1.getSelectedIndex();
-
-        if (selecao == 1) {
-            jPanelCadastro.setVisible(true);
-        }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
-        int selecao = jComboBox1.getSelectedIndex();
 
-        if (selecao == 1) {
-            int resposta = JOptionPane.showConfirmDialog(this, "Deseja incluir novo cliente?", "Cadastro", WIDTH);
-            if (resposta == 1) {
-                String firstName = txtNome.getText();
-                String lastName = txtSobronome.getText();
-                String logradouro = txtLogradouro.getText();
-                Integer numero = Integer.parseInt(txtNumero.getText());
-                String complemento = txtComplemento.getText();
-                String Cep = txtCep.getText();
-                String bairro = txtBairro.getText();
-                String uf = txtUf.getText();
-                String telefone = txtTelefone.getText();
-                String convenio = txtConvenio.getText();
-                String email = txtEmail.getText();
+        int resposta = JOptionPane.showConfirmDialog(this, "Deseja incluir novo cliente?", "Cadastro", WIDTH);
+        if (resposta == 0) {
+            String firstName = txtNome.getText();
+            String lastName = txtSobronome.getText();
+            String logradouro = txtLogradouro.getText();
+            Integer numero = Integer.parseInt(txtNumero.getText());
+            String complemento = txtComplemento.getText();
+            String Cep = txtCep.getText();
+            String bairro = txtBairro.getText();
+            String uf = txtUf.getText();
+            String telefone = txtTelefone.getText();
+            String email = txtEmail.getText();
+            int id = jComboBoxConvenio.getSelectedIndex();
+            ConveniosDao conveniosDao = new ConveniosDao();
 
-                Cliente cliente = new Cliente(firstName, lastName, logradouro, numero, bairro, complemento, Cep, uf, telefone, convenio, email);
-                ClienteDao clienteDao = new ClienteDao();
-                clienteDao.CreateCliente(cliente);
-                JOptionPane.showMessageDialog(this, "Cadastrado concluido!");
-                
-            }
+            Cliente cliente = new Cliente(firstName, lastName, logradouro, numero,
+                    bairro, complemento, Cep, uf, telefone, Cep, email);
+            cliente.setConvenio(conveniosDao.getConvenios(id));
 
+            ClienteDao clienteDao = new ClienteDao();
+            clienteDao.CreateCliente(cliente);
+            JOptionPane.showMessageDialog(this, "Cadastrado concluido!");
+        }
+        
+        int novocliente = JOptionPane.showConfirmDialog(this, "Deseja Incluir um novo Cliente?", "Cadastro de Clientes", WIDTH);
+        if(novocliente == 0){
+            txtNome.setText("");
+            txtSobronome.setText("");
+            txtBairro.setText("");
+            txtCep.setText("");
+            txtCodigo.setText("");
+            txtComplemento.setText("");
+            txtEmail.setText("");
+            txtLogradouro.setText("");
+            txtNumero.setText("");
+            txtSobronome.setText("");
+            txtTelefone.setText("");
+            txtUf.setText("");
+            jComboBoxConvenio.setSelectedIndex(0);
+        }else if(novocliente == 1){
+            dispose();
         }
     }//GEN-LAST:event_btnIncluirActionPerformed
 
@@ -391,9 +382,7 @@ public class Cadastro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnIncluir;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> jComboBoxConvenio;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCadastro;
     private javax.swing.JLabel lbnBairro;

@@ -5,6 +5,7 @@ public class Principal extends javax.swing.JFrame {
     Sobre sobre = new Sobre();
     Pesquisar pesquisar = new Pesquisar();
     Cadastro cadastro = new Cadastro();
+    SelecioneCadastro selecioneCadastro = new SelecioneCadastro();
         
     public Principal() {
         initComponents();
@@ -143,10 +144,6 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAtendimentoActionPerformed
 
-    private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
-        cadastro.setVisible(true);
-    }//GEN-LAST:event_btnCadastroActionPerformed
-
     private void btnTemp2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTemp2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTemp2ActionPerformed
@@ -158,6 +155,10 @@ public class Principal extends javax.swing.JFrame {
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         pesquisar.setVisible(true);
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
+        selecioneCadastro.setVisible(true);
+    }//GEN-LAST:event_btnCadastroActionPerformed
 
     /**
      * @param args the command line arguments
