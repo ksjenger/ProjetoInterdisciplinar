@@ -11,53 +11,11 @@ import model.entities.Convenios;
 
 public class CadastroCliente extends javax.swing.JFrame {
 
-    private DefaultFormatterFactory getFormatoCpf() {
-        MaskFormatter comFoco = null;
-        try {
-            comFoco = new MaskFormatter("###.###.###-##");
-            comFoco.setPlaceholderCharacter(' ');
-            comFoco.setOverwriteMode(true);
-            comFoco.setValidCharacters("0123456789");
-            } catch (Exception pe) {
-            System.out.println(pe.getMessage());
-            }
-        DefaultFormatterFactory factory = new DefaultFormatterFactory(comFoco, comFoco);
-        return factory;
-    }
-    
-    private DefaultFormatterFactory getFormatoCEP() {
-        MaskFormatter comFoco = null;
-        try {
-            comFoco = new MaskFormatter("#####-###");
-            comFoco.setPlaceholderCharacter(' ');
-            comFoco.setOverwriteMode(true);
-            comFoco.setValidCharacters("0123456789");
-            } catch (Exception pe) {
-            System.out.println(pe.getMessage());
-            }
-        DefaultFormatterFactory factory = new DefaultFormatterFactory(comFoco, comFoco);
-        return factory;
-    }
-    
-        private DefaultFormatterFactory getFormatoTelefone() {
-        MaskFormatter comFoco = null;
-        try {
-            comFoco = new MaskFormatter("(##)#####-####");
-            comFoco.setPlaceholderCharacter(' ');
-            comFoco.setOverwriteMode(true);
-            comFoco.setValidCharacters("0123456789");
-            } catch (Exception pe) {
-            System.out.println(pe.getMessage());
-            }
-        DefaultFormatterFactory factory = new DefaultFormatterFactory(comFoco, comFoco);
-        return factory;
-    }
-
     public CadastroCliente() {
         initComponents();
-        txtCPF.setFormatterFactory(getFormatoCpf());
+        /*txtCPF.setFormatterFactory(getFormatoCpf());
         txtCEP.setFormatterFactory(getFormatoCEP());
-        txtTelefone.setFormatterFactory(getFormatoTelefone());
+        txtTelefone.setFormatterFactory(getFormatoTelefone());*/
     }
 
     @SuppressWarnings("unchecked")
@@ -88,7 +46,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         lbnConvenio = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnIncluir = new javax.swing.JButton();
-        jComboBoxConvenio = new javax.swing.JComboBox<>();
+        jComboBoxConvenio = new javax.swing.JComboBox<String>();
         lbnCPF = new javax.swing.JLabel();
         txtCEP = new javax.swing.JFormattedTextField();
         txtCPF = new javax.swing.JFormattedTextField();
@@ -160,7 +118,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         jPanelCadastro.add(txtLogradouro);
         txtLogradouro.setBounds(80, 60, 220, 30);
 
-        lbnTelefone.setText("Telefone:");
+        lbnTelefone.setText("Celular:");
         jPanelCadastro.add(lbnTelefone);
         lbnTelefone.setBounds(240, 190, 60, 14);
 
@@ -234,7 +192,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         jPanelCadastro.add(btnIncluir);
         btnIncluir.setBounds(70, 303, 150, 30);
 
-        jComboBoxConvenio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Alianz", "Amil", "Blue Life", "Care Plus", "Golden Cross", "Intermedica", "Medial Saude", "Med Service", "Notredame", "Present Senior", "Sulamerica", "Unimed" }));
+        jComboBoxConvenio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Alianz", "Amil", "Blue Life", "Care Plus", "Golden Cross", "Intermedica", "Medial Saude", "Med Service", "Notredame", "Present Senior", "Sulamerica", "Unimed" }));
         jComboBoxConvenio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxConvenioActionPerformed(evt);
@@ -247,6 +205,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         jPanelCadastro.add(lbnCPF);
         lbnCPF.setBounds(220, 230, 34, 14);
 
+        try {
+            txtCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtCEP.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtCEPFocusLost(evt);
@@ -260,6 +223,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         jPanelCadastro.add(txtCEP);
         txtCEP.setBounds(50, 140, 120, 30);
 
+        try {
+            txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtCPF.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtCPFFocusLost(evt);
@@ -272,8 +240,14 @@ public class CadastroCliente extends javax.swing.JFrame {
         });
         jPanelCadastro.add(txtCPF);
         txtCPF.setBounds(250, 220, 160, 30);
+
+        try {
+            txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # ####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jPanelCadastro.add(txtTelefone);
-        txtTelefone.setBounds(300, 180, 110, 30);
+        txtTelefone.setBounds(290, 180, 120, 30);
 
         lbnBairro.setText("Bairro:");
         jPanelCadastro.add(lbnBairro);
@@ -289,7 +263,7 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         lbnCidade.setText("Cidade:");
         jPanelCadastro.add(lbnCidade);
-        lbnCidade.setBounds(170, 150, 50, 14);
+        lbnCidade.setBounds(190, 150, 50, 14);
 
         txtCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -375,12 +349,12 @@ public class CadastroCliente extends javax.swing.JFrame {
             String logradouro = txtLogradouro.getText();
             Integer numero = Integer.parseInt(txtNumero.getText());
             String complemento = txtComplemento.getText();
-            String Cep = txtCEP.getText();
+            String CEP = txtCEP.getText();
             String bairro = txtBairro.getText();
             String uf = txtUf.getText();
             String telefone = txtTelefone.getText();
             String email = txtEmail.getText();
-            String CEP = txtCEP.getText();
+            String CPF = txtCPF.getText();
             String carterinha = txtCarterinha.getText();
             String cidade = txtCidade.getText();
             String convenio = null;
@@ -416,7 +390,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             ConveniosDao conveniosDao = new ConveniosDao();
 
             Cliente cliente = new Cliente(null, firstName, lastName, logradouro, 
-                    numero, bairro, complemento, CEP, uf, telefone, email, CEP, carterinha, cidade, c);
+                    numero, bairro, complemento, CEP, uf, telefone, email, CPF, carterinha, cidade, c);
             cliente.setConvenio(conveniosDao.getConvenios(jComboBoxConvenio.getSelectedIndex()));
 
             ClienteDao clienteDao = new ClienteDao();
