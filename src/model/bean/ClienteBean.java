@@ -1,14 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model.bean;
 
-/**
- *
- * @author ksjenger
- */
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import view.CadastroCliente;
+
+
 public class ClienteBean {
+    
+    public static JTextField validaCamposCadastro(CadastroCliente cc){
+        if(cc.getTxtNome().getText() == null){
+            return cc.getTxtNome();            
+        }else{
+            return cc.getTxtLogradouro();
+        }
+    }
     
 }

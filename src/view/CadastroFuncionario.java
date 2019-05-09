@@ -277,7 +277,11 @@ public class CadastroFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
-
+        
+        
+        
+        
+        
         int resposta = JOptionPane.showConfirmDialog(this, "Cadastrar novo Funcionario?", "Cadastro", WIDTH);
         if (resposta == 0) {
             String firstName = txtNome.getText();
