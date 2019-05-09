@@ -13,7 +13,7 @@ public class SelecioneCadastro extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jComboBoxCadastro = new javax.swing.JComboBox<String>();
+        jComboBoxCadastro = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         lbnTituloCadastro = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
@@ -23,7 +23,7 @@ public class SelecioneCadastro extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
-        jComboBoxCadastro.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Selecione", "Clientes", "Funcionarios", "Convenios", "Produtos" }));
+        jComboBoxCadastro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Clientes", "Funcionarios", "Convenios", "Medicamentos", "Infantil", "Perfumaria" }));
         jComboBoxCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxCadastroActionPerformed(evt);

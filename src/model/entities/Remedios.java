@@ -1,3 +1,4 @@
+
 package model.entities;
 
 public class Remedios extends Produtos {
@@ -5,13 +6,13 @@ public class Remedios extends Produtos {
 	private Integer codigo;
 	private Integer quantidade;
 	private String tipoRemedio;
-	private String prescricao;
+	private Boolean prescricao;
 
 	public Remedios() {
 		super();
 	}
 
-	public Remedios(Integer codigo, Integer quantidade, String tipoRemedio, String prescricao) {
+	public Remedios(Integer codigo, Integer quantidade, String tipoRemedio, Boolean prescricao) {
 		super();
 		this.codigo = codigo;
 		this.quantidade = quantidade;
@@ -43,11 +44,11 @@ public class Remedios extends Produtos {
 		this.tipoRemedio = tipoRemedio;
 	}
 
-	public String getPrescricao() {
+	public Boolean getPrescricao() {
 		return prescricao;
 	}
 
-	public void setPrescricao(String prescricao) {
+	public void setPrescricao(Boolean prescricao) {
 		this.prescricao = prescricao;
 	}
 

@@ -4,9 +4,9 @@ import javax.swing.JOptionPane;
 import java.sql.Date;
 import model.entities.Remedios;
 
-public class CadastroProdutos extends javax.swing.JFrame {
+public class CadastroMedicamentos extends javax.swing.JFrame {
 
-    public CadastroProdutos() {
+    public CadastroMedicamentos() {
         initComponents();
 
     }
@@ -15,7 +15,7 @@ public class CadastroProdutos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonStatus = new javax.swing.ButtonGroup();
+        GroupButtonReceita = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         lbnTituloCadastro = new javax.swing.JLabel();
         jPanelCadastro = new javax.swing.JPanel();
@@ -27,16 +27,17 @@ public class CadastroProdutos extends javax.swing.JFrame {
         btnIncluir = new javax.swing.JButton();
         jComboBoxTipo = new javax.swing.JComboBox();
         txtPrecoFormatado = new javax.swing.JFormattedTextField();
-        btnInativo = new javax.swing.JRadioButton();
-        btnAtivo = new javax.swing.JRadioButton();
+        RadioBNao = new javax.swing.JRadioButton();
+        RadioBSim = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         lbnTituloCadastro.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        lbnTituloCadastro.setText("Novo Produto");
+        lbnTituloCadastro.setText("Novo Medicamento");
 
-        jPanelCadastro.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Produtos"));
+        jPanelCadastro.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Medicamentos"));
         jPanelCadastro.setToolTipText("");
         jPanelCadastro.setLayout(null);
 
@@ -78,7 +79,7 @@ public class CadastroProdutos extends javax.swing.JFrame {
         jPanelCadastro.add(btnIncluir);
         btnIncluir.setBounds(60, 140, 150, 30);
 
-        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Remedio", "Perfumaria", "Infantil" }));
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "OTC", "Eticos", "Psico", "Nutricosmeticos" }));
         jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoActionPerformed(evt);
@@ -101,15 +102,24 @@ public class CadastroProdutos extends javax.swing.JFrame {
         jPanelCadastro.add(txtPrecoFormatado);
         txtPrecoFormatado.setBounds(50, 60, 90, 30);
 
-        buttonStatus.add(btnInativo);
-        btnInativo.setText("Inativo");
-        jPanelCadastro.add(btnInativo);
-        btnInativo.setBounds(290, 70, 100, 23);
+        GroupButtonReceita.add(RadioBNao);
+        RadioBNao.setText("Nao");
+        jPanelCadastro.add(RadioBNao);
+        RadioBNao.setBounds(320, 90, 100, 23);
 
-        buttonStatus.add(btnAtivo);
-        btnAtivo.setText("Ativo");
-        jPanelCadastro.add(btnAtivo);
-        btnAtivo.setBounds(200, 70, 93, 23);
+        GroupButtonReceita.add(RadioBSim);
+        RadioBSim.setText("Sim");
+        RadioBSim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RadioBSimActionPerformed(evt);
+            }
+        });
+        jPanelCadastro.add(RadioBSim);
+        RadioBSim.setBounds(260, 90, 60, 23);
+
+        jLabel1.setText("Precisa de Receita Medica?");
+        jPanelCadastro.add(jLabel1);
+        jLabel1.setBounds(240, 64, 180, 20);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,11 +128,11 @@ public class CadastroProdutos extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanelCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addComponent(lbnTituloCadastro))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(lbnTituloCadastro)))
+                        .addContainerGap()
+                        .addComponent(jPanelCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -130,15 +140,15 @@ public class CadastroProdutos extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbnTituloCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanelCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanelCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 450, 270);
+        jPanel1.setBounds(0, 0, 450, 290);
 
-        setSize(new java.awt.Dimension(466, 308));
+        setSize(new java.awt.Dimension(466, 318));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -148,55 +158,46 @@ public class CadastroProdutos extends javax.swing.JFrame {
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
 
-        int resposta = JOptionPane.showConfirmDialog(this, "Cadastrar novo Produto?", "Cadastro", WIDTH);
+        int resposta = JOptionPane.showConfirmDialog(this, "Cadastrar novo Medicamento?", "Cadastro", 2);
         if (resposta == 0) {
            String nome = txtNome.getText();
-           Double preco = Double.parseDouble(txtPrecoFormatado.getText());
+           String valor = txtPrecoFormatado.getText();
+           Double preco = Double.parseDouble(valor.replace(",", "."));
            String tipo = null;
            if(jComboBoxTipo.getSelectedIndex() == 0){
-               JOptionPane.showMessageDialog(this, "Selecione a categoria do Produto!");
+               JOptionPane.showMessageDialog(this, "Selecione a categoria do Medicamento!");
            }else if(jComboBoxTipo.getSelectedIndex() == 1){
-               tipo = " Remedio";
+               tipo = "OTC";
            }else if(jComboBoxTipo.getSelectedIndex() == 2){
-               tipo = "Perfumaria";
+               tipo = "Eticos";
            }else if(jComboBoxTipo.getSelectedIndex() == 3){
-               tipo = "Infantil";
+               tipo = "Psico";
+           }else if(jComboBoxTipo.getSelectedIndex() == 4){
+               tipo = "Nutricosmeticos";
            }
            
-           Boolean status = null;
+           boolean prescricao = true;
            
-           if(btnAtivo.isSelected()){
-               status = true;
+           if(RadioBSim.isSelected()){
+               prescricao = true;
+           }else if(RadioBNao.isSelected()){
+               prescricao = false;
            }else{
-               status = false;
+               JOptionPane.showMessageDialog(this, "Selecione se o Remedio precisa de prescricao");
            }
            
-           if(tipo.equals("Remedio")){
-               Remedios remedio = new Remedios(null, null, tipo, tipo);
-               remedio.setNome(nome);
-               remedio.set
-           }
-           
-           
+           Remedios remedio = new Remedios(null, null, tipo, prescricao);
+           remedio.setNome(nome);
+           remedio.setValor(preco);
         }
         
-        int novo = JOptionPane.showConfirmDialog(this, "Cadastro Concluido!! Deseja cadastrar um novo Funcionario?", "Cadastro de Clientes", WIDTH);
+        int novo = JOptionPane.showConfirmDialog(this, "Cadastro Concluido!! Deseja cadastrar um novo Medicamento?", "Cadastro de Clientes", 1);
         if (novo == 0) {
             txtNome.setText("");
-
-            txtBairro.setText("");
-            txtCep.setText("");
-            txtComplemento.setText("");
-            txtEmail.setText("");
-
-            txtNumero.setText("");
-    
-            txtTelefone.setText("");
-            txtUf.setText("");
-            jComboBoxCargo.setSelectedIndex(0);
+            txtPrecoFormatado.setText("");
+            jComboBoxTipo.setSelectedIndex(0);
         } else if (novo == 1) {
             dispose();
-
         }
     }//GEN-LAST:event_btnIncluirActionPerformed
 
@@ -220,23 +221,28 @@ public class CadastroProdutos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTipoActionPerformed
 
+    private void RadioBSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioBSimActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RadioBSimActionPerformed
+
 
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroProdutos().setVisible(true);
+                new CadastroMedicamentos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton btnAtivo;
+    private javax.swing.ButtonGroup GroupButtonReceita;
+    private javax.swing.JRadioButton RadioBNao;
+    private javax.swing.JRadioButton RadioBSim;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JRadioButton btnInativo;
     private javax.swing.JButton btnIncluir;
-    private javax.swing.ButtonGroup buttonStatus;
     private javax.swing.JComboBox jComboBoxTipo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCadastro;
     private javax.swing.JLabel lbnNome;
