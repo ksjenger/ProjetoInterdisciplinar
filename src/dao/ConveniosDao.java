@@ -7,35 +7,41 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import model.entities.Convenios;
 
-public class ConveniosDao{
-    
+public class ConveniosDao {
+
     Connection conn = null;
-    
-    public Convenios getConvenios(Integer id){
+
+    public Convenios getConvenios(Integer id) {
         Convenios convenio = null;
         conn = ConectaBD.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
-        
-        try{
+
+        try {
             st = conn.prepareStatement("select * from convenios where IdConvenio = ?");
             st.setInt(1, id);
             rs = st.executeQuery();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 Integer idConvenio = rs.getInt("IdConvenio");
                 String nomeConvenio = rs.getString("Empresa");
-                convenio = new Convenios(nomeConvenio, idConvenio);
-                
-                
+                convenio = new Convenios(idConvenio, nomeConvenio);
+
             }
-            
-        
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            ConectaBD.closeConnection();
+            try {
+                st.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+
         return convenio;
-        
+
     }
-    
+
 }

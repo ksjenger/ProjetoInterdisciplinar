@@ -5,25 +5,18 @@
  */
 package model.entities;
 
-/**
- *
- * @author kauan
- */
 public class Convenios {
-    
+
     private Integer IdConvenio;
     private String nomeConvenio;
-    private String carterinha;
 
-    public Convenios(Integer IdConvenio, String nomeConvenio, String carterinha) {
+    public Convenios(Integer IdConvenio, String nomeConvenio) {
         this.IdConvenio = IdConvenio;
         this.nomeConvenio = nomeConvenio;
-        this.carterinha = carterinha;
     }
 
-    public Convenios(String nomeConvenio, Integer IdConvenio) {
+    public Convenios(String nomeConvenio) {
         this.nomeConvenio = nomeConvenio;
-        this.IdConvenio = IdConvenio;
     }
 
     public Convenios() {
@@ -37,14 +30,6 @@ public class Convenios {
         this.nomeConvenio = nomeConvenio;
     }
 
-    public String getCarterinha() {
-        return carterinha;
-    }
-
-    public void setCarterinha(String Carterinha) {
-        this.carterinha = Carterinha;
-    }
-
     public Integer getIdConvenio() {
         return IdConvenio;
     }
@@ -52,7 +37,5 @@ public class Convenios {
     public void setIdConvenio(Integer IdConvenio) {
         this.IdConvenio = IdConvenio;
     }
-    
-    
-    
+
 }

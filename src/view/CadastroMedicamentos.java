@@ -1,5 +1,6 @@
 package view;
 
+import dao.RemediosDao;
 import javax.swing.JOptionPane;
 import java.sql.Date;
 import model.entities.Remedios;
@@ -160,37 +161,48 @@ public class CadastroMedicamentos extends javax.swing.JFrame {
 
         int resposta = JOptionPane.showConfirmDialog(this, "Cadastrar novo Medicamento?", "Cadastro", 2);
         if (resposta == 0) {
-           String nome = txtNome.getText();
-           String valor = txtPrecoFormatado.getText();
-           Double preco = Double.parseDouble(valor.replace(",", "."));
-           String tipo = null;
-           if(jComboBoxTipo.getSelectedIndex() == 0){
-               JOptionPane.showMessageDialog(this, "Selecione a categoria do Medicamento!");
-           }else if(jComboBoxTipo.getSelectedIndex() == 1){
-               tipo = "OTC";
-           }else if(jComboBoxTipo.getSelectedIndex() == 2){
-               tipo = "Eticos";
-           }else if(jComboBoxTipo.getSelectedIndex() == 3){
-               tipo = "Psico";
-           }else if(jComboBoxTipo.getSelectedIndex() == 4){
-               tipo = "Nutricosmeticos";
-           }
-           
-           boolean prescricao = true;
-           
-           if(RadioBSim.isSelected()){
-               prescricao = true;
-           }else if(RadioBNao.isSelected()){
-               prescricao = false;
-           }else{
-               JOptionPane.showMessageDialog(this, "Selecione se o Remedio precisa de prescricao");
-           }
-           
-           Remedios remedio = new Remedios(null, null, tipo, prescricao);
-           remedio.setNome(nome);
-           remedio.setValor(preco);
+            String nome = txtNome.getText();
+            String valor = txtPrecoFormatado.getText();
+            Double preco = Double.parseDouble(valor.replace(",", "."));
+            String tipo = null;
+            switch (jComboBoxTipo.getSelectedIndex()) {
+                case 0:
+                    JOptionPane.showMessageDialog(this, "Selecione a categoria do Medicamento!");
+                    break;
+                case 1:
+                    tipo = "OTC";
+                    break;
+                case 2:
+                    tipo = "Eticos";
+                    break;
+                case 3:
+                    tipo = "Psico";
+                    break;
+                case 4:
+                    tipo = "Nutricosmeticos";
+                    break;
+                default:
+                    break;
+            }
+
+            boolean prescricao = true;
+
+            if (RadioBSim.isSelected()) {
+                prescricao = true;
+            } else if (RadioBNao.isSelected()) {
+                prescricao = false;
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione se o Remedio precisa de prescricao");
+            }
+
+            Remedios remedio = new Remedios(null, null, tipo, prescricao);
+            remedio.setNome(nome);
+            remedio.setValor(preco);
+            remedio.setCategoria("Remedio");
+            RemediosDao remediosDao = new RemediosDao();
+            remediosDao.InsertRemedio(remedio);
         }
-        
+
         int novo = JOptionPane.showConfirmDialog(this, "Cadastro Concluido!! Deseja cadastrar um novo Medicamento?", "Cadastro de Clientes", 1);
         if (novo == 0) {
             txtNome.setText("");
@@ -210,7 +222,7 @@ public class CadastroMedicamentos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtPrecoFormatadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoFormatadoActionPerformed
-        
+
     }//GEN-LAST:event_txtPrecoFormatadoActionPerformed
 
     private void txtPrecoFormatadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecoFormatadoFocusLost
@@ -224,7 +236,6 @@ public class CadastroMedicamentos extends javax.swing.JFrame {
     private void RadioBSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioBSimActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_RadioBSimActionPerformed
-
 
     public static void main(String args[]) {
 

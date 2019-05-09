@@ -12,10 +12,10 @@ public class Produtos {
     public Produtos() {
     }
 
-    public Produtos(Integer idProduto, String nome, String tipo, Double valor, String codBar, Boolean status) {
+    public Produtos(Integer idProduto, String nome, String categoria, Double valor, String codBar, Boolean status) {
         this.idProduto = idProduto;
         this.nome = nome;
-        this.categoria = tipo;
+        this.categoria = categoria;
         this.valor = valor;
         this.codBar = codBar;
         this.status = status;
@@ -61,12 +61,12 @@ public class Produtos {
         this.nome = nome;
     }
 
-    public String getTipo() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setTipo(String tipo) {
-        this.categoria = tipo;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
 }

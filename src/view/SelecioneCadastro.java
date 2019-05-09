@@ -74,7 +74,7 @@ public class SelecioneCadastro extends javax.swing.JFrame {
 
     private void jComboBoxCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCadastroActionPerformed
         if (jComboBoxCadastro.getSelectedIndex() == 1) {
-            int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Cliente?", "Cadastrar Cliente", 2);
+            int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Cliente?", "Cadastrar Cliente", 1);
 
             if (decisao == 0) {
                 CadastroCliente cadastro = new CadastroCliente();
@@ -84,7 +84,7 @@ public class SelecioneCadastro extends javax.swing.JFrame {
             }
         }
         if (jComboBoxCadastro.getSelectedIndex() == 2) {
-            int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Funcionario?", "Cadastrar Funcionario", 2);
+            int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Funcionario?", "Cadastrar Funcionario", 1);
 
             if (decisao == 0) {
                 CadastroFuncionario cadastroFuncionario = new CadastroFuncionario();
@@ -92,8 +92,19 @@ public class SelecioneCadastro extends javax.swing.JFrame {
             } else {
                 jComboBoxCadastro.setSelectedIndex(0);
             }
+        }
+        if (jComboBoxCadastro.getSelectedIndex() == 4) {
+            int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Remedio?", "Cadastrar Remedio", 1);
+
+            if (decisao == 0) {
+                CadastroMedicamentos cm = new CadastroMedicamentos();
+                cm.setVisible(true);
+            } else {
+                jComboBoxCadastro.setSelectedIndex(0);
+            }
+        }
     }//GEN-LAST:event_jComboBoxCadastroActionPerformed
-    }
+     
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed

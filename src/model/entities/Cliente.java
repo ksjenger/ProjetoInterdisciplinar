@@ -13,18 +13,12 @@ public class Cliente {
     private String uf;
     private String telefone;
     private String email;
-    
+    private String CPF;
+    private String carterinha;
     private Convenios convenio;
+    private String cidade;
 
-    public Convenios getConvenio() {
-        return convenio;
-    }
-
-    public void setConvenio(Convenios convenio) {
-        this.convenio = convenio;
-    }
-
-    public Cliente(Integer idCliente, String firstName, String lastName, String logradouro, Integer numero, String bairro, String complemento, String CEP, String uf, String telefone, String convenio, String email) {
+    public Cliente(Integer idCliente, String firstName, String lastName, String logradouro, Integer numero, String bairro, String complemento, String CEP, String uf, String telefone, String email, String CPF, String carterinha, String Cidade, Convenios convenio) {
         this.idCliente = idCliente;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -36,7 +30,46 @@ public class Cliente {
         this.uf = uf;
         this.telefone = telefone;
         this.email = email;
+        this.CPF = CPF;
+        this.carterinha = carterinha;
+        this.convenio = convenio;
+        this.cidade = cidade;
     }
+
+    public Convenios getConvenio() {
+        return convenio;
+    }
+
+    public void setConvenio(Convenios convenio) {
+        this.convenio = convenio;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+    
+
+    public String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
+
+    public String getCarterinha() {
+        return carterinha;
+    }
+
+    public void setCarterinha(String carterinha) {
+        this.carterinha = carterinha;
+    }
+
+
 
     public Cliente() {
     }
