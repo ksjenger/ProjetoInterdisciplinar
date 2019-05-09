@@ -12,8 +12,11 @@ public class ClienteBean {
     public static JTextField validaCamposCadastro(CadastroCliente cc){
         if(cc.getTxtNome().getText() == null){
             return cc.getTxtNome();            
-        }else{
+        }else if(cc.getTxtLogradouro().getText() == null){
             return cc.getTxtLogradouro();
+        }
+        else{
+            return null;
         }
     }
     

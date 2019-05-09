@@ -4,6 +4,7 @@ import dao.FuncionariosDao;
 import javax.swing.JOptionPane;
 import model.entities.Funcionarios;
 import java.sql.Date;
+import model.bean.ClienteBean;
 
 public class CadastroFuncionario extends javax.swing.JFrame {
 

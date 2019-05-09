@@ -455,7 +455,10 @@ public class CadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
-        JOptionPane.showMessageDialog(this, " "+ ClienteBean.validaCamposCadastro(this));
+        JOptionPane.showMessageDialog(this, " " + ClienteBean.validaCamposCadastro(this));
+        
+        ClienteBean.validaCamposCadastro(this).setFocusable(true);
+        
         int resposta = JOptionPane.showConfirmDialog(this, "Deseja incluir novo cliente?", "Cadastro", WIDTH);
         if (resposta == 0) {
             String firstName = txtNome.getText();
