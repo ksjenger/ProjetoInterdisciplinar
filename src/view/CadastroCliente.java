@@ -195,7 +195,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         jPanelCadastro.add(btnIncluir);
         btnIncluir.setBounds(70, 303, 150, 30);
 
-        jComboBoxConvenio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Alianz", "Amil", "Blue Life", "Care Plus", "Golden Cross", "Intermedica", "Medial Saude", "Med Service", "Notredame", "Present Senior", "Sulamerica", "Unimed" }));
+        jComboBoxConvenio.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Selecione", "Alianz", "Amil", "Blue Life", "Care Plus", "Golden Cross", "Intermedica", "Medial Saude", "Med Service", "Notredame", "Present Senior", "Sulamerica", "Unimed" }));
         jComboBoxConvenio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxConvenioActionPerformed(evt);
@@ -377,15 +377,15 @@ public class CadastroCliente extends javax.swing.JFrame {
             }else if(jComboBoxConvenio.getSelectedIndex() == 7){
                 convenio = "Medial Saude";
             }else if(jComboBoxConvenio.getSelectedIndex() == 8){
-                convenio = "";
+                convenio = "Med Service";
             }else if(jComboBoxConvenio.getSelectedIndex() == 9){
-                convenio = "";
+                convenio = "Notredame";
             }else if(jComboBoxConvenio.getSelectedIndex() == 10){
-                convenio = "";
+                convenio = "Present Senior";
             }else if(jComboBoxConvenio.getSelectedIndex() == 11){
-                convenio = "";
+                convenio = "Sulamerica";
             }else if(jComboBoxConvenio.getSelectedIndex() == 12){
-                convenio = "";
+                convenio = "Unimed";
             }
             
             Convenios c = new Convenios(convenio);
@@ -393,7 +393,7 @@ public class CadastroCliente extends javax.swing.JFrame {
 
             Cliente cliente = new Cliente(null, firstName, lastName, logradouro, 
                     numero, bairro, complemento, CEP, uf, telefone, email, CPF, carterinha, cidade, c);
-            cliente.setConvenio(conveniosDao.getConvenios(jComboBoxConvenio.getSelectedIndex()));
+            cliente.setConvenio(conveniosDao.selectConvenio(jComboBoxConvenio.getSelectedIndex()));
 
             ClienteDao clienteDao = new ClienteDao();
             clienteDao.CreateCliente(cliente);

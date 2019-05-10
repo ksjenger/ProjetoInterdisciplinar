@@ -93,6 +93,18 @@ public class SelecioneCadastro extends javax.swing.JFrame {
                 jComboBoxCadastro.setSelectedIndex(0);
             }
         }
+        if(jComboBoxCadastro.getSelectedIndex() == 3){
+            int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Convenio?", "Cadastrar Convenio", 1);
+
+            if (decisao == 0) {
+                CadastroConvenio cc = new CadastroConvenio();
+                cc.setVisible(true);
+            } else {
+                jComboBoxCadastro.setSelectedIndex(0);
+            }
+            
+        }
+        
         if (jComboBoxCadastro.getSelectedIndex() == 4) {
             int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Remedio?", "Cadastrar Remedio", 1);
 

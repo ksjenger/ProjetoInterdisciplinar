@@ -44,7 +44,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         lbnCargo = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnIncluir = new javax.swing.JButton();
-        jComboBoxCargo = new javax.swing.JComboBox<>();
+        jComboBoxCargo = new javax.swing.JComboBox<String>();
         txtCPF = new javax.swing.JFormattedTextField();
         lbnCPF = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
@@ -188,7 +188,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         jPanelCadastro.add(btnIncluir);
         btnIncluir.setBounds(70, 303, 150, 30);
 
-        jComboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Gerente", "Caixa", "Balconista", "Farmaceutico", "Atendente" }));
+        jComboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Selecione", "Gerente", "Caixa", "Balconista", "Farmaceutico", "Atendente" }));
         jComboBoxCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxCargoActionPerformed(evt);

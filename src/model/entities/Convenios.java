@@ -10,12 +10,8 @@ public class Convenios {
     private Integer IdConvenio;
     private String nomeConvenio;
 
-    public Convenios(Integer IdConvenio, String nomeConvenio) {
-        this.IdConvenio = IdConvenio;
-        this.nomeConvenio = nomeConvenio;
-    }
-
     public Convenios(String nomeConvenio) {
+        this.IdConvenio = IdConvenio;
         this.nomeConvenio = nomeConvenio;
     }
 
@@ -37,5 +33,4 @@ public class Convenios {
     public void setIdConvenio(Integer IdConvenio) {
         this.IdConvenio = IdConvenio;
     }
-
 }
