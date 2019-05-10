@@ -23,7 +23,7 @@ public class ConectaBD {
                 String url = "jdbc:mysql://localhost:3306/projetointerdisciplinar?useSSL=false";
                 conn = DriverManager.getConnection(url, username, password);
             } catch (ClassNotFoundException e) {
-                System.out.println("Driver não encontrado " + e.toString());
+                System.out.println("Driver nao encontrado " + e.toString());
             } catch (SQLException e) {
                 System.out.println("Erro ao conectar o Banco de Dados " + e.toString());
             }

@@ -17,11 +17,13 @@ public class Funcionarios {
     private String email;
     private Date dataContrato;
     private String Cargo;
+    private String cidade;
+    private String cpf;
 
     public Funcionarios() {
     }
 
-    public Funcionarios(Integer idFuncionario, String firstName, String lastName, String logradouro, Integer numero, String bairro, String complemento, String CEP, String uf, String telefone, String email, Date dataContrato, String Cargo) {
+    public Funcionarios(Integer idFuncionario, String firstName, String lastName, String logradouro, Integer numero, String bairro, String complemento, String CEP, String uf, String telefone, String email, Date dataContrato, String Cargo, String cidade, String cpf) {
         this.idFuncionario = idFuncionario;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,10 +37,37 @@ public class Funcionarios {
         this.email = email;
         this.dataContrato = dataContrato;
         this.Cargo = Cargo;
+        this.cidade = cidade;
+        this.cpf = cpf;
     }
 
-   
+    public Integer getIdFuncionario() {
+        return idFuncionario;
+    }
 
+    public void setIdFuncionario(Integer idFuncionario) {
+        this.idFuncionario = idFuncionario;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    
+    
+
+    
     public String getFirstName() {
         return firstName;
     }

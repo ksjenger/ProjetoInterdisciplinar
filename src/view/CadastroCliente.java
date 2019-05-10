@@ -2,6 +2,7 @@ package view;
 
 import dao.ClienteDao;
 import dao.ConveniosDao;
+import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -14,123 +15,11 @@ import model.entities.Convenios;
 
 public class CadastroCliente extends javax.swing.JFrame {
 
+    
     public CadastroCliente() {
         initComponents();
+        
     }
-
-    public JButton getBtnIncluir() {
-        return btnIncluir;
-    }
-
-    public void setBtnIncluir(JButton btnIncluir) {
-        this.btnIncluir = btnIncluir;
-    }
-
-    public JTextField getTxtBairro() {
-        return txtBairro;
-    }
-
-    public void setTxtBairro(JTextField txtBairro) {
-        this.txtBairro = txtBairro;
-    }
-
-    public JFormattedTextField getTxtCEP() {
-        return txtCEP;
-    }
-
-    public void setTxtCEP(JFormattedTextField txtCEP) {
-        this.txtCEP = txtCEP;
-    }
-
-    public JFormattedTextField getTxtCPF() {
-        return txtCPF;
-    }
-
-    public void setTxtCPF(JFormattedTextField txtCPF) {
-        this.txtCPF = txtCPF;
-    }
-
-    public JTextField getTxtCarterinha() {
-        return txtCarterinha;
-    }
-
-    public void setTxtCarterinha(JTextField txtCarterinha) {
-        this.txtCarterinha = txtCarterinha;
-    }
-
-    public JTextField getTxtCidade() {
-        return txtCidade;
-    }
-
-    public void setTxtCidade(JTextField txtCidade) {
-        this.txtCidade = txtCidade;
-    }
-
-    public JTextField getTxtComplemento() {
-        return txtComplemento;
-    }
-
-    public void setTxtComplemento(JTextField txtComplemento) {
-        this.txtComplemento = txtComplemento;
-    }
-
-    public JTextField getTxtEmail() {
-        return txtEmail;
-    }
-
-    public void setTxtEmail(JTextField txtEmail) {
-        this.txtEmail = txtEmail;
-    }
-
-    public JTextField getTxtLogradouro() {
-        return txtLogradouro;
-    }
-
-    public void setTxtLogradouro(JTextField txtLogradouro) {
-        this.txtLogradouro = txtLogradouro;
-    }
-
-    public JTextField getTxtNome() {
-        return txtNome;
-    }
-
-    public void setTxtNome(JTextField txtNome) {
-        this.txtNome = txtNome;
-    }
-
-    public JTextField getTxtNumero() {
-        return txtNumero;
-    }
-
-    public void setTxtNumero(JTextField txtNumero) {
-        this.txtNumero = txtNumero;
-    }
-
-    public JTextField getTxtSobronome() {
-        return txtSobronome;
-    }
-
-    public void setTxtSobronome(JTextField txtSobronome) {
-        this.txtSobronome = txtSobronome;
-    }
-
-    public JFormattedTextField getTxtTelefone() {
-        return txtTelefone;
-    }
-
-    public void setTxtTelefone(JFormattedTextField txtTelefone) {
-        this.txtTelefone = txtTelefone;
-    }
-
-    public JTextField getTxtUf() {
-        return txtUf;
-    }
-
-    public void setTxtUf(JTextField txtUf) {
-        this.txtUf = txtUf;
-    }
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -455,11 +344,7 @@ public class CadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
-        JOptionPane.showMessageDialog(this, " " + ClienteBean.validaCamposCadastro(this));
-        
-        ClienteBean.validaCamposCadastro(this).setFocusable(true);
-        
-        int resposta = JOptionPane.showConfirmDialog(this, "Deseja incluir novo cliente?", "Cadastro", WIDTH);
+        int resposta = JOptionPane.showConfirmDialog(this, "Deseja incluir novo cliente?", "Cadastro", 1);
         if (resposta == 0) {
             String firstName = txtNome.getText();
             String lastName = txtSobronome.getText();
