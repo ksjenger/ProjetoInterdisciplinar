@@ -1,24 +1,19 @@
 package view;
 
-import dao.ClienteDao;
-import dao.ConveniosDao;
-import java.awt.Color;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
+import dao.FuncionariosDao;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import model.bean.ClienteBean;
-import model.entities.Cliente;
-import model.entities.Convenios;
+import model.entities.Funcionarios;
+import java.sql.Date;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.bean.ProdutosBean;
 
+public class FormCadastroFuncionario extends javax.swing.JFrame {
 
-
-public class CadastroCliente extends javax.swing.JFrame {
-
-    
-    public CadastroCliente() {
+    public FormCadastroFuncionario() {
         initComponents();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -39,33 +34,31 @@ public class CadastroCliente extends javax.swing.JFrame {
         txtLogradouro = new javax.swing.JTextField();
         lbnTelefone = new javax.swing.JLabel();
         txtUf = new javax.swing.JTextField();
+        lbnBairro = new javax.swing.JLabel();
+        txtBairro = new javax.swing.JTextField();
         lbnEmail = new javax.swing.JLabel();
-        txtCarterinha = new javax.swing.JTextField();
         lbnUf = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lbnCep = new javax.swing.JLabel();
-        lbnCodigo = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        lbnConvenio = new javax.swing.JLabel();
+        lbnCargo = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnIncluir = new javax.swing.JButton();
-        jComboBoxConvenio = new javax.swing.JComboBox<String>();
-        lbnCPF = new javax.swing.JLabel();
-        txtCEP = new javax.swing.JFormattedTextField();
+        jComboBoxCargo = new javax.swing.JComboBox<String>();
         txtCPF = new javax.swing.JFormattedTextField();
-        txtTelefone = new javax.swing.JFormattedTextField();
-        lbnBairro = new javax.swing.JLabel();
-        txtBairro = new javax.swing.JTextField();
-        lbnCidade = new javax.swing.JLabel();
+        lbnCPF = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
+        lbnCidade = new javax.swing.JLabel();
+        txtCEP = new javax.swing.JFormattedTextField();
+        txtTelefone = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         lbnTituloCadastro.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        lbnTituloCadastro.setText("Novo Cliente");
+        lbnTituloCadastro.setText("Novo Funcionario");
 
-        jPanelCadastro.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Clientes"));
+        jPanelCadastro.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Funcionarios"));
         jPanelCadastro.setToolTipText("");
         jPanelCadastro.setLayout(null);
 
@@ -83,7 +76,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             }
         });
         jPanelCadastro.add(txtComplemento);
-        txtComplemento.setBounds(100, 100, 130, 30);
+        txtComplemento.setBounds(280, 100, 130, 30);
 
         lbnSobrenome.setText("Sobrenome:");
         jPanelCadastro.add(lbnSobrenome);
@@ -107,7 +100,7 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         lbnComplemento.setText("Complemento:");
         jPanelCadastro.add(lbnComplemento);
-        lbnComplemento.setBounds(10, 110, 90, 14);
+        lbnComplemento.setBounds(190, 110, 90, 14);
 
         lbnLogradouro.setText("Logradouro:");
         jPanelCadastro.add(lbnLogradouro);
@@ -123,7 +116,7 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         lbnTelefone.setText("Celular:");
         jPanelCadastro.add(lbnTelefone);
-        lbnTelefone.setBounds(240, 190, 60, 14);
+        lbnTelefone.setBounds(240, 200, 60, 14);
 
         txtUf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,23 +124,27 @@ public class CadastroCliente extends javax.swing.JFrame {
             }
         });
         jPanelCadastro.add(txtUf);
-        txtUf.setBounds(370, 140, 40, 30);
+        txtUf.setBounds(210, 140, 40, 30);
+
+        lbnBairro.setText("Bairro:");
+        jPanelCadastro.add(lbnBairro);
+        lbnBairro.setBounds(10, 110, 60, 14);
+
+        txtBairro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBairroActionPerformed(evt);
+            }
+        });
+        jPanelCadastro.add(txtBairro);
+        txtBairro.setBounds(50, 100, 130, 30);
 
         lbnEmail.setText("Email:");
         jPanelCadastro.add(lbnEmail);
-        lbnEmail.setBounds(10, 190, 60, 14);
-
-        txtCarterinha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCarterinhaActionPerformed(evt);
-            }
-        });
-        jPanelCadastro.add(txtCarterinha);
-        txtCarterinha.setBounds(140, 260, 150, 30);
+        lbnEmail.setBounds(10, 200, 60, 14);
 
         lbnUf.setText("UF:");
         jPanelCadastro.add(lbnUf);
-        lbnUf.setBounds(350, 150, 30, 14);
+        lbnUf.setBounds(190, 150, 30, 14);
 
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,21 +158,17 @@ public class CadastroCliente extends javax.swing.JFrame {
         jPanelCadastro.add(lbnCep);
         lbnCep.setBounds(10, 150, 30, 14);
 
-        lbnCodigo.setText("Numero do Convenio:");
-        jPanelCadastro.add(lbnCodigo);
-        lbnCodigo.setBounds(10, 270, 120, 14);
-
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
             }
         });
         jPanelCadastro.add(txtEmail);
-        txtEmail.setBounds(50, 180, 160, 30);
+        txtEmail.setBounds(50, 190, 180, 30);
 
-        lbnConvenio.setText("Convenio: ");
-        jPanelCadastro.add(lbnConvenio);
-        lbnConvenio.setBounds(10, 230, 70, 14);
+        lbnCargo.setText("Cargo:");
+        jPanelCadastro.add(lbnCargo);
+        lbnCargo.setBounds(10, 260, 70, 14);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -195,18 +188,48 @@ public class CadastroCliente extends javax.swing.JFrame {
         jPanelCadastro.add(btnIncluir);
         btnIncluir.setBounds(70, 303, 150, 30);
 
-        jComboBoxConvenio.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Selecione", "Alianz", "Amil", "Blue Life", "Care Plus", "Golden Cross", "Intermedica", "Medial Saude", "Med Service", "Notredame", "Present Senior", "Sulamerica", "Unimed" }));
-        jComboBoxConvenio.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Selecione", "Gerente", "Caixa", "Balconista", "Farmaceutico", "Atendente" }));
+        jComboBoxCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxConvenioActionPerformed(evt);
+                jComboBoxCargoActionPerformed(evt);
             }
         });
-        jPanelCadastro.add(jComboBoxConvenio);
-        jComboBoxConvenio.setBounds(70, 220, 140, 30);
+        jPanelCadastro.add(jComboBoxCargo);
+        jComboBoxCargo.setBounds(70, 250, 140, 30);
+
+        try {
+            txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtCPF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCPFFocusLost(evt);
+            }
+        });
+        txtCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCPFActionPerformed(evt);
+            }
+        });
+        jPanelCadastro.add(txtCPF);
+        txtCPF.setBounds(250, 250, 160, 30);
 
         lbnCPF.setText("CPF:");
         jPanelCadastro.add(lbnCPF);
-        lbnCPF.setBounds(220, 230, 34, 14);
+        lbnCPF.setBounds(220, 260, 34, 14);
+
+        txtCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCidadeActionPerformed(evt);
+            }
+        });
+        jPanelCadastro.add(txtCidade);
+        txtCidade.setBounds(310, 140, 100, 30);
+
+        lbnCidade.setText("Cidade:");
+        jPanelCadastro.add(lbnCidade);
+        lbnCidade.setBounds(260, 150, 50, 14);
 
         try {
             txtCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
@@ -227,54 +250,12 @@ public class CadastroCliente extends javax.swing.JFrame {
         txtCEP.setBounds(50, 140, 120, 30);
 
         try {
-            txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtCPF.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtCPFFocusLost(evt);
-            }
-        });
-        txtCPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCPFActionPerformed(evt);
-            }
-        });
-        jPanelCadastro.add(txtCPF);
-        txtCPF.setBounds(250, 220, 160, 30);
-
-        try {
             txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # ####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
         jPanelCadastro.add(txtTelefone);
-        txtTelefone.setBounds(290, 180, 120, 30);
-
-        lbnBairro.setText("Bairro:");
-        jPanelCadastro.add(lbnBairro);
-        lbnBairro.setBounds(240, 110, 60, 14);
-
-        txtBairro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBairroActionPerformed(evt);
-            }
-        });
-        jPanelCadastro.add(txtBairro);
-        txtBairro.setBounds(280, 100, 130, 30);
-
-        lbnCidade.setText("Cidade:");
-        jPanelCadastro.add(lbnCidade);
-        lbnCidade.setBounds(190, 150, 50, 14);
-
-        txtCidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCidadeActionPerformed(evt);
-            }
-        });
-        jPanelCadastro.add(txtCidade);
-        txtCidade.setBounds(240, 140, 100, 30);
+        txtTelefone.setBounds(290, 190, 120, 30);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -286,24 +267,24 @@ public class CadastroCliente extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanelCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(lbnTituloCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addGap(65, 65, 65)
+                        .addComponent(lbnTituloCadastro)))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbnTituloCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 450, 410);
+        jPanel1.setBounds(0, 0, 620, 430);
 
-        setSize(new java.awt.Dimension(466, 456));
+        setSize(new java.awt.Dimension(466, 472));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -331,10 +312,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBairroActionPerformed
 
-    private void txtCarterinhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCarterinhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCarterinhaActionPerformed
-
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
@@ -344,69 +321,53 @@ public class CadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
-        int resposta = JOptionPane.showConfirmDialog(this, "Deseja incluir novo cliente?", "Cadastro", 1);
+
+        int resposta = JOptionPane.showConfirmDialog(this, "Cadastrar novo Funcionario?", "Cadastro", 1);
         if (resposta == 0) {
             String firstName = txtNome.getText();
             String lastName = txtSobronome.getText();
             String logradouro = txtLogradouro.getText();
             Integer numero = Integer.parseInt(txtNumero.getText());
             String complemento = txtComplemento.getText();
-            String CEP = txtCEP.getText();
+            String Cep = txtCEP.getText();
             String bairro = txtBairro.getText();
             String uf = txtUf.getText();
             String telefone = txtTelefone.getText();
             String email = txtEmail.getText();
             String CPF = txtCPF.getText();
-            String carterinha = txtCarterinha.getText();
             String cidade = txtCidade.getText();
-            String convenio = null;
-            if(jComboBoxConvenio.getSelectedIndex() == 0){
-                JOptionPane.showMessageDialog(this, "Escolha o Convenio", "Erro", 1);
-            }else if(jComboBoxConvenio.getSelectedIndex() == 1){
-                convenio = "Alianz"; 
-            }else if(jComboBoxConvenio.getSelectedIndex() == 2){
-                convenio = "Amil";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 3){
-                convenio = "Blue Life";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 4){
-                convenio = "Care Plus";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 5){
-                convenio = "Golden Cross";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 6){
-                convenio = "Intermedica";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 7){
-                convenio = "Medial Saude";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 8){
-                convenio = "Med Service";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 9){
-                convenio = "Notredame";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 10){
-                convenio = "Present Senior";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 11){
-                convenio = "Sulamerica";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 12){
-                convenio = "Unimed";
+            int id = jComboBoxCargo.getSelectedIndex();
+            String cargo = null;
+            if (id == 0) {
+                JOptionPane.showMessageDialog(this, "Selecione um Cargo!!");
+            } else if (id == 1) {
+                cargo = "Gerente";
+            } else if (id == 2) {
+                cargo = "Caixa";
+            } else if (id == 3) {
+                cargo = "Balconista";
+            } else if (id == 4) {
+                cargo = "Farmaceutico";
+            } else if (id == 5) {
+                cargo = "Atendente";
             }
+
+            Date date = new java.sql.Date(new java.util.Date().getTime());
+
+            Funcionarios funcionario = new Funcionarios(null, firstName, 
+                    lastName, logradouro, numero, bairro, complemento, 
+                    Cep, uf, telefone, email, date, cargo, cidade, CPF);
             
-            Convenios c = new Convenios(convenio);
-            ConveniosDao conveniosDao = new ConveniosDao();
-
-            Cliente cliente = new Cliente(null, firstName, lastName, logradouro, 
-                    numero, bairro, complemento, CEP, uf, telefone, email, CPF, carterinha, cidade, c);
-            cliente.setConvenio(conveniosDao.selectConvenio(jComboBoxConvenio.getSelectedIndex()));
-
-            ClienteDao clienteDao = new ClienteDao();
-            clienteDao.CreateCliente(cliente);
-            JOptionPane.showMessageDialog(this, "Cadastrado concluido!");
+            FuncionariosDao funcionariosDao = new FuncionariosDao();
+            funcionariosDao.CreateFuncionario(funcionario);
         }
-
-        int novocliente = JOptionPane.showConfirmDialog(this, "Deseja Incluir um novo Cliente?", "Cadastro de Clientes", WIDTH);
-        if (novocliente == 0) {
+        
+        int novo = JOptionPane.showConfirmDialog(this, "Cadastro Concluido!! Deseja cadastrar um novo Funcionario?", "Cadastro de Clientes", 2);
+        if (novo == 0) {
             txtNome.setText("");
             txtSobronome.setText("");
             txtBairro.setText("");
             txtCEP.setText("");
-            txtCarterinha.setText("");
             txtComplemento.setText("");
             txtEmail.setText("");
             txtLogradouro.setText("");
@@ -414,29 +375,25 @@ public class CadastroCliente extends javax.swing.JFrame {
             txtSobronome.setText("");
             txtTelefone.setText("");
             txtUf.setText("");
-            jComboBoxConvenio.setSelectedIndex(0);
-        } else if (novocliente == 1) {
-            dispose();
-
+            txtCidade.setText("");
+            txtCPF.setText("");
+            jComboBoxCargo.setSelectedIndex(0);
+        } else if (novo == 1) {
+            hide();
         }
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cancelar?", "Confirma", WIDTH);
+        int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cancelar?", "Confirma", 1);
 
         if (decisao != 1) {
             System.exit(0);
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void txtCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCEPActionPerformed
-       
-    
-    }//GEN-LAST:event_txtCEPActionPerformed
-
-    private void txtCEPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCEPFocusLost
-           
-    }//GEN-LAST:event_txtCEPFocusLost
+    private void jComboBoxCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCargoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxCargoActionPerformed
 
     private void txtCPFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCPFFocusLost
         // TODO add your handling code here:
@@ -446,46 +403,23 @@ public class CadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCPFActionPerformed
 
-    private void jComboBoxConvenioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxConvenioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxConvenioActionPerformed
-
     private void txtCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCidadeActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void txtCEPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCEPFocusLost
 
-        /* Create and display the form */
+    }//GEN-LAST:event_txtCEPFocusLost
+
+    private void txtCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCEPActionPerformed
+
+    }//GEN-LAST:event_txtCEPActionPerformed
+
+    public static void main(String args[]) {
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroCliente().setVisible(true);
+                new FormCadastroFuncionario().setVisible(true);
             }
         });
     }
@@ -493,16 +427,15 @@ public class CadastroCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnIncluir;
-    private javax.swing.JComboBox<String> jComboBoxConvenio;
+    private javax.swing.JComboBox<String> jComboBoxCargo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCadastro;
     private javax.swing.JLabel lbnBairro;
     private javax.swing.JLabel lbnCPF;
+    private javax.swing.JLabel lbnCargo;
     private javax.swing.JLabel lbnCep;
     private javax.swing.JLabel lbnCidade;
-    private javax.swing.JLabel lbnCodigo;
     private javax.swing.JLabel lbnComplemento;
-    private javax.swing.JLabel lbnConvenio;
     private javax.swing.JLabel lbnEmail;
     private javax.swing.JLabel lbnLogradouro;
     private javax.swing.JLabel lbnNome;
@@ -514,7 +447,6 @@ public class CadastroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCEP;
     private javax.swing.JFormattedTextField txtCPF;
-    private javax.swing.JTextField txtCarterinha;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtComplemento;
     private javax.swing.JTextField txtEmail;

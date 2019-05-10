@@ -14,10 +14,10 @@ public class ClienteDao {
         PreparedStatement st = null;
 
         try {
-            st = conn.prepareStatement("insert into cliente (firstName, "
+            st = conn.prepareStatement("insert into clientes (firstName, "
                     + "lastName, logradouro, numero, bairro, "
-                    + "complemento, CEP, uf, telefone, email, CPF, cidade, idconvenio) values"
-                    + " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)");
+                    + "complemento, CEP, uf, telefone, email, CPF, cidade, idconvenio, carteirinha) values"
+                    + " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?, ?)");
             st.setString(1, cliente.getFirstName());
             st.setString(2, cliente.getLastName());
             st.setString(3, cliente.getLogradouro());
@@ -31,6 +31,7 @@ public class ClienteDao {
             st.setString(11, cliente.getCPF());
             st.setString(12, cliente.getCidade());
             st.setInt(13, cliente.getConvenio().getIdConvenio());
+            st.setString(14, cliente.getCarterinha());
             st.execute();
             st.close();
             ConectaBD.closeConnection();

@@ -5,9 +5,9 @@ import javax.swing.JOptionPane;
 import java.sql.Date;
 import model.entities.Remedios;
 
-public class CadastroMedicamentos extends javax.swing.JFrame {
+public class FormCadastroMedicamentos extends javax.swing.JFrame {
 
-    public CadastroMedicamentos() {
+    public FormCadastroMedicamentos() {
         initComponents();
 
     }
@@ -241,7 +241,7 @@ public class CadastroMedicamentos extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroMedicamentos().setVisible(true);
+                new FormCadastroMedicamentos().setVisible(true);
             }
         });
     }

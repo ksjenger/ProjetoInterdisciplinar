@@ -2,9 +2,9 @@ package view;
 
 import javax.swing.JOptionPane;
 
-public class SelecioneCadastro extends javax.swing.JFrame {
+public class FormSelecioneCadastro extends javax.swing.JFrame {
 
-    public SelecioneCadastro() {
+    public FormSelecioneCadastro() {
         initComponents();
     }
 
@@ -49,12 +49,13 @@ public class SelecioneCadastro extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 11, Short.MAX_VALUE)
-                .addComponent(lbnTituloCadastro))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbnTituloCadastro)
+                .addContainerGap())
         );
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(40, 10, 303, 59);
+        jPanel3.setBounds(40, 10, 303, 70);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +78,7 @@ public class SelecioneCadastro extends javax.swing.JFrame {
             int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Cliente?", "Cadastrar Cliente", 1);
 
             if (decisao == 0) {
-                CadastroCliente cadastro = new CadastroCliente();
+                FormCadastroCliente cadastro = new FormCadastroCliente();
                 cadastro.setVisible(true);
             } else {
                 jComboBoxCadastro.setSelectedIndex(0);
@@ -87,7 +88,7 @@ public class SelecioneCadastro extends javax.swing.JFrame {
             int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Funcionario?", "Cadastrar Funcionario", 1);
 
             if (decisao == 0) {
-                CadastroFuncionario cadastroFuncionario = new CadastroFuncionario();
+                FormCadastroFuncionario cadastroFuncionario = new FormCadastroFuncionario();
                 cadastroFuncionario.setVisible(true);
             } else {
                 jComboBoxCadastro.setSelectedIndex(0);
@@ -97,7 +98,7 @@ public class SelecioneCadastro extends javax.swing.JFrame {
             int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Convenio?", "Cadastrar Convenio", 1);
 
             if (decisao == 0) {
-                CadastroConvenio cc = new CadastroConvenio();
+                FormCadastroConvenio cc = new FormCadastroConvenio();
                 cc.setVisible(true);
             } else {
                 jComboBoxCadastro.setSelectedIndex(0);
@@ -109,7 +110,7 @@ public class SelecioneCadastro extends javax.swing.JFrame {
             int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Remedio?", "Cadastrar Remedio", 1);
 
             if (decisao == 0) {
-                CadastroMedicamentos cm = new CadastroMedicamentos();
+                FormCadastroMedicamentos cm = new FormCadastroMedicamentos();
                 cm.setVisible(true);
             } else {
                 jComboBoxCadastro.setSelectedIndex(0);
@@ -138,20 +139,21 @@ public class SelecioneCadastro extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SelecioneCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormSelecioneCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SelecioneCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormSelecioneCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SelecioneCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormSelecioneCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SelecioneCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormSelecioneCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SelecioneCadastro().setVisible(true);
+                new FormSelecioneCadastro().setVisible(true);
             }
         });
     }

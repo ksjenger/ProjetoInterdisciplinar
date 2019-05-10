@@ -20,11 +20,11 @@ import model.entities.Convenios;
  *
  * @author kauan
  */
-public class CadastroConvenio extends javax.swing.JFrame {
+public class FormCadastroConvenio extends javax.swing.JFrame {
 
     private int it;
 
-    public CadastroConvenio() {
+    public FormCadastroConvenio() {
         initComponents();
         CarregaGrid();
     }
@@ -153,6 +153,8 @@ public class CadastroConvenio extends javax.swing.JFrame {
             ConectaBD.closeConnection();
             st.close();
             rs.close();
+            
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -227,17 +229,17 @@ public class CadastroConvenio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroConvenio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCadastroConvenio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroConvenio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCadastroConvenio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroConvenio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCadastroConvenio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroConvenio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormCadastroConvenio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroConvenio().setVisible(true);
+                new FormCadastroConvenio().setVisible(true);
             }
         });
     }

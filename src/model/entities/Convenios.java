@@ -10,11 +10,15 @@ public class Convenios {
     private Integer IdConvenio;
     private String nomeConvenio;
 
-    public Convenios(String nomeConvenio) {
-        this.IdConvenio = IdConvenio;
+    public Convenios(String nomeConvenio, Integer idConvenio) {
+        this.IdConvenio = idConvenio;
         this.nomeConvenio = nomeConvenio;
     }
 
+    public Convenios(String nomeConvenio){
+        this.nomeConvenio = nomeConvenio;
+    }
+    
     public Convenios() {
     }
 
