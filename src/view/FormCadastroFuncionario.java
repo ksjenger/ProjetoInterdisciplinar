@@ -4,10 +4,6 @@ import dao.FuncionariosDao;
 import javax.swing.JOptionPane;
 import model.entities.Funcionarios;
 import java.sql.Date;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.bean.ProdutosBean;
 
 public class FormCadastroFuncionario extends javax.swing.JFrame {
 
@@ -338,18 +334,27 @@ public class FormCadastroFuncionario extends javax.swing.JFrame {
             String cidade = txtCidade.getText();
             int id = jComboBoxCargo.getSelectedIndex();
             String cargo = null;
-            if (id == 0) {
-                JOptionPane.showMessageDialog(this, "Selecione um Cargo!!");
-            } else if (id == 1) {
-                cargo = "Gerente";
-            } else if (id == 2) {
-                cargo = "Caixa";
-            } else if (id == 3) {
-                cargo = "Balconista";
-            } else if (id == 4) {
-                cargo = "Farmaceutico";
-            } else if (id == 5) {
-                cargo = "Atendente";
+            switch (id) {
+                case 0:
+                    JOptionPane.showMessageDialog(this, "Selecione um Cargo!!");
+                    break;
+                case 1:
+                    cargo = "Gerente";
+                    break;
+                case 2:
+                    cargo = "Caixa";
+                    break;
+                case 3:
+                    cargo = "Balconista";
+                    break;
+                case 4:
+                    cargo = "Farmaceutico";
+                    break;
+                case 5:
+                    cargo = "Atendente";
+                    break;
+                default:
+                    break;
             }
 
             Date date = new java.sql.Date(new java.util.Date().getTime());

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import model.entities.Convenios;
 
 public class ConveniosDao {
@@ -80,14 +82,49 @@ public class ConveniosDao {
             }
         }
     }
+    
+    public static ArrayList<Convenios> getConvenios(){
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
+        ArrayList<Convenios> lista = new ArrayList<Convenios>();
+
+        Convenios c = new Convenios();
+        try {
+            conn = ConectaBD.getConnection();
+            String sql = "Select * from Convenios";
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+
+            while(rs.next()) {
+                int idConvenio = rs.getInt("idConvenio");
+                String empresa = rs.getString("Empresa");
+                c.setNomeConvenio(empresa);
+                c.setIdConvenio(idConvenio);
+                lista.add(c);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConectaBD.closeConnection();
+            try {
+                st.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return lista;
+    
+    }
 
     public Convenios selectConvenio(Integer id) {
-        Connection conn = null;
+        
         PreparedStatement st = null;
         ResultSet rs = null;
 
         Convenios c = new Convenios();
-        c = null;
 
         try {
             conn = ConectaBD.getConnection();

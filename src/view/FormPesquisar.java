@@ -139,12 +139,14 @@ public class FormPesquisar extends javax.swing.JFrame {
         
         lista = pd.selectProdutos();
         
-        for(Object produto : lista){
+        
+        
+        /*
             DefaultTableModel tab = (DefaultTableModel) jTableProdutos.getModel();
             tab.setNumRows(0);
             tab.addRow(new String[]{l, empresa});
-            
-        }
+          */  
+        
 
     }
     

@@ -2,23 +2,29 @@ package view;
 
 import dao.ClienteDao;
 import dao.ConveniosDao;
-import java.awt.Color;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import model.bean.ProdutosBean;
 import model.entities.Cliente;
 import model.entities.Convenios;
 
-
-
 public class FormCadastroCliente extends javax.swing.JFrame {
 
-    
+    ArrayList<Convenios> listaConvenios;
+
     public FormCadastroCliente() {
         initComponents();
+
+        listaConvenios = new ArrayList<Convenios>();
+        listaConvenios = ConveniosDao.getConvenios();
         
+            
+            
+            
+        for(Convenios con :listaConvenios){
+            jComboBoxConvenio.addItem(con.getNomeConvenio());
+        }
+        
+        Convenios cc = listaConvenios.get(0);
     }
 
     @SuppressWarnings("unchecked")
@@ -195,7 +201,6 @@ public class FormCadastroCliente extends javax.swing.JFrame {
         jPanelCadastro.add(btnIncluir);
         btnIncluir.setBounds(70, 303, 150, 30);
 
-        jComboBoxConvenio.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Selecione", "Alianz", "Amil", "Blue Life", "Care Plus", "Golden Cross", "Intermedica", "Medial Saude", "Med Service", "Notredame", "Present Senior", "Sulamerica", "Unimed" }));
         jComboBoxConvenio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxConvenioActionPerformed(evt);
@@ -359,10 +364,14 @@ public class FormCadastroCliente extends javax.swing.JFrame {
             String CPF = txtCPF.getText();
             String carterinha = txtCarterinha.getText();
             String cidade = txtCidade.getText();
-            String convenio = null;
-            Integer idConvenio = jComboBoxConvenio.getSelectedIndex();
+            //String convenio = null;
+            //Integer idConvenio = jComboBoxConvenio.getSelectedIndex();
+
             
-            if(jComboBoxConvenio.getSelectedIndex() == 0){
+            
+            Convenios c = listaConvenios.get(jComboBoxConvenio.getSelectedIndex());
+
+            /*if(== 0){
                 JOptionPane.showMessageDialog(this, "Escolha o Convenio", "Erro", 1);
             }else if(jComboBoxConvenio.getSelectedIndex() == 1){
                 convenio = "Alianz"; 
@@ -390,13 +399,10 @@ public class FormCadastroCliente extends javax.swing.JFrame {
                 convenio = "Unimed";
             }
             
-            Convenios c = new Convenios(convenio, idConvenio);
-            ConveniosDao conveniosDao = new ConveniosDao();
-            
-
-            Cliente cliente = new Cliente(null, firstName, lastName, logradouro, 
+            Convenios c = new Convenios(convenio, idConvenio);*/
+            //ConveniosDao conveniosDao = new ConveniosDao();
+            Cliente cliente = new Cliente(null, firstName, lastName, logradouro,
                     numero, bairro, complemento, CEP, uf, telefone, email, CPF, carterinha, cidade, c);
-            
 
             ClienteDao clienteDao = new ClienteDao();
             clienteDao.CreateCliente(cliente);
@@ -433,12 +439,12 @@ public class FormCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCEPActionPerformed
-       
-    
+
+
     }//GEN-LAST:event_txtCEPActionPerformed
 
     private void txtCEPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCEPFocusLost
-           
+
     }//GEN-LAST:event_txtCEPFocusLost
 
     private void txtCPFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCPFFocusLost
