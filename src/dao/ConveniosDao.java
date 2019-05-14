@@ -87,9 +87,9 @@ public class ConveniosDao {
         Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
-        ArrayList<Convenios> lista = new ArrayList<Convenios>();
+        ArrayList<Convenios> lista = new ArrayList<>();
 
-        Convenios c = new Convenios();
+        
         try {
             conn = ConectaBD.getConnection();
             String sql = "Select * from Convenios";
@@ -97,6 +97,7 @@ public class ConveniosDao {
             rs = st.executeQuery(sql);
 
             while(rs.next()) {
+                Convenios c = new Convenios();
                 int idConvenio = rs.getInt("idConvenio");
                 String empresa = rs.getString("Empresa");
                 c.setNomeConvenio(empresa);

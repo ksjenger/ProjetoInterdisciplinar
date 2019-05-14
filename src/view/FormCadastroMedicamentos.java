@@ -50,9 +50,9 @@ public class FormCadastroMedicamentos extends javax.swing.JFrame {
         jPanelCadastro.add(lbnNome);
         lbnNome.setBounds(10, 30, 50, 14);
 
-        lbnPreco.setText("Preço:");
+        lbnPreco.setText("Preço: (R$)");
         jPanelCadastro.add(lbnPreco);
-        lbnPreco.setBounds(10, 70, 50, 14);
+        lbnPreco.setBounds(10, 70, 70, 14);
 
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,7 +101,7 @@ public class FormCadastroMedicamentos extends javax.swing.JFrame {
             }
         });
         jPanelCadastro.add(txtPrecoFormatado);
-        txtPrecoFormatado.setBounds(50, 60, 90, 30);
+        txtPrecoFormatado.setBounds(80, 60, 90, 30);
 
         GroupButtonReceita.add(RadioBNao);
         RadioBNao.setText("Nao");

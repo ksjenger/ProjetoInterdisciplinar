@@ -1,4 +1,3 @@
-
 package view;
 
 import dao.ProdutosDao;
@@ -10,6 +9,7 @@ public class FormPesquisar extends javax.swing.JFrame {
 
     public FormPesquisar() {
         initComponents();
+        CarregaGrid();
     }
 
     @SuppressWarnings("unchecked")
@@ -132,24 +132,22 @@ public class FormPesquisar extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void CarregaGrid() {
-        
-        ProdutosDao pd = new ProdutosDao();
-        
-        ArrayList lista = new ArrayList<Produtos>();
-        
-        lista = pd.selectProdutos();
-        
-        
-        
-        /*
-            DefaultTableModel tab = (DefaultTableModel) jTableProdutos.getModel();
-            tab.setNumRows(0);
-            tab.addRow(new String[]{l, empresa});
-          */  
-        
+
+        ArrayList<Produtos> lista = new ArrayList<>();
+        lista = ProdutosDao.selectProdutos();
+        DefaultTableModel tab = (DefaultTableModel) jTableProdutos.getModel();
+        tab.setNumRows(0);
+
+        for (Produtos prod : lista) {
+            String nome = prod.getNome();
+            String tipoProduto = prod.getTipo();
+            String preco = "" + prod.getValor();
+            String classificacao = prod.getCategoria();
+            tab.addRow(new String[]{nome, tipoProduto, preco, classificacao});
+        }
 
     }
-    
+
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimparActionPerformed

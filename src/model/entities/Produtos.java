@@ -8,6 +8,7 @@ public class Produtos {
     private Double valor;
     private String codBar;
     private boolean status;
+    private String tipo;
 
     public Produtos() {
     }
@@ -21,6 +22,14 @@ public class Produtos {
         this.status = status;
     }
 
+    public void setTipo(String tipo){
+        this.tipo = tipo;
+    }
+    
+    public String getTipo(){
+        return tipo;
+    }
+    
     public Integer getIdProduto() {
         return idProduto;
     }

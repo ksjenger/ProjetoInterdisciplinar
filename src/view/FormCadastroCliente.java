@@ -14,17 +14,14 @@ public class FormCadastroCliente extends javax.swing.JFrame {
     public FormCadastroCliente() {
         initComponents();
 
-        listaConvenios = new ArrayList<Convenios>();
+        listaConvenios = new ArrayList<>();
         listaConvenios = ConveniosDao.getConvenios();
-        
-            
-            
-            
-        for(Convenios con :listaConvenios){
+        jComboBoxConvenio.removeAllItems();
+        for(Convenios con : listaConvenios){
             jComboBoxConvenio.addItem(con.getNomeConvenio());
+            String nomeConvenio = con.getNomeConvenio();
+
         }
-        
-        Convenios cc = listaConvenios.get(0);
     }
 
     @SuppressWarnings("unchecked")
@@ -44,7 +41,6 @@ public class FormCadastroCliente extends javax.swing.JFrame {
         lbnLogradouro = new javax.swing.JLabel();
         txtLogradouro = new javax.swing.JTextField();
         lbnTelefone = new javax.swing.JLabel();
-        txtUf = new javax.swing.JTextField();
         lbnEmail = new javax.swing.JLabel();
         txtCarterinha = new javax.swing.JTextField();
         lbnUf = new javax.swing.JLabel();
@@ -55,7 +51,7 @@ public class FormCadastroCliente extends javax.swing.JFrame {
         lbnConvenio = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnIncluir = new javax.swing.JButton();
-        jComboBoxConvenio = new javax.swing.JComboBox<String>();
+        jComboBoxConvenio = new javax.swing.JComboBox<>();
         lbnCPF = new javax.swing.JLabel();
         txtCEP = new javax.swing.JFormattedTextField();
         txtCPF = new javax.swing.JFormattedTextField();
@@ -64,6 +60,7 @@ public class FormCadastroCliente extends javax.swing.JFrame {
         txtBairro = new javax.swing.JTextField();
         lbnCidade = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
+        jComboBoxEstado = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -131,14 +128,6 @@ public class FormCadastroCliente extends javax.swing.JFrame {
         jPanelCadastro.add(lbnTelefone);
         lbnTelefone.setBounds(240, 190, 60, 14);
 
-        txtUf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUfActionPerformed(evt);
-            }
-        });
-        jPanelCadastro.add(txtUf);
-        txtUf.setBounds(370, 140, 40, 30);
-
         lbnEmail.setText("Email:");
         jPanelCadastro.add(lbnEmail);
         lbnEmail.setBounds(10, 190, 60, 14);
@@ -153,7 +142,7 @@ public class FormCadastroCliente extends javax.swing.JFrame {
 
         lbnUf.setText("UF:");
         jPanelCadastro.add(lbnUf);
-        lbnUf.setBounds(350, 150, 30, 14);
+        lbnUf.setBounds(330, 150, 30, 14);
 
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,7 +218,7 @@ public class FormCadastroCliente extends javax.swing.JFrame {
             }
         });
         jPanelCadastro.add(txtCEP);
-        txtCEP.setBounds(50, 140, 120, 30);
+        txtCEP.setBounds(50, 140, 110, 30);
 
         try {
             txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -271,7 +260,7 @@ public class FormCadastroCliente extends javax.swing.JFrame {
 
         lbnCidade.setText("Cidade:");
         jPanelCadastro.add(lbnCidade);
-        lbnCidade.setBounds(190, 150, 50, 14);
+        lbnCidade.setBounds(170, 150, 50, 14);
 
         txtCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,7 +268,11 @@ public class FormCadastroCliente extends javax.swing.JFrame {
             }
         });
         jPanelCadastro.add(txtCidade);
-        txtCidade.setBounds(240, 140, 100, 30);
+        txtCidade.setBounds(220, 140, 100, 30);
+
+        jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        jPanelCadastro.add(jComboBoxEstado);
+        jComboBoxEstado.setBounds(360, 140, 50, 30);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -328,10 +321,6 @@ public class FormCadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLogradouroActionPerformed
 
-    private void txtUfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUfActionPerformed
-
     private void txtBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBairroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBairroActionPerformed
@@ -358,54 +347,21 @@ public class FormCadastroCliente extends javax.swing.JFrame {
             String complemento = txtComplemento.getText();
             String CEP = txtCEP.getText();
             String bairro = txtBairro.getText();
-            String uf = txtUf.getText();
+            String uf = (String) jComboBoxEstado.getSelectedItem();
             String telefone = txtTelefone.getText();
             String email = txtEmail.getText();
             String CPF = txtCPF.getText();
             String carterinha = txtCarterinha.getText();
             String cidade = txtCidade.getText();
-            //String convenio = null;
-            //Integer idConvenio = jComboBoxConvenio.getSelectedIndex();
+            Integer idConvenio = jComboBoxConvenio.getSelectedIndex();
 
-            
-            
             Convenios c = listaConvenios.get(jComboBoxConvenio.getSelectedIndex());
-
-            /*if(== 0){
-                JOptionPane.showMessageDialog(this, "Escolha o Convenio", "Erro", 1);
-            }else if(jComboBoxConvenio.getSelectedIndex() == 1){
-                convenio = "Alianz"; 
-            }else if(jComboBoxConvenio.getSelectedIndex() == 2){
-                convenio = "Amil";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 3){
-                convenio = "Blue Life";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 4){
-                convenio = "Care Plus";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 5){
-                convenio = "Golden Cross";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 6){
-                convenio = "Intermedica";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 7){
-                convenio = "Medial Saude";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 8){
-                convenio = "Med Service";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 9){
-                convenio = "Notredame";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 10){
-                convenio = "Present Senior";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 11){
-                convenio = "Sulamerica";
-            }else if(jComboBoxConvenio.getSelectedIndex() == 12){
-                convenio = "Unimed";
-            }
             
-            Convenios c = new Convenios(convenio, idConvenio);*/
-            //ConveniosDao conveniosDao = new ConveniosDao();
+            Convenios con = new Convenios(c.getNomeConvenio(), c.getIdConvenio());
             Cliente cliente = new Cliente(null, firstName, lastName, logradouro,
-                    numero, bairro, complemento, CEP, uf, telefone, email, CPF, carterinha, cidade, c);
+                    numero, bairro, complemento, CEP, uf, telefone, email, CPF, carterinha, cidade, con);
 
-            ClienteDao clienteDao = new ClienteDao();
-            clienteDao.CreateCliente(cliente);
+            ClienteDao.CreateCliente(cliente);
             JOptionPane.showMessageDialog(this, "Cadastrado concluido!");
         }
 
@@ -422,7 +378,7 @@ public class FormCadastroCliente extends javax.swing.JFrame {
             txtNumero.setText("");
             txtSobronome.setText("");
             txtTelefone.setText("");
-            txtUf.setText("");
+            jComboBoxEstado.setSelectedIndex(0);
             jComboBoxConvenio.setSelectedIndex(0);
         } else if (novocliente == 1) {
             dispose();
@@ -505,6 +461,7 @@ public class FormCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnIncluir;
     private javax.swing.JComboBox<String> jComboBoxConvenio;
+    private javax.swing.JComboBox<String> jComboBoxEstado;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCadastro;
     private javax.swing.JLabel lbnBairro;
@@ -534,6 +491,5 @@ public class FormCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtSobronome;
     private javax.swing.JFormattedTextField txtTelefone;
-    private javax.swing.JTextField txtUf;
     // End of variables declaration//GEN-END:variables
 }

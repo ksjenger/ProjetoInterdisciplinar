@@ -9,7 +9,7 @@ public class ClienteDao {
 
     private static Connection conn = null;
 
-    public void CreateCliente(Cliente cliente) {
+    public static void CreateCliente(Cliente cliente) {
         conn = ConectaBD.getConnection();
         PreparedStatement st = null;
 

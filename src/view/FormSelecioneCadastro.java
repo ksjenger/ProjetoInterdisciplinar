@@ -13,7 +13,7 @@ public class FormSelecioneCadastro extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jComboBoxCadastro = new javax.swing.JComboBox<String>();
+        jComboBoxCadastro = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         lbnTituloCadastro = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
@@ -23,7 +23,7 @@ public class FormSelecioneCadastro extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
-        jComboBoxCadastro.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Selecione", "Clientes", "Funcionarios", "Convenios", "Medicamentos", "Infantil", "Perfumaria" }));
+        jComboBoxCadastro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Clientes", "Funcionarios", "Convenios", "Medicamentos", "Perfumaria" }));
         jComboBoxCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxCadastroActionPerformed(evt);
@@ -116,6 +116,18 @@ public class FormSelecioneCadastro extends javax.swing.JFrame {
                 jComboBoxCadastro.setSelectedIndex(0);
             }
         }
+        
+        if (jComboBoxCadastro.getSelectedIndex() == 5) {
+            int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Produto?", "Cadastrar Remedio", 1);
+
+            if (decisao == 0) {
+                FormCadastroPerfumaria cp = new FormCadastroPerfumaria();
+                cp.setVisible(true);
+            } else {
+                jComboBoxCadastro.setSelectedIndex(0);
+            }
+        }
+        
     }//GEN-LAST:event_jComboBoxCadastroActionPerformed
      
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
