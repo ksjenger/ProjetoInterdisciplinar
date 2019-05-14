@@ -11,19 +11,21 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.entities.Convenios;
+import model.entities.Produtos;
 
 /**
  *
  * @author kauan
  */
-public class FormEstoqueRemedio extends javax.swing.JFrame {
+public class FormEstoqueProdutos extends javax.swing.JFrame {
 
     private int it;
 
-    public FormEstoqueRemedio() {
+    public FormEstoqueProdutos() {
         initComponents();
         CarregaGrid();
     }
@@ -123,39 +125,13 @@ public class FormEstoqueRemedio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     private void CarregaGrid() {
 
-        Connection conn = null;
-        Statement st = null;
-        ResultSet rs = null;
-
-        try {
-            conn = ConectaBD.getConnection();
-            String sql = "SELECT produtos.nome, perfumaria.categoria,  produtos.status, "
-                    + "produtos.preco, perfumaria.Quantidade "
-                    + "FROM produtos "
-                    + "INNER JOIN perfumaria ON "
-                    + "produtos.idProduto = perfumaria.idProduto order by produtos.nome";
-            
-            st = conn.createStatement();
-            rs = st.executeQuery(sql);
-            DefaultTableModel tab = (DefaultTableModel) jtabEstoque.getModel();
-            tab.setNumRows(0);
-            while (rs.next()) {
-                String nome = rs.getString("nome");
-                String categoria = rs.getString("categoria");
-                Boolean status = rs.getBoolean("status");
-                *
-                tab.addRow(new String[]{idConvenio, empresa});
-            }
-            ConectaBD.closeConnection();
-            st.close();
-            rs.close();
-            
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        DefaultTableModel tab = (DefaultTableModel)jtabEstoque.getModel() ;
+        tab.setNumRows(0);
+    
+        ArrayList<Produtos> lista = new ArrayList<>();
+        
     }
-
+    
     private void jtabEstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtabEstoqueMouseClicked
         if (jtabEstoque.getSelectionModel().isSelectionEmpty()) {
             JOptionPane.showMessageDialog(null, "Nada selecionado");
@@ -183,20 +159,36 @@ public class FormEstoqueRemedio extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormEstoqueRemedio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormEstoqueRemedio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormEstoqueRemedio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormEstoqueRemedio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormEstoqueProdutos.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FormEstoqueProdutos.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FormEstoqueProdutos.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FormEstoqueProdutos.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormEstoqueRemedio().setVisible(true);
+                new FormEstoqueProdutos().setVisible(true);
             }
         });
     }
