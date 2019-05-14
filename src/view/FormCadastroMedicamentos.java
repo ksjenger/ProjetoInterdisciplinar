@@ -80,7 +80,7 @@ public class FormCadastroMedicamentos extends javax.swing.JFrame {
         jPanelCadastro.add(btnIncluir);
         btnIncluir.setBounds(60, 140, 150, 30);
 
-        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "OTC", "Eticos", "Psico", "Nutricosmeticos" }));
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "OTC", "Eticos", "Psico", "Nutricosmeticos", "Antimicrobianos", "Alto custo" }));
         jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoActionPerformed(evt);
@@ -181,6 +181,11 @@ public class FormCadastroMedicamentos extends javax.swing.JFrame {
                 case 4:
                     tipo = "Nutricosmeticos";
                     break;
+                case 5:
+                    tipo = "Alto custo";
+                case 6:
+                    tipo = "Antimicrobiano";
+                    
                 default:
                     break;
             }

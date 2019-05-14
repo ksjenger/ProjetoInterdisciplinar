@@ -1,5 +1,7 @@
 package model.entities;
 
+import java.util.Objects;
+
 public class Produtos {
 
     private Integer idProduto;
@@ -77,5 +79,5 @@ public class Produtos {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-
+   
 }

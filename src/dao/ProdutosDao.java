@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -35,9 +34,27 @@ public class ProdutosDao {
                 Double preco = rs.getDouble(3);
                 String genero = rs.getString(4);
                 Produtos p = new Produtos(null, nome, genero, preco, null, Boolean.TRUE);
+                p.setTipo(tipo);
                 listaP.add(p);
             }
-
+            
+            sql = "select produtos.nome as Nome, produtos.tipo as Classificacao, "
+                    + "produtos.preco as Preco, perfumaria.Categoria as Genero "
+                    + "from produtos inner join perfumaria on "
+                    + "perfumaria.idProduto = produtos.idProduto order by produtos.nome; ";
+            rs = st.executeQuery(sql);
+            
+            while(rs.next()){
+                String nome = rs.getString(1);
+                String tipo = rs.getString(2);
+                Double preco = rs.getDouble(3);
+                String genero = rs.getString(4);
+                Produtos p = new Produtos(null, nome, genero, preco, null, Boolean.TRUE);
+                p.setTipo(tipo);
+                listaP.add(p);
+            }
+            
+            
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

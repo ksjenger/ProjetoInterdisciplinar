@@ -20,7 +20,6 @@ public class FormCadastroCliente extends javax.swing.JFrame {
         for(Convenios con : listaConvenios){
             jComboBoxConvenio.addItem(con.getNomeConvenio());
             String nomeConvenio = con.getNomeConvenio();
-
         }
     }
 
@@ -381,7 +380,7 @@ public class FormCadastroCliente extends javax.swing.JFrame {
             jComboBoxEstado.setSelectedIndex(0);
             jComboBoxConvenio.setSelectedIndex(0);
         } else if (novocliente == 1) {
-            dispose();
+            hide();
 
         }
     }//GEN-LAST:event_btnIncluirActionPerformed

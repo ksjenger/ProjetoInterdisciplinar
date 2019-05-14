@@ -14,12 +14,13 @@ public class FormLogin extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lbnSenha = new javax.swing.JLabel();
         lbnLogin = new javax.swing.JLabel();
-        txtSenha = new javax.swing.JTextField();
         txtLogin = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
         jPanel3 = new javax.swing.JPanel();
         lbnTituloCadastro = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        lbnConexao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Acessar o Sistema");
@@ -35,8 +36,6 @@ public class FormLogin extends javax.swing.JFrame {
         lbnLogin.setText("Login:");
         jPanel2.add(lbnLogin);
         lbnLogin.setBounds(50, 30, 50, 14);
-        jPanel2.add(txtSenha);
-        txtSenha.setBounds(100, 60, 170, 30);
 
         txtLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -45,6 +44,10 @@ public class FormLogin extends javax.swing.JFrame {
         });
         jPanel2.add(txtLogin);
         txtLogin.setBounds(100, 20, 170, 30);
+
+        jPasswordField1.setText("jPasswordField1");
+        jPanel2.add(jPasswordField1);
+        jPasswordField1.setBounds(100, 60, 170, 30);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -117,8 +120,10 @@ public class FormLogin extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(30, 0, 340, 240);
+        getContentPane().add(lbnConexao);
+        lbnConexao.setBounds(170, 240, 60, 14);
 
-        setSize(new java.awt.Dimension(414, 281));
+        setSize(new java.awt.Dimension(414, 309));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -176,10 +181,11 @@ public class FormLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JLabel lbnConexao;
     private javax.swing.JLabel lbnLogin;
     private javax.swing.JLabel lbnSenha;
     private javax.swing.JLabel lbnTituloCadastro;
     private javax.swing.JTextField txtLogin;
-    private javax.swing.JTextField txtSenha;
     // End of variables declaration//GEN-END:variables
 }

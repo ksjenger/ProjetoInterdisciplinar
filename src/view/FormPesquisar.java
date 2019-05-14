@@ -7,6 +7,8 @@ import model.entities.Produtos;
 
 public class FormPesquisar extends javax.swing.JFrame {
 
+    ArrayList<Produtos> lista = new ArrayList<>();
+
     public FormPesquisar() {
         initComponents();
         CarregaGrid();
@@ -36,6 +38,11 @@ public class FormPesquisar extends javax.swing.JFrame {
         lbnTituloPesquisa.setText("Pesquisa de Produtos");
 
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         btnLimpar.setText("Limpar");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -44,7 +51,6 @@ public class FormPesquisar extends javax.swing.JFrame {
             }
         });
 
-        lbnBusca.setIcon(new javax.swing.ImageIcon("C:\\Users\\kauan\\Desktop\\Search.png")); // NOI18N
         lbnBusca.setText("Busca:");
 
         jTableProdutos.setModel(new javax.swing.table.DefaultTableModel(
@@ -55,16 +61,9 @@ public class FormPesquisar extends javax.swing.JFrame {
                 "Nome", "Tipo de Produto", "Preco", "Classificacao"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -132,8 +131,6 @@ public class FormPesquisar extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void CarregaGrid() {
-
-        ArrayList<Produtos> lista = new ArrayList<>();
         lista = ProdutosDao.selectProdutos();
         DefaultTableModel tab = (DefaultTableModel) jTableProdutos.getModel();
         tab.setNumRows(0);
@@ -141,16 +138,32 @@ public class FormPesquisar extends javax.swing.JFrame {
         for (Produtos prod : lista) {
             String nome = prod.getNome();
             String tipoProduto = prod.getTipo();
-            String preco = "" + prod.getValor();
+            Double valor = prod.getValor();
+            String preco = "" + valor;
             String classificacao = prod.getCategoria();
             tab.addRow(new String[]{nome, tipoProduto, preco, classificacao});
         }
-
     }
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        String pesquisa = txtPesquisa.getText();
+        DefaultTableModel tab = (DefaultTableModel) jTableProdutos.getModel();
+        tab.setNumRows(0);
+        for (Produtos prod : lista) {
+            if (lista.contains(pesquisa)) {
+                String nome = prod.getNome();
+                String tipoProduto = prod.getTipo();
+                Double valor = prod.getValor();
+                String preco = "" + valor;
+                String classificacao = prod.getCategoria();
+                tab.addRow(new String[]{nome, tipoProduto, preco, classificacao});
+            }
+        }
+    }//GEN-LAST:event_btnPesquisarActionPerformed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

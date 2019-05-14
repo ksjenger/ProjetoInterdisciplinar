@@ -82,21 +82,20 @@ public class ConveniosDao {
             }
         }
     }
-    
-    public static ArrayList<Convenios> getConvenios(){
+
+    public static ArrayList<Convenios> getConvenios() {
         Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
         ArrayList<Convenios> lista = new ArrayList<>();
 
-        
         try {
             conn = ConectaBD.getConnection();
-            String sql = "Select * from Convenios";
+            String sql = "Select * from Convenios order by Empresa";
             st = conn.createStatement();
             rs = st.executeQuery(sql);
 
-            while(rs.next()) {
+            while (rs.next()) {
                 Convenios c = new Convenios();
                 int idConvenio = rs.getInt("idConvenio");
                 String empresa = rs.getString("Empresa");
@@ -117,11 +116,11 @@ public class ConveniosDao {
         }
 
         return lista;
-    
+
     }
 
     public Convenios selectConvenio(Integer id) {
-        
+
         PreparedStatement st = null;
         ResultSet rs = null;
 
