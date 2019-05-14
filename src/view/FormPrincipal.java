@@ -22,7 +22,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        btnTemp = new javax.swing.JButton();
+        btnEstoque = new javax.swing.JButton();
         btnPesquisar = new javax.swing.JButton();
         btnAtendimento = new javax.swing.JButton();
         btnCadastro = new javax.swing.JButton();
@@ -45,13 +45,14 @@ public class FormPrincipal extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(null);
 
-        btnTemp.addActionListener(new java.awt.event.ActionListener() {
+        btnEstoque.setText("Estoque");
+        btnEstoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTempActionPerformed(evt);
+                btnEstoqueActionPerformed(evt);
             }
         });
-        jPanel2.add(btnTemp);
-        btnTemp.setBounds(10, 290, 100, 60);
+        jPanel2.add(btnEstoque);
+        btnEstoque.setBounds(10, 290, 100, 60);
 
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -136,9 +137,10 @@ public class FormPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTempActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTempActionPerformed
+    private void btnEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstoqueActionPerformed
+        FormSelecioneEstoque fs = new FormSelecioneEstoque();
+        fs.setVisible(true);
+    }//GEN-LAST:event_btnEstoqueActionPerformed
 
     private void btnAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtendimentoActionPerformed
         // TODO add your handling code here:
@@ -196,8 +198,8 @@ public class FormPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtendimento;
     private javax.swing.JButton btnCadastro;
+    private javax.swing.JButton btnEstoque;
     private javax.swing.JButton btnPesquisar;
-    private javax.swing.JButton btnTemp;
     private javax.swing.JButton btnTemp2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
