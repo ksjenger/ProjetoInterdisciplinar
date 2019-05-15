@@ -1,27 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.entities.Produtos;
 import dao.EstoqueDao;
 import model.entities.Perfumaria;
+import model.entities.Remedios;
 
-/**
- *
- * @author kauan
- */
-public class FormEstoqueProdutos extends javax.swing.JFrame {
 
-    ArrayList<Perfumaria> lista = new ArrayList<>();
+public class FormEstoqueRemedios extends javax.swing.JFrame {
+
+    ArrayList<Remedios> lista = new ArrayList<>();
     private int it;
 
-    public FormEstoqueProdutos() {
+    public FormEstoqueRemedios() {
         initComponents();
         CarregaGrid();
     }
@@ -42,7 +35,7 @@ public class FormEstoqueProdutos extends javax.swing.JFrame {
         btnAtualizar = new javax.swing.JButton();
         jComboBoxStatus = new javax.swing.JComboBox<>();
 
-        setTitle("Suprimento de Produtos");
+        setTitle("Suprimento de Medicamentos");
         getContentPane().setLayout(null);
 
         jPanel1.setToolTipText("");
@@ -71,9 +64,9 @@ public class FormEstoqueProdutos extends javax.swing.JFrame {
         jScrollPane1.setBounds(20, 80, 740, 220);
 
         lbnTituloCadastro.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        lbnTituloCadastro.setText("Produtos");
+        lbnTituloCadastro.setText("Medicamentos");
         jPanel1.add(lbnTituloCadastro);
-        lbnTituloCadastro.setBounds(290, 20, 220, 44);
+        lbnTituloCadastro.setBounds(250, 20, 320, 44);
 
         txtQtd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,21 +127,21 @@ public class FormEstoqueProdutos extends javax.swing.JFrame {
         DefaultTableModel tab = (DefaultTableModel) jtabEstoque.getModel();
         tab.setNumRows(0);
         
-        lista = EstoqueDao.selectPerfumaria();
+        lista = EstoqueDao.selectRemedios();
 
-        for (Perfumaria pf : lista) {
-            String nome = pf.getNome();
-            String tipo = pf.getTipo();
-            String categoria = pf.getCategoria();
-            Boolean status = pf.getStatus();
+        for (Remedios rd : lista) {
+            String nome = rd.getNome();
+            String tipo = rd.getTipo();
+            String categoria = rd.getCategoria();
+            Boolean status = rd.getStatus();
             String stStatus = null;
             if (status) {
                 stStatus = "Ativo";
             } else {
                 stStatus = "Inativo";
             }
-            String quantidade = "" + pf.getQuantidade();
-            String valor = "R$" + pf.getValor();
+            String quantidade = "" + rd.getQuantidade();
+            String valor = "R$" + rd.getValor();
 
             tab.addRow(new String[]{nome, tipo, categoria, stStatus, valor, quantidade});
 
@@ -175,7 +168,7 @@ public class FormEstoqueProdutos extends javax.swing.JFrame {
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         if (txtNome.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Selecione o produto para suprir");
+            JOptionPane.showMessageDialog(this, "Selecione o Medicamento para suprir");
         } else {
             String quantidade = txtQtd.getText();
             Boolean status = true;
@@ -186,7 +179,7 @@ public class FormEstoqueProdutos extends javax.swing.JFrame {
             }
             lista.get(it).setQuantidade(Integer.parseInt(quantidade));
             lista.get(it).setStatus(status);
-            EstoqueDao.updatePerfumaria(lista.get(it));
+            EstoqueDao.updateRemedio(lista.get(it));
             JOptionPane.showMessageDialog(this, "Cadastro atualizado com sucesso!");
             CarregaGrid();
             txtNome.setText("");
@@ -207,21 +200,21 @@ public class FormEstoqueProdutos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormEstoqueProdutos.class
+            java.util.logging.Logger.getLogger(FormEstoqueRemedios.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormEstoqueProdutos.class
+            java.util.logging.Logger.getLogger(FormEstoqueRemedios.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormEstoqueProdutos.class
+            java.util.logging.Logger.getLogger(FormEstoqueRemedios.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormEstoqueProdutos.class
+            java.util.logging.Logger.getLogger(FormEstoqueRemedios.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormEstoqueProdutos().setVisible(true);
+                new FormEstoqueRemedios().setVisible(true);
             }
         });
     }

@@ -4,6 +4,9 @@ import javax.swing.JOptionPane;
 
 public class FormSelecioneEstoque extends javax.swing.JFrame {
 
+    FormEstoqueProdutos fp = new FormEstoqueProdutos();
+    FormEstoqueRemedios fr = new FormEstoqueRemedios();
+    
     public FormSelecioneEstoque() {
         initComponents();
     }
@@ -67,9 +70,10 @@ public class FormSelecioneEstoque extends javax.swing.JFrame {
         jPanel1.add(btnCancelar);
         btnCancelar.setBounds(100, 220, 170, 40);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Escolha o que deseja suprir para o estoque");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(70, 120, 240, 14);
+        jLabel1.setBounds(40, 120, 300, 14);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 390, 300);
@@ -83,16 +87,16 @@ public class FormSelecioneEstoque extends javax.swing.JFrame {
             int decisao = JOptionPane.showConfirmDialog(this, "Deseja suprir um novo Medicamento?", "Cadastrar Estoque", 1);
 
             if (decisao == 0) {
-                
+                fr.setVisible(true);
             } else {
                 jComboBoxCadastro.setSelectedIndex(0);
             }
         }
         if (jComboBoxCadastro.getSelectedIndex() == 2) {
-            int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Produto?", "Cadastrar Estoque", 1);
+            int decisao = JOptionPane.showConfirmDialog(this, "Deseja Suprir um novo Produto?", "Cadastrar Estoque", 1);
 
             if (decisao == 0) {
-                
+                fp.setVisible(true);
             } else {
                 jComboBoxCadastro.setSelectedIndex(0);
             }

@@ -1,9 +1,19 @@
 package view;
 
+import dao.ConectaBD;
+import java.awt.Color;
+
 public class FormLogin extends javax.swing.JFrame {
     FormPrincipal principal = new FormPrincipal();
     public FormLogin() {
         initComponents();
+        if(ConectaBD.connectionOk()){
+            lbnConexao.setText("Online");
+            lbnConexao.setForeground(Color.GREEN);
+        }else{
+            lbnConexao.setText("Offline");
+            lbnConexao.setForeground(Color.red);
+        }
     }
     @SuppressWarnings("unchecked")
     
@@ -22,7 +32,7 @@ public class FormLogin extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         lbnConexao = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Acessar o Sistema");
         getContentPane().setLayout(null);
 
@@ -121,7 +131,7 @@ public class FormLogin extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(30, 0, 340, 240);
         getContentPane().add(lbnConexao);
-        lbnConexao.setBounds(170, 240, 60, 14);
+        lbnConexao.setBounds(20, 240, 60, 14);
 
         setSize(new java.awt.Dimension(414, 309));
         setLocationRelativeTo(null);
@@ -137,37 +147,12 @@ public class FormLogin extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         principal.setVisible(true);
+        hide();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+  
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
+ 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FormLogin().setVisible(true);

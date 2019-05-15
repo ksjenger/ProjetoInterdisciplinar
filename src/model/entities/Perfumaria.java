@@ -14,6 +14,7 @@ public class Perfumaria extends Produtos{
 	public Perfumaria() {
 		super();
 	}
+        
 
 	public Integer getCodigo() {
 		return codigo;

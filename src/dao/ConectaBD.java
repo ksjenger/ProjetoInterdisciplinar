@@ -31,6 +31,11 @@ public class ConectaBD {
         return conn;
     }
 
+    public static boolean connectionOk(){
+        getConnection();
+        return true;
+    }
+    
     public static void closeConnection() {
         try {
             if (conn != null) {
@@ -41,5 +46,6 @@ public class ConectaBD {
         }
 
     }
-
+    
+ 
 }
