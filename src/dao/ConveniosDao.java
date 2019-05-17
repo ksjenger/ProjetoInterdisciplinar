@@ -10,7 +10,7 @@ import model.entities.Convenios;
 
 public class ConveniosDao {
 
-    Connection conn = null;
+    private static Connection conn = null;
 
     public Convenios insertConvenios(Convenios convenio) {
         conn = ConectaBD.getConnection();
@@ -119,8 +119,8 @@ public class ConveniosDao {
 
     }
 
-    public Convenios selectConvenio(Integer id) {
-
+    public static Convenios selectConvenio(Integer id) {
+        
         PreparedStatement st = null;
         ResultSet rs = null;
 

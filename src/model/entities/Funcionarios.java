@@ -3,7 +3,7 @@ package model.entities;
 import java.sql.Date;
 
 public class Funcionarios {
-    
+
     private Integer idFuncionario;
     private String firstName;
     private String lastName;
@@ -19,6 +19,7 @@ public class Funcionarios {
     private String Cargo;
     private String cidade;
     private String cpf;
+    private Login login;
 
     public Funcionarios() {
     }
@@ -64,10 +65,7 @@ public class Funcionarios {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    
-    
 
-    
     public String getFirstName() {
         return firstName;
     }
@@ -163,8 +161,13 @@ public class Funcionarios {
     public void setCargo(String Cargo) {
         this.Cargo = Cargo;
     }
-    
-    
-    
-    
+
+    public Login getLogin() {
+        return login;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
+    }
+
 }

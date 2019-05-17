@@ -2,8 +2,11 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import model.entities.Cliente;
+import model.entities.Convenios;
 
 public class ClienteDao {
 
@@ -47,4 +50,38 @@ public class ClienteDao {
             }
         }
     }
+    
+    public static Cliente findByCPF(String cpf){
+        conn = ConectaBD.getConnection();
+        PreparedStatement st = null;
+        String sql = "Select * from clientes where cpf = ?";
+        ResultSet rs = null;
+        Cliente c = new Cliente();
+        Integer idConvenio = null;
+        
+        try{
+            st = conn.prepareStatement(sql);
+            st.setString(1, cpf);
+            rs = st.executeQuery();
+            
+            if(rs.next()){
+                String firstName = rs.getString("firstname");
+                String lastName = rs.getString("lastname");
+                String CPF = rs.getString("CPF");
+                idConvenio = rs.getInt("idConvenio");
+                c.setFirstName(firstName);
+                c.setLastName(lastName);
+                c.setCPF(CPF);             
+                Convenios convenio = ConveniosDao.selectConvenio(idConvenio);
+                c.setConvenio(convenio);
+            }
+                
+            
+        }catch(SQLException e){
+            
+        }
+        
+        return c;
+    }
+    
 }

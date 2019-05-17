@@ -52,7 +52,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnEstoque);
-        btnEstoque.setBounds(10, 290, 100, 60);
+        btnEstoque.setBounds(10, 290, 120, 60);
 
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -61,7 +61,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnPesquisar);
-        btnPesquisar.setBounds(10, 10, 100, 60);
+        btnPesquisar.setBounds(10, 10, 120, 60);
 
         btnAtendimento.setText("Atendimento");
         btnAtendimento.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +70,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnAtendimento);
-        btnAtendimento.setBounds(10, 80, 100, 60);
+        btnAtendimento.setBounds(10, 80, 120, 60);
 
         btnCadastro.setText("Cadastros");
         btnCadastro.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +79,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnCadastro);
-        btnCadastro.setBounds(10, 150, 100, 60);
+        btnCadastro.setBounds(10, 150, 120, 60);
 
         btnTemp2.setText("Relatorios");
         btnTemp2.addActionListener(new java.awt.event.ActionListener() {
@@ -88,10 +88,10 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnTemp2);
-        btnTemp2.setBounds(10, 220, 100, 60);
+        btnTemp2.setBounds(10, 220, 120, 60);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(20, 90, 120, 380);
+        jPanel2.setBounds(20, 90, 140, 370);
 
         lbnTituloDrogaria.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lbnTituloDrogaria.setText("Drogaria Cruzeiro do Sul");
@@ -102,7 +102,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/projeto-do-fundo-da-farmacia_1212-351.jpg"))); // NOI18N
         jPanel3.add(jLabel1);
-        jLabel1.setBounds(0, 0, 520, 380);
+        jLabel1.setBounds(10, 0, 520, 380);
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(160, 80, 520, 380);
@@ -143,7 +143,8 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEstoqueActionPerformed
 
     private void btnAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtendimentoActionPerformed
-        // TODO add your handling code here:
+        FormAtendimento at = new FormAtendimento();
+        at.setVisible(true);
     }//GEN-LAST:event_btnAtendimentoActionPerformed
 
     private void btnTemp2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTemp2ActionPerformed
