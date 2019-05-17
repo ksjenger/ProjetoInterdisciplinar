@@ -82,10 +82,10 @@ public class ProdutosDao {
                     + " produtos.preco as Preco,remedios.tipoRemedio as Genero "
                     + "from produtos "
                     + "inner join remedios on remedios.idProduto = produtos.idProduto "
-                    + "where produtos.nome like '?%' order by produtos.nome;";
+                    + "where produtos.nome like ? order by produtos.nome;";
             
             st = conn.prepareStatement(sql);
-            st.setString(1, nome);
+            st.setString(1, '%' + nome + '%');
             rs = st.executeQuery();
             
             
@@ -103,8 +103,10 @@ public class ProdutosDao {
                     + " produtos.preco as Preco, perfumaria.Categoria as Genero "
                     + "from produtos "
                     + "inner join perfumaria on perfumaria.idProduto = produtos.idProduto"
-                    + " where nome like '?%' order by produtos.nome";
-            st.setString(1, nome);
+                    + " where nome like ? order by produtos.nome";
+            
+            st = conn.prepareStatement(sql);
+            st.setString(1,  '%' + nome + '%');
             rs = st.executeQuery();
             
             while(rs.next()){
@@ -129,7 +131,7 @@ public class ProdutosDao {
             }
         }
         
-        return ordenaArray(listaP);
+        return listaP;
     }
     
     private static ArrayList<Produtos> ordenaArray(ArrayList<Produtos> produtos){

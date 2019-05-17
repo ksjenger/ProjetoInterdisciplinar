@@ -1,19 +1,26 @@
 package view;
 
 import dao.ClienteDao;
+import dao.ProdutosDao;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 import model.entities.Cliente;
+import model.entities.Produtos;
 import model.entities.Receita;
 
 public class FormAtendimento extends javax.swing.JFrame {
 
     public FormAtendimento() {
         initComponents();
+        jListCliente.setVisible(false);
+        DefaultListModel cl;
     }
 
     @SuppressWarnings("unchecked")
@@ -34,6 +41,8 @@ public class FormAtendimento extends javax.swing.JFrame {
         Quantidade = new javax.swing.JLabel();
         btnIncluir = new javax.swing.JButton();
         btnIncluir1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListCliente = new javax.swing.JList();
         jPanel4 = new javax.swing.JPanel();
         lbnData = new javax.swing.JLabel();
         txtData = new javax.swing.JFormattedTextField();
@@ -79,15 +88,26 @@ public class FormAtendimento extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jPanel3.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 242, 740, 220);
+        jScrollPane1.setBounds(10, 110, 740, 220);
 
         lbnProduto.setText("Produtos a incluir:");
         jPanel3.add(lbnProduto);
         lbnProduto.setBounds(10, 10, 110, 30);
+
+        txtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPesquisaKeyPressed(evt);
+            }
+        });
         jPanel3.add(txtPesquisa);
         txtPesquisa.setBounds(120, 10, 580, 30);
 
         btnPesquisarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Search.png"))); // NOI18N
+        btnPesquisarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarProdutoActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnPesquisarProduto);
         btnPesquisarProduto.setBounds(710, 10, 30, 30);
 
@@ -114,6 +134,11 @@ public class FormAtendimento extends javax.swing.JFrame {
         btnIncluir1.setText("Incluir");
         jPanel3.add(btnIncluir1);
         btnIncluir1.setBounds(580, 50, 80, 30);
+
+        jScrollPane2.setViewportView(jListCliente);
+
+        jPanel3.add(jScrollPane2);
+        jScrollPane2.setBounds(120, 40, 580, 130);
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(10, 250, 760, 500);
@@ -216,7 +241,7 @@ public class FormAtendimento extends javax.swing.JFrame {
         jPanel2.setBounds(10, 60, 760, 100);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 780, 710);
+        jPanel1.setBounds(0, 60, 780, 710);
 
         setSize(new java.awt.Dimension(797, 753));
         setLocationRelativeTo(null);
@@ -261,6 +286,24 @@ public class FormAtendimento extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnIncluirReceitaActionPerformed
 
+    private void btnPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdutoActionPerformed
+        String pesquisa = txtPesquisa.getText();
+        ArrayList<Produtos> find = new ArrayList<>();
+        find = ProdutosDao.findProdutosbyName(pesquisa);
+        for (Produtos prod : find) {
+            String nome = prod.getNome();
+            String tipoProduto = prod.getTipo();
+            Double valor = prod.getValor();
+            String preco = "" + valor;
+            String classificacao = prod.getCategoria();
+        }
+    }//GEN-LAST:event_btnPesquisarProdutoActionPerformed
+
+    private void txtPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyPressed
+        String pesquisa = txtProduto.getText();
+        
+    }//GEN-LAST:event_txtPesquisaKeyPressed
+
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -279,11 +322,13 @@ public class FormAtendimento extends javax.swing.JFrame {
     private javax.swing.JButton btnPesquisarCliente;
     private javax.swing.JButton btnPesquisarProduto;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JList jListCliente;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbnCliente;
     private javax.swing.JLabel lbnConvenio;
