@@ -153,15 +153,16 @@ public class FormPesquisar extends javax.swing.JFrame {
         String pesquisa = txtPesquisa.getText();
         DefaultTableModel tab = (DefaultTableModel) jTableProdutos.getModel();
         tab.setNumRows(0);
-        for (Produtos prod : lista) {
-            if (lista.contains(pesquisa)) {
-                String nome = prod.getNome();
-                String tipoProduto = prod.getTipo();
-                Double valor = prod.getValor();
-                String preco = "" + valor;
-                String classificacao = prod.getCategoria();
-                tab.addRow(new String[]{nome, tipoProduto, preco, classificacao});
-            }
+        ArrayList<Produtos> find = new ArrayList<>();
+        find = ProdutosDao.findProdutosbyName(pesquisa);
+        for (Produtos prod : find) {
+            String nome = prod.getNome();
+            String tipoProduto = prod.getTipo();
+            Double valor = prod.getValor();
+            String preco = "" + valor;
+            String classificacao = prod.getCategoria();
+            tab.addRow(new String[]{nome, tipoProduto, preco, classificacao});
+
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
     public static void main(String args[]) {
