@@ -11,7 +11,7 @@ public class RemediosDao {
 
     private static Connection conn = null;
 
-    private Integer getLastId() {
+    private static Integer getLastId() {
         Integer idProduto = null;
         Statement st = null;
         ResultSet rs = null;
@@ -32,7 +32,7 @@ public class RemediosDao {
         return idProduto;
     }
 
-    public void InsertRemedio(Remedios remedio) {
+    public static void InsertRemedio(Remedios remedio) {
         PreparedStatement st = null;
         conn = ConectaBD.getConnection();
         int id = getLastId();
@@ -64,7 +64,36 @@ public class RemediosDao {
                 e.printStackTrace();
             }
         }
+    }
 
+    public static Boolean prescricaoMedica(Integer id) {
+        Boolean prescricaoMedica = false;
+
+        conn = ConectaBD.getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        String sql = "select prescricao from remedios where idProduto = ?";
+
+        try {
+            st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                prescricaoMedica = rs.getBoolean(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConectaBD.closeConnection();
+            try {
+                st.close();
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return prescricaoMedica;
     }
 
 }

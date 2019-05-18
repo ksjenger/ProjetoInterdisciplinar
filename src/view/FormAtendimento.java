@@ -2,27 +2,36 @@ package view;
 
 import dao.ClienteDao;
 import dao.ProdutosDao;
+import dao.RemediosDao;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.entities.Cliente;
 import model.entities.Produtos;
 import model.entities.Receita;
 
 public class FormAtendimento extends javax.swing.JFrame {
-
+    
+    Receita r;
+    ArrayList<Produtos> listaProd = new ArrayList<>();
+    ArrayList<Produtos> prodList = new ArrayList<>();
+    Boolean editar = true;
+    DefaultListModel modelo;
+    int enter = 0;
+    
     public FormAtendimento() {
         initComponents();
         jListCliente.setVisible(false);
-        DefaultListModel cl;
+        modelo = new DefaultListModel();
+        jListCliente.setModel(modelo);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -30,19 +39,20 @@ public class FormAtendimento extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lbnTituloCadastro = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jListCliente = new javax.swing.JList<>();
         lbnProduto = new javax.swing.JLabel();
         txtPesquisa = new javax.swing.JTextField();
-        btnPesquisarProduto = new javax.swing.JButton();
-        txtProduto = new javax.swing.JTextField();
+        txtIdProduto = new javax.swing.JTextField();
         txtNomeProduto = new javax.swing.JTextField();
         txtQuantidadeProduto = new javax.swing.JTextField();
         Quantidade = new javax.swing.JLabel();
         btnIncluir = new javax.swing.JButton();
-        btnIncluir1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jListCliente = new javax.swing.JList();
+        btnIncluirProduto = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableProdutos = new javax.swing.JTable();
+        btnFinalizarCompra = new javax.swing.JButton();
+        lbnValorfinal = new javax.swing.JLabel();
+        lbnValor = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         lbnData = new javax.swing.JLabel();
         txtData = new javax.swing.JFormattedTextField();
@@ -74,48 +84,53 @@ public class FormAtendimento extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel3.setLayout(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        jListCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jListCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jListCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListClienteMouseClicked(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel3.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 110, 740, 220);
+        });
+        jPanel3.add(jListCliente);
+        jListCliente.setBounds(120, 40, 390, 60);
 
         lbnProduto.setText("Produtos a incluir:");
         jPanel3.add(lbnProduto);
         lbnProduto.setBounds(10, 10, 110, 30);
 
+        txtPesquisa.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                txtPesquisaCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+        txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPesquisaActionPerformed(evt);
+            }
+        });
         txtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPesquisaKeyPressed(evt);
             }
-        });
-        jPanel3.add(txtPesquisa);
-        txtPesquisa.setBounds(120, 10, 580, 30);
-
-        btnPesquisarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Search.png"))); // NOI18N
-        btnPesquisarProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarProdutoActionPerformed(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPesquisaKeyReleased(evt);
             }
         });
-        jPanel3.add(btnPesquisarProduto);
-        btnPesquisarProduto.setBounds(710, 10, 30, 30);
+        jPanel3.add(txtPesquisa);
+        txtPesquisa.setBounds(120, 10, 620, 30);
 
-        txtProduto.setEditable(false);
-        jPanel3.add(txtProduto);
-        txtProduto.setBounds(20, 50, 50, 30);
+        txtIdProduto.setEditable(false);
+        jPanel3.add(txtIdProduto);
+        txtIdProduto.setBounds(20, 50, 50, 30);
 
         txtNomeProduto.setEditable(false);
+        txtNomeProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNomeProdutoMouseClicked(evt);
+            }
+        });
         jPanel3.add(txtNomeProduto);
         txtNomeProduto.setBounds(90, 50, 390, 30);
         jPanel3.add(txtQuantidadeProduto);
@@ -127,21 +142,57 @@ public class FormAtendimento extends javax.swing.JFrame {
 
         btnIncluir.setBackground(new java.awt.Color(204, 0, 0));
         btnIncluir.setText("Cancelar");
+        btnIncluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIncluirActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnIncluir);
         btnIncluir.setBounds(660, 50, 80, 30);
 
-        btnIncluir1.setBackground(new java.awt.Color(0, 204, 0));
-        btnIncluir1.setText("Incluir");
-        jPanel3.add(btnIncluir1);
-        btnIncluir1.setBounds(580, 50, 80, 30);
+        btnIncluirProduto.setBackground(new java.awt.Color(0, 204, 0));
+        btnIncluirProduto.setText("Incluir");
+        btnIncluirProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIncluirProdutoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnIncluirProduto);
+        btnIncluirProduto.setBounds(580, 50, 80, 30);
 
-        jScrollPane2.setViewportView(jListCliente);
+        jTableProdutos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jPanel3.add(jScrollPane2);
-        jScrollPane2.setBounds(120, 40, 580, 130);
+            },
+            new String [] {
+                "Nome", "Tipo", "Categoria", "Preco", "Quantidade"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableProdutos);
+
+        jPanel3.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 110, 740, 190);
+
+        btnFinalizarCompra.setText("Finalizar atendimento");
+        btnFinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarCompraActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnFinalizarCompra);
+        btnFinalizarCompra.setBounds(580, 320, 160, 23);
+
+        lbnValorfinal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jPanel3.add(lbnValorfinal);
+        lbnValorfinal.setBounds(430, 320, 140, 30);
+
+        lbnValor.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbnValor.setText("Valor total: R$");
+        jPanel3.add(lbnValor);
+        lbnValor.setBounds(300, 320, 140, 30);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(10, 250, 760, 500);
+        jPanel3.setBounds(10, 240, 760, 360);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Receita"));
         jPanel4.setLayout(null);
@@ -158,7 +209,7 @@ public class FormAtendimento extends javax.swing.JFrame {
         jPanel4.add(txtData);
         txtData.setBounds(100, 20, 70, 30);
 
-        jLabel3.setText("Numero de Controle");
+        jLabel3.setText("Numero de Controle:");
         jPanel4.add(jLabel3);
         jLabel3.setBounds(460, 20, 120, 30);
         jPanel4.add(txtControle);
@@ -166,9 +217,9 @@ public class FormAtendimento extends javax.swing.JFrame {
 
         lbnQuantidadePrescrita.setText("Quantidade prescrita:");
         jPanel4.add(lbnQuantidadePrescrita);
-        lbnQuantidadePrescrita.setBounds(200, 20, 120, 30);
+        lbnQuantidadePrescrita.setBounds(200, 20, 140, 30);
         jPanel4.add(txtQuantidadePrescrita);
-        txtQuantidadePrescrita.setBounds(320, 20, 60, 30);
+        txtQuantidadePrescrita.setBounds(350, 20, 60, 30);
 
         btnIncluirReceita.setBackground(new java.awt.Color(0, 204, 0));
         btnIncluirReceita.setText("Incluir");
@@ -241,11 +292,27 @@ public class FormAtendimento extends javax.swing.JFrame {
         jPanel2.setBounds(10, 60, 760, 100);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 60, 780, 710);
+        jPanel1.setBounds(10, 0, 780, 600);
 
-        setSize(new java.awt.Dimension(797, 753));
+        setSize(new java.awt.Dimension(825, 644));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    public void ListaDePesquisa() {
+        ArrayList<Produtos> listaProdutos = new ArrayList<>();
+        listaProdutos = ProdutosDao.findProdutosbyName(txtPesquisa.getText());
+        int size = listaProdutos.size();
+        modelo.removeAllElements();
+        
+        for (Produtos prod : listaProdutos) {
+            int idProduto = prod.getIdProduto();
+            String nome = prod.getNome();
+            modelo.addElement(idProduto + " - " + nome);
+            jListCliente.setVisible(true);
+        }
+
+    }
+    
 
     private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
 
@@ -260,10 +327,10 @@ public class FormAtendimento extends javax.swing.JFrame {
         String cpf = txtCpf.getText();
         Cliente c = new Cliente();
         c = ClienteDao.findByCPF(cpf);
-        if(c.getFirstName() == null){
+        if (c.getFirstName() == null) {
             lbnCliente.setText("Cliente nao cadastrado");
             lbnCliente.setForeground(Color.red);
-        }else{
+        } else {
             String nome = c.getFirstName() + " " + c.getLastName();
             lbnCliente.setForeground(Color.red);
             lbnCliente.setText(nome);
@@ -274,36 +341,131 @@ public class FormAtendimento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesquisarClienteActionPerformed
 
     private void btnIncluirReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirReceitaActionPerformed
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String dataReceita = txtData.getText();
-        
-        String qtd = txtQuantidadePrescrita.getText();
-        String controle = txtControle.getText();
-        try {
-            Receita r = new Receita(null, controle, sdf.parse(dataReceita), Integer.parseInt(qtd));
-        } catch (ParseException ex) {
-            Logger.getLogger(FormAtendimento.class.getName()).log(Level.SEVERE, null, ex);
+        if (txtData.getText() == null) {
+            JOptionPane.showMessageDialog(this, "Data da Receita Obrigatoria");
+            txtData.setFocusable(true);
+        } else {
+            if (editar == true) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String dataReceita = txtData.getText();
+                Integer qtd = null;
+                if (txtQuantidadeProduto.getText() == null) {
+                    qtd = 1;
+                } else {
+                    qtd = Integer.parseInt(txtQuantidadePrescrita.getText());
+                }
+                
+                String controle = txtControle.getText();
+                try {
+                     r = new Receita(null, controle, sdf.parse(dataReceita), qtd);
+                } catch (ParseException ex) {
+                    Logger.getLogger(FormAtendimento.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                txtQuantidadePrescrita.setEditable(false);
+                txtControle.setEditable(false);
+                txtData.setEditable(false);
+                editar = false;
+                btnIncluirReceita.setBackground(Color.gray);
+            } else {
+                txtQuantidadePrescrita.setEditable(true);
+                txtControle.setEditable(true);
+                txtData.setEditable(true);
+                editar = true;
+                btnIncluirReceita.setBackground(Color.GREEN);
+            }
         }
+        
     }//GEN-LAST:event_btnIncluirReceitaActionPerformed
 
-    private void btnPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdutoActionPerformed
-        String pesquisa = txtPesquisa.getText();
-        ArrayList<Produtos> find = new ArrayList<>();
-        find = ProdutosDao.findProdutosbyName(pesquisa);
-        for (Produtos prod : find) {
-            String nome = prod.getNome();
-            String tipoProduto = prod.getTipo();
-            Double valor = prod.getValor();
-            String preco = "" + valor;
-            String classificacao = prod.getCategoria();
-        }
-    }//GEN-LAST:event_btnPesquisarProdutoActionPerformed
-
     private void txtPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyPressed
-        String pesquisa = txtProduto.getText();
-        
+
     }//GEN-LAST:event_txtPesquisaKeyPressed
 
+    private void txtPesquisaCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtPesquisaCaretPositionChanged
+        
+
+    }//GEN-LAST:event_txtPesquisaCaretPositionChanged
+
+    private void btnIncluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirProdutoActionPerformed
+        String nome = txtNomeProduto.getText();
+        int idProduto = Integer.parseInt(txtIdProduto.getText());
+        String qtd = txtQuantidadeProduto.getText();
+        if(qtd.equals("")){
+            qtd = "1";
+        }
+        prodList.add(ProdutosDao.findProdutosbyId(idProduto));
+        DefaultTableModel tab = (DefaultTableModel) jTableProdutos.getModel();
+        tab.setNumRows(0);
+        double valorAtendimento = 0;
+        for (Produtos p : prodList) {
+            tab.addRow(new String[]{p.getNome(), p.getTipo(), p.getCategoria(), "R$" + p.getValor(), qtd});
+        }
+        
+       
+        for(int i=0; i<prodList.size(); i++)
+            valorAtendimento = valorAtendimento + prodList.get(i).getValor();
+       
+        lbnValorfinal.setText(""+valorAtendimento);
+        
+        txtNomeProduto.setText("");
+        txtPesquisa.setText("");
+        txtIdProduto.setText("");
+    }//GEN-LAST:event_btnIncluirProdutoActionPerformed
+
+    private void txtNomeProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNomeProdutoMouseClicked
+
+    }//GEN-LAST:event_txtNomeProdutoMouseClicked
+
+    private void jListClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListClienteMouseClicked
+        String produtos = jListCliente.getSelectedValue();        
+        String idnome[] = produtos.split(" - ");
+        
+        txtNomeProduto.setText(idnome[1]);
+        txtIdProduto.setText(idnome[0]);
+        jListCliente.setVisible(false);
+        txtPesquisa.setText(produtos);
+        
+    }//GEN-LAST:event_jListClienteMouseClicked
+
+    private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
+        jListCliente.setVisible(false);
+        enter = 1;
+    }//GEN-LAST:event_txtPesquisaActionPerformed
+
+    private void txtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyReleased
+        if (enter == 0) {
+            ListaDePesquisa();
+        } else {
+            enter = 0;
+        }
+    }//GEN-LAST:event_txtPesquisaKeyReleased
+
+    private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
+        txtNomeProduto.setText("");
+        txtPesquisa.setText("");
+        txtIdProduto.setText("");
+    }//GEN-LAST:event_btnIncluirActionPerformed
+
+    private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
+        Boolean prescricaoMedica = false;
+        for(Produtos p : prodList){
+            prescricaoMedica = RemediosDao.prescricaoMedica(p.getIdProduto());
+            if(prescricaoMedica){
+                if(r == null){
+                    prescricaoMedica = true;
+                }
+            }
+        }
+        if(prescricaoMedica){
+            JOptionPane.showMessageDialog(this, "Existem medicamentos que possuem prescricao medica obrigatoria"
+                            + ". Favor solicitar a receita ao cliente. ");
+        }else{
+            -
+            
+            
+        }
+    }//GEN-LAST:event_btnFinalizarCompraActionPerformed
+    
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -316,20 +478,19 @@ public class FormAtendimento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Quantidade;
     private javax.swing.JButton btnCadastrarNovo;
+    private javax.swing.JButton btnFinalizarCompra;
     private javax.swing.JButton btnIncluir;
-    private javax.swing.JButton btnIncluir1;
+    private javax.swing.JButton btnIncluirProduto;
     private javax.swing.JButton btnIncluirReceita;
     private javax.swing.JButton btnPesquisarCliente;
-    private javax.swing.JButton btnPesquisarProduto;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JList jListCliente;
+    private javax.swing.JList<String> jListCliente;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableProdutos;
     private javax.swing.JLabel lbnCliente;
     private javax.swing.JLabel lbnConvenio;
     private javax.swing.JLabel lbnCpf;
@@ -339,12 +500,14 @@ public class FormAtendimento extends javax.swing.JFrame {
     private javax.swing.JLabel lbnQuantidadePrescrita;
     private javax.swing.JLabel lbnSetConvenio;
     private javax.swing.JLabel lbnTituloCadastro;
+    private javax.swing.JLabel lbnValor;
+    private javax.swing.JLabel lbnValorfinal;
     private javax.swing.JTextField txtControle;
     private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JFormattedTextField txtData;
+    private javax.swing.JTextField txtIdProduto;
     private javax.swing.JTextField txtNomeProduto;
     private javax.swing.JTextField txtPesquisa;
-    private javax.swing.JTextField txtProduto;
     private javax.swing.JTextField txtQuantidadePrescrita;
     private javax.swing.JTextField txtQuantidadeProduto;
     // End of variables declaration//GEN-END:variables

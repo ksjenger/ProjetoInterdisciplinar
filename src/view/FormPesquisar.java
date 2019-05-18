@@ -2,12 +2,14 @@ package view;
 
 import dao.ProdutosDao;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 import model.entities.Produtos;
 
 public class FormPesquisar extends javax.swing.JFrame {
 
     ArrayList<Produtos> lista = new ArrayList<>();
+    DefaultListModel modelo;
 
     public FormPesquisar() {
         initComponents();
@@ -35,7 +37,9 @@ public class FormPesquisar extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createCompoundBorder(), javax.swing.BorderFactory.createCompoundBorder()));
 
         lbnTituloPesquisa.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        lbnTituloPesquisa.setText("Pesquisa de Produtos");
+        lbnTituloPesquisa.setText("Consulta de Preco");
+
+        jPanel2.setLayout(null);
 
         txtPesquisa.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
@@ -44,6 +48,8 @@ public class FormPesquisar extends javax.swing.JFrame {
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
+        jPanel2.add(txtPesquisa);
+        txtPesquisa.setBounds(86, 11, 384, 28);
 
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -51,6 +57,8 @@ public class FormPesquisar extends javax.swing.JFrame {
                 btnPesquisarActionPerformed(evt);
             }
         });
+        jPanel2.add(btnPesquisar);
+        btnPesquisar.setBounds(476, 14, 80, 23);
 
         btnLimpar.setText("Limpar");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -58,8 +66,12 @@ public class FormPesquisar extends javax.swing.JFrame {
                 btnLimparActionPerformed(evt);
             }
         });
+        jPanel2.add(btnLimpar);
+        btnLimpar.setBounds(561, 14, 79, 23);
 
         lbnBusca.setText("Busca:");
+        jPanel2.add(lbnBusca);
+        lbnBusca.setBounds(10, 18, 72, 14);
 
         jTableProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -79,56 +91,27 @@ public class FormPesquisar extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableProdutos);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPesquisa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPesquisar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisar)
-                    .addComponent(lbnBusca)
-                    .addComponent(btnLimpar))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(0, 50, 650, 360);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(lbnTituloPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(163, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lbnTituloPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(122, 122, 122))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(20, 20, 20)
                 .addComponent(lbnTituloPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(28, 28, 28)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -138,19 +121,7 @@ public class FormPesquisar extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(696, 554));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    private void CarregaGrid() {
-        lista = ProdutosDao.selectProdutos();
-        DefaultTableModel tab = (DefaultTableModel) jTableProdutos.getModel();
-        tab.setNumRows(0);
-        for (Produtos prod : lista) {
-            String nome = prod.getNome();
-            String tipoProduto = prod.getTipo();
-            Double valor = prod.getValor();
-            String preco = "" + valor;
-            String classificacao = prod.getCategoria();
-            tab.addRow(new String[]{nome, tipoProduto, preco, classificacao});
-        }
-    }
+
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         txtPesquisa.setText("");
@@ -170,13 +141,26 @@ public class FormPesquisar extends javax.swing.JFrame {
             String preco = "" + valor;
             String classificacao = prod.getCategoria();
             tab.addRow(new String[]{nome, tipoProduto, preco, classificacao});
-
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void txtPesquisaCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtPesquisaCaretPositionChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPesquisaCaretPositionChanged
+    private void CarregaGrid() {
+        lista = ProdutosDao.selectProdutos();
+        DefaultTableModel tab = (DefaultTableModel) jTableProdutos.getModel();
+        tab.setNumRows(0);
+        for (Produtos prod : lista) {
+            String nome = prod.getNome();
+            String tipoProduto = prod.getTipo();
+            Double valor = prod.getValor();
+            String preco = "" + valor;
+            String classificacao = prod.getCategoria();
+            tab.addRow(new String[]{nome, tipoProduto, preco, classificacao});
+        }
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
