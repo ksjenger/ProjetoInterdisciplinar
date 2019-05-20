@@ -28,7 +28,7 @@ public class ReceitaDao {
             st = conn.prepareStatement(sql);
             st.setString(1, receita.getNrControle());
             st.setDate(2, sqlDate);
-            st.setInt(3, receita.getRemedios().get());
+            st.setInt(3, receita.getRemedios().getIdProduto());
             st.setInt(4, receita.getQtd());
             st.execute();
 

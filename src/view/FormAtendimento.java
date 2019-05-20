@@ -20,7 +20,7 @@ import model.entities.Receita;
 public class FormAtendimento extends javax.swing.JFrame {
 
     Receita r;
-    ArrayList<Produtos> listaProd = new ArrayList<>();
+    //ArrayList<Produtos> listaProd = new ArrayList<>();
     ArrayList<Produtos> prodList = new ArrayList<>();
     Boolean editar = true;
     DefaultListModel modelo;
@@ -469,7 +469,7 @@ public class FormAtendimento extends javax.swing.JFrame {
             } catch (ParseException ex) {
                 Logger.getLogger(FormAtendimento.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+                        
                 
 
         }
