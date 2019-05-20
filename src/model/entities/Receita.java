@@ -7,6 +7,7 @@ public class Receita {
     private String nrControle;
     private Date date;
     private Integer qtd;
+    private Produtos remedios;
 
     public Receita() {
     }
@@ -18,6 +19,14 @@ public class Receita {
         this.qtd = qtd;
     }
 
+    public void setRemedios(Produtos remedios){
+        this.remedios = remedios;
+    }
+    
+    public Produtos getRemedios(){
+        return remedios;
+    }    
+    
     public Integer getQtd() {
         return qtd;
     }

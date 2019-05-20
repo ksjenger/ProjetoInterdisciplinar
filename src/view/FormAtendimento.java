@@ -2,6 +2,7 @@ package view;
 
 import dao.ClienteDao;
 import dao.ProdutosDao;
+import dao.ReceitaDao;
 import dao.RemediosDao;
 import java.awt.Color;
 import java.text.ParseException;
@@ -17,21 +18,21 @@ import model.entities.Produtos;
 import model.entities.Receita;
 
 public class FormAtendimento extends javax.swing.JFrame {
-    
+
     Receita r;
     ArrayList<Produtos> listaProd = new ArrayList<>();
     ArrayList<Produtos> prodList = new ArrayList<>();
     Boolean editar = true;
     DefaultListModel modelo;
     int enter = 0;
-    
+
     public FormAtendimento() {
         initComponents();
         jListCliente.setVisible(false);
         modelo = new DefaultListModel();
         jListCliente.setModel(modelo);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -303,7 +304,7 @@ public class FormAtendimento extends javax.swing.JFrame {
         listaProdutos = ProdutosDao.findProdutosbyName(txtPesquisa.getText());
         int size = listaProdutos.size();
         modelo.removeAllElements();
-        
+
         for (Produtos prod : listaProdutos) {
             int idProduto = prod.getIdProduto();
             String nome = prod.getNome();
@@ -312,7 +313,7 @@ public class FormAtendimento extends javax.swing.JFrame {
         }
 
     }
-    
+
 
     private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
 
@@ -354,10 +355,13 @@ public class FormAtendimento extends javax.swing.JFrame {
                 } else {
                     qtd = Integer.parseInt(txtQuantidadePrescrita.getText());
                 }
-                
+
                 String controle = txtControle.getText();
+                
+                
+                
                 try {
-                     r = new Receita(null, controle, sdf.parse(dataReceita), qtd);
+                    r = new Receita(null, controle, sdf.parse(dataReceita), qtd);
                 } catch (ParseException ex) {
                     Logger.getLogger(FormAtendimento.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -374,7 +378,7 @@ public class FormAtendimento extends javax.swing.JFrame {
                 btnIncluirReceita.setBackground(Color.GREEN);
             }
         }
-        
+
     }//GEN-LAST:event_btnIncluirReceitaActionPerformed
 
     private void txtPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyPressed
@@ -382,7 +386,7 @@ public class FormAtendimento extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesquisaKeyPressed
 
     private void txtPesquisaCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtPesquisaCaretPositionChanged
-        
+
 
     }//GEN-LAST:event_txtPesquisaCaretPositionChanged
 
@@ -390,7 +394,7 @@ public class FormAtendimento extends javax.swing.JFrame {
         String nome = txtNomeProduto.getText();
         int idProduto = Integer.parseInt(txtIdProduto.getText());
         String qtd = txtQuantidadeProduto.getText();
-        if(qtd.equals("")){
+        if (qtd.equals("")) {
             qtd = "1";
         }
         prodList.add(ProdutosDao.findProdutosbyId(idProduto));
@@ -400,13 +404,13 @@ public class FormAtendimento extends javax.swing.JFrame {
         for (Produtos p : prodList) {
             tab.addRow(new String[]{p.getNome(), p.getTipo(), p.getCategoria(), "R$" + p.getValor(), qtd});
         }
-        
-       
-        for(int i=0; i<prodList.size(); i++)
+
+        for (int i = 0; i < prodList.size(); i++) {
             valorAtendimento = valorAtendimento + prodList.get(i).getValor();
-       
-        lbnValorfinal.setText(""+valorAtendimento);
-        
+        }
+
+        lbnValorfinal.setText("" + valorAtendimento);
+
         txtNomeProduto.setText("");
         txtPesquisa.setText("");
         txtIdProduto.setText("");
@@ -417,14 +421,14 @@ public class FormAtendimento extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeProdutoMouseClicked
 
     private void jListClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListClienteMouseClicked
-        String produtos = jListCliente.getSelectedValue();        
+        String produtos = jListCliente.getSelectedValue();
         String idnome[] = produtos.split(" - ");
-        
+
         txtNomeProduto.setText(idnome[1]);
         txtIdProduto.setText(idnome[0]);
         jListCliente.setVisible(false);
         txtPesquisa.setText(produtos);
-        
+
     }//GEN-LAST:event_jListClienteMouseClicked
 
     private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
@@ -448,26 +452,31 @@ public class FormAtendimento extends javax.swing.JFrame {
 
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
         Boolean prescricaoMedica = false;
-        for(Produtos p : prodList){
-            prescricaoMedica = RemediosDao.prescricaoMedica(p.getIdProduto());
-            if(prescricaoMedica){
-                if(r == null){
+        for (Produtos p : prodList) {
+            if (RemediosDao.prescricaoMedica(p.getIdProduto())) {
+                r.setRemedios(p);
+                if (r == null) {
                     prescricaoMedica = true;
                 }
             }
         }
-        if(prescricaoMedica){
+        if (prescricaoMedica) {
             JOptionPane.showMessageDialog(this, "Existem medicamentos que possuem prescricao medica obrigatoria"
-                            + ". Favor solicitar a receita ao cliente. ");
-        }else{
-            -
+                    + ". Favor solicitar a receita ao cliente. ");
+        } else {
+            try {
+                ReceitaDao.insertReceita(r);
+            } catch (ParseException ex) {
+                Logger.getLogger(FormAtendimento.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
-            
+                
+
         }
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
-    
+
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FormAtendimento().setVisible(true);
