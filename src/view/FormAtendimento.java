@@ -1,5 +1,6 @@
 package view;
 
+import dao.AtendimentoDao;
 import dao.ClienteDao;
 import dao.ProdutosDao;
 import dao.ReceitaDao;
@@ -8,6 +9,7 @@ import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -31,6 +33,7 @@ public class FormAtendimento extends javax.swing.JFrame {
         jListCliente.setVisible(false);
         modelo = new DefaultListModel();
         jListCliente.setModel(modelo);
+        numeroAtendimento();
     }
 
     @SuppressWarnings("unchecked")
@@ -40,7 +43,7 @@ public class FormAtendimento extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lbnTituloCadastro = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jListCliente = new javax.swing.JList<>();
+        jListCliente = new javax.swing.JList<String>();
         lbnProduto = new javax.swing.JLabel();
         txtPesquisa = new javax.swing.JTextField();
         txtIdProduto = new javax.swing.JTextField();
@@ -71,6 +74,8 @@ public class FormAtendimento extends javax.swing.JFrame {
         lbnSetConvenio = new javax.swing.JLabel();
         lbnCliente = new javax.swing.JLabel();
         btnPesquisarCliente = new javax.swing.JButton();
+        lbnAtendimento = new javax.swing.JLabel();
+        lbnDataAtendimento = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -80,7 +85,7 @@ public class FormAtendimento extends javax.swing.JFrame {
         lbnTituloCadastro.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lbnTituloCadastro.setText("Atendimento");
         jPanel1.add(lbnTituloCadastro);
-        lbnTituloCadastro.setBounds(250, 10, 250, 44);
+        lbnTituloCadastro.setBounds(260, 10, 250, 44);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel3.setLayout(null);
@@ -292,12 +297,32 @@ public class FormAtendimento extends javax.swing.JFrame {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(10, 60, 760, 100);
 
+        lbnAtendimento.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(lbnAtendimento);
+        lbnAtendimento.setBounds(50, 20, 190, 30);
+
         getContentPane().add(jPanel1);
         jPanel1.setBounds(10, 0, 780, 600);
 
-        setSize(new java.awt.Dimension(825, 644));
+        lbnDataAtendimento.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(lbnDataAtendimento);
+        lbnDataAtendimento.setBounds(40, 620, 190, 30);
+
+        setSize(new java.awt.Dimension(825, 696));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void numeroAtendimento() {
+        Integer atendimento = AtendimentoDao.findNextId();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss");
+        String data = sdf.format(new Date());
+
+        lbnDataAtendimento.setText("Atendimento: " + atendimento);
+        lbnDataAtendimento.setVisible(true);
+        lbnDataAtendimento.setText(data);
+        lbnDataAtendimento.setVisible(true);
+
+    }
 
     public void ListaDePesquisa() {
         ArrayList<Produtos> listaProdutos = new ArrayList<>();
@@ -357,9 +382,7 @@ public class FormAtendimento extends javax.swing.JFrame {
                 }
 
                 String controle = txtControle.getText();
-                
-                
-                
+
                 try {
                     r = new Receita(null, controle, sdf.parse(dataReceita), qtd);
                 } catch (ParseException ex) {
@@ -466,11 +489,10 @@ public class FormAtendimento extends javax.swing.JFrame {
         } else {
             try {
                 ReceitaDao.insertReceita(r);
+                
             } catch (ParseException ex) {
                 Logger.getLogger(FormAtendimento.class.getName()).log(Level.SEVERE, null, ex);
             }
-                        
-                
 
         }
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
@@ -500,10 +522,12 @@ public class FormAtendimento extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProdutos;
+    private javax.swing.JLabel lbnAtendimento;
     private javax.swing.JLabel lbnCliente;
     private javax.swing.JLabel lbnConvenio;
     private javax.swing.JLabel lbnCpf;
     private javax.swing.JLabel lbnData;
+    private javax.swing.JLabel lbnDataAtendimento;
     private javax.swing.JLabel lbnNomeCliente;
     private javax.swing.JLabel lbnProduto;
     private javax.swing.JLabel lbnQuantidadePrescrita;
