@@ -15,18 +15,19 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.entities.Atendimento;
 import model.entities.Cliente;
 import model.entities.Produtos;
 import model.entities.Receita;
 
 public class FormAtendimento extends javax.swing.JFrame {
-
+    Atendimento a = new Atendimento();
     Receita r;
-    //ArrayList<Produtos> listaProd = new ArrayList<>();
     ArrayList<Produtos> prodList = new ArrayList<>();
     Boolean editar = true;
     DefaultListModel modelo;
     int enter = 0;
+    double valorAtendimento = 0;
 
     public FormAtendimento() {
         initComponents();
@@ -36,6 +37,12 @@ public class FormAtendimento extends javax.swing.JFrame {
         numeroAtendimento();
     }
 
+    public Receita getReceita(){
+        return r;
+    }
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -423,7 +430,6 @@ public class FormAtendimento extends javax.swing.JFrame {
         prodList.add(ProdutosDao.findProdutosbyId(idProduto));
         DefaultTableModel tab = (DefaultTableModel) jTableProdutos.getModel();
         tab.setNumRows(0);
-        double valorAtendimento = 0;
         for (Produtos p : prodList) {
             tab.addRow(new String[]{p.getNome(), p.getTipo(), p.getCategoria(), "R$" + p.getValor(), qtd});
         }
@@ -487,15 +493,15 @@ public class FormAtendimento extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Existem medicamentos que possuem prescricao medica obrigatoria"
                     + ". Favor solicitar a receita ao cliente. ");
         } else {
-            try {
-                ReceitaDao.insertReceita(r);
-                
-            } catch (ParseException ex) {
-                Logger.getLogger(FormAtendimento.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            FormPagamentos pg = new FormPagamentos();
+            pg.setVisible(true);
+            pg.setTxtVenda("R$: " +valorAtendimento);
+            a = new Atendimento();
+            
         }
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
+
+    
 
     public static void main(String args[]) {
 
