@@ -25,7 +25,7 @@ public class FormLogin extends javax.swing.JFrame {
         lbnSenha = new javax.swing.JLabel();
         lbnLogin = new javax.swing.JLabel();
         txtLogin = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JPasswordField();
         jPanel3 = new javax.swing.JPanel();
         lbnTituloCadastro = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -55,9 +55,9 @@ public class FormLogin extends javax.swing.JFrame {
         jPanel2.add(txtLogin);
         txtLogin.setBounds(100, 20, 170, 30);
 
-        jPasswordField1.setText("jPasswordField1");
-        jPanel2.add(jPasswordField1);
-        jPasswordField1.setBounds(100, 60, 170, 30);
+        txtPassword.setText("jPasswordField1");
+        jPanel2.add(txtPassword);
+        txtPassword.setBounds(100, 60, 170, 30);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -146,6 +146,9 @@ public class FormLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String nome = txtLogin.getText();
+        String senha = txtPassword.getText();
+        
         principal.setVisible(true);
         hide();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -166,11 +169,11 @@ public class FormLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel lbnConexao;
     private javax.swing.JLabel lbnLogin;
     private javax.swing.JLabel lbnSenha;
     private javax.swing.JLabel lbnTituloCadastro;
     private javax.swing.JTextField txtLogin;
+    private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,7 +19,8 @@ public class Funcionarios {
     private String Cargo;
     private String cidade;
     private String cpf;
-    private Login login;
+    private String Login;
+    private String password;
 
     public Funcionarios() {
     }
@@ -162,12 +163,22 @@ public class Funcionarios {
         this.Cargo = Cargo;
     }
 
-    public Login getLogin() {
-        return login;
+    public String getLogin() {
+        return Login;
     }
 
-    public void setLogin(Login login) {
-        this.login = login;
+    public void setLogin(String Login) {
+        this.Login = Login;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
 
 }

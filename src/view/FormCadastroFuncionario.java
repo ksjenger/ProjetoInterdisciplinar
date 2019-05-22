@@ -4,6 +4,7 @@ import dao.FuncionariosDao;
 import javax.swing.JOptionPane;
 import model.entities.Funcionarios;
 import java.sql.Date;
+import java.util.Scanner;
 
 public class FormCadastroFuncionario extends javax.swing.JFrame {
 
@@ -184,7 +185,7 @@ public class FormCadastroFuncionario extends javax.swing.JFrame {
         jPanelCadastro.add(btnIncluir);
         btnIncluir.setBounds(70, 303, 150, 30);
 
-        jComboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Selecione", "Gerente", "Caixa", "Balconista", "Farmaceutico", "Atendente" }));
+        jComboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Gerente", "Caixa", "Balconista", "Farmaceutico", "Atendente" }));
         jComboBoxCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxCargoActionPerformed(evt);
@@ -265,7 +266,7 @@ public class FormCadastroFuncionario extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addComponent(lbnTituloCadastro)))
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,14 +274,14 @@ public class FormCadastroFuncionario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lbnTituloCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanelCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                .addGap(18, 18, 18))
+                .addComponent(jPanelCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 620, 430);
+        jPanel1.setBounds(0, 0, 450, 430);
 
-        setSize(new java.awt.Dimension(466, 472));
+        setSize(new java.awt.Dimension(466, 458));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -317,7 +318,7 @@ public class FormCadastroFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
-
+        Funcionarios funcionario;
         int resposta = JOptionPane.showConfirmDialog(this, "Cadastrar novo Funcionario?", "Cadastro", 1);
         if (resposta == 0) {
             String firstName = txtNome.getText();
@@ -359,12 +360,16 @@ public class FormCadastroFuncionario extends javax.swing.JFrame {
 
             Date date = new java.sql.Date(new java.util.Date().getTime());
 
-            Funcionarios funcionario = new Funcionarios(null, firstName, 
+            funcionario = new Funcionarios(null, firstName, 
                     lastName, logradouro, numero, bairro, complemento, 
                     Cep, uf, telefone, email, date, cargo, cidade, CPF);
+            String login = JOptionPane.showInputDialog("Informe o novo Login");
+            String senha = JOptionPane.showInputDialog("Confirme a senha");
+            funcionario.setLogin(login);
+            funcionario.setPassword(senha);
             
-            FuncionariosDao funcionariosDao = new FuncionariosDao();
-            funcionariosDao.CreateFuncionario(funcionario);
+            FuncionariosDao.CreateFuncionario(funcionario);
+           
         }
         
         int novo = JOptionPane.showConfirmDialog(this, "Cadastro Concluido!! Deseja cadastrar um novo Funcionario?", "Cadastro de Clientes", 2);
@@ -384,8 +389,11 @@ public class FormCadastroFuncionario extends javax.swing.JFrame {
             txtCPF.setText("");
             jComboBoxCargo.setSelectedIndex(0);
         } else if (novo == 1) {
-            hide();
+            dispose();
         }
+        
+       
+        
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

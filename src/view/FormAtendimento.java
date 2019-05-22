@@ -220,7 +220,7 @@ public class FormAtendimento extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jPanel4.add(txtData);
-        txtData.setBounds(100, 20, 70, 30);
+        txtData.setBounds(110, 20, 70, 30);
 
         jLabel3.setText("Numero de Controle:");
         jPanel4.add(jLabel3);
