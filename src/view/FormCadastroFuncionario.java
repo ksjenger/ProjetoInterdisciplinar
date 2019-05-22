@@ -41,7 +41,7 @@ public class FormCadastroFuncionario extends javax.swing.JFrame {
         lbnCargo = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnIncluir = new javax.swing.JButton();
-        jComboBoxCargo = new javax.swing.JComboBox<String>();
+        jComboBoxCargo = new javax.swing.JComboBox<>();
         txtCPF = new javax.swing.JFormattedTextField();
         lbnCPF = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
@@ -185,7 +185,7 @@ public class FormCadastroFuncionario extends javax.swing.JFrame {
         jPanelCadastro.add(btnIncluir);
         btnIncluir.setBounds(70, 303, 150, 30);
 
-        jComboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Gerente", "Caixa", "Balconista", "Farmaceutico", "Atendente" }));
+        jComboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Gerente", "Caixa", "Balconista", "Farmaceutico", "Atendente" }));
         jComboBoxCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxCargoActionPerformed(evt);
@@ -359,20 +359,19 @@ public class FormCadastroFuncionario extends javax.swing.JFrame {
             }
 
             Date date = new java.sql.Date(new java.util.Date().getTime());
-
-            funcionario = new Funcionarios(null, firstName, 
-                    lastName, logradouro, numero, bairro, complemento, 
-                    Cep, uf, telefone, email, date, cargo, cidade, CPF);
             String login = JOptionPane.showInputDialog("Informe o novo Login");
             String senha = JOptionPane.showInputDialog("Confirme a senha");
-            funcionario.setLogin(login);
-            funcionario.setPassword(senha);
+            
+            funcionario = new Funcionarios(null, firstName, 
+                    lastName, logradouro, numero, bairro, complemento, 
+                    Cep, uf, telefone, email, date, cargo, cidade, CPF, login, senha);
+            
             
             FuncionariosDao.CreateFuncionario(funcionario);
            
         }
         
-        int novo = JOptionPane.showConfirmDialog(this, "Cadastro Concluido!! Deseja cadastrar um novo Funcionario?", "Cadastro de Clientes", 2);
+        int novo = JOptionPane.showConfirmDialog(this, "Cadastro Concluido!! Deseja cadastrar um novo Funcionario?", "Cadastro de Clientes", 1);
         if (novo == 0) {
             txtNome.setText("");
             txtSobronome.setText("");

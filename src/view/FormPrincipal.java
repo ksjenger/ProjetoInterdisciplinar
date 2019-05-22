@@ -114,6 +114,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         jMenuBar1.setName("MenuBar"); // NOI18N
 
         jMenuCadastros.setText("Cadastros");
+        jMenuCadastros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadastrosActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenuCadastros);
 
         jMenuConfiguracoes.setText("Configuracoes");
@@ -162,6 +167,10 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
         selecioneCadastro.setVisible(true);
     }//GEN-LAST:event_btnCadastroActionPerformed
+
+    private void jMenuCadastrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrosActionPerformed
+        selecioneCadastro.setVisible(true);
+    }//GEN-LAST:event_jMenuCadastrosActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

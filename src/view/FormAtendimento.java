@@ -50,7 +50,7 @@ public class FormAtendimento extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lbnTituloCadastro = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jListCliente = new javax.swing.JList<String>();
+        jListCliente = new javax.swing.JList<>();
         lbnProduto = new javax.swing.JLabel();
         txtPesquisa = new javax.swing.JTextField();
         txtIdProduto = new javax.swing.JTextField();
@@ -84,7 +84,7 @@ public class FormAtendimento extends javax.swing.JFrame {
         lbnAtendimento = new javax.swing.JLabel();
         lbnDataAtendimento = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
@@ -112,10 +112,10 @@ public class FormAtendimento extends javax.swing.JFrame {
         lbnProduto.setBounds(10, 10, 110, 30);
 
         txtPesquisa.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 txtPesquisaCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         txtPesquisa.addActionListener(new java.awt.event.ActionListener() {

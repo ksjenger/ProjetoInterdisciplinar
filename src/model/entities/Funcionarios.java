@@ -25,7 +25,7 @@ public class Funcionarios {
     public Funcionarios() {
     }
 
-    public Funcionarios(Integer idFuncionario, String firstName, String lastName, String logradouro, Integer numero, String bairro, String complemento, String CEP, String uf, String telefone, String email, Date dataContrato, String Cargo, String cidade, String cpf) {
+    public Funcionarios(Integer idFuncionario, String firstName, String lastName, String logradouro, Integer numero, String bairro, String complemento, String CEP, String uf, String telefone, String email, Date dataContrato, String Cargo, String cidade, String cpf, String Login, String password) {
         this.idFuncionario = idFuncionario;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,7 +41,10 @@ public class Funcionarios {
         this.Cargo = Cargo;
         this.cidade = cidade;
         this.cpf = cpf;
+        this.Login = Login;
+        this.password = password;
     }
+
 
     public Integer getIdFuncionario() {
         return idFuncionario;

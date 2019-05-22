@@ -1,22 +1,30 @@
 package view;
 
 import dao.ConectaBD;
+import dao.FuncionariosDao;
 import java.awt.Color;
+import javax.swing.JOptionPane;
+import model.entities.Funcionarios;
 
 public class FormLogin extends javax.swing.JFrame {
+
     FormPrincipal principal = new FormPrincipal();
+    Funcionarios funcionarioLog = new Funcionarios();
+
     public FormLogin() {
         initComponents();
-        if(ConectaBD.connectionOk()){
+        txtPassword.setText("");
+        if (ConectaBD.connectionOk()) {
             lbnConexao.setText("Online");
             lbnConexao.setForeground(Color.GREEN);
-        }else{
+        } else {
             lbnConexao.setText("Offline");
             lbnConexao.setForeground(Color.red);
         }
     }
+
     @SuppressWarnings("unchecked")
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -146,16 +154,26 @@ public class FormLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String nome = txtLogin.getText();
+        String nome = "vazio";
+        nome = txtLogin.getText();
         String senha = txtPassword.getText();
-        
-        principal.setVisible(true);
-        hide();
+        funcionarioLog = FuncionariosDao.getPassaword(nome);
+
+        if (funcionarioLog == null) {
+            JOptionPane.showMessageDialog(this, "Login nao encontrado!!");
+        } else {
+            if (senha.equals(funcionarioLog.getPassword())) {
+                JOptionPane.showMessageDialog(this, "BEM VIDO " + funcionarioLog.getFirstName());
+                principal.setVisible(true);
+                hide();
+            } else {
+                JOptionPane.showMessageDialog(this, "Senha invalida!!");
+            }
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-  
     public static void main(String args[]) {
- 
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FormLogin().setVisible(true);
