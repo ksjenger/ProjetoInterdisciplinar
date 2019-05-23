@@ -20,8 +20,11 @@ import java.util.logging.Logger;
  * @author kauan
  */
 public class FuncionarioBean {
+    
+        private static String idF = null;
+    
         private static String path;
-        private Integer id = 0;
+        
         
         public static void tempWriterUser(Integer id) {
         try {
@@ -37,7 +40,7 @@ public class FuncionarioBean {
         }
     }
     
-    public String tempReadOrder(){
+    public static String tempReadOrder(){
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader(path));
@@ -45,9 +48,9 @@ public class FuncionarioBean {
             ex.printStackTrace();
         }
         try {
-            id = reader.readLine();
+            idF = reader.readLine();
             reader.close();
-            return id;
+            return idF;
         } catch (IOException ex) {
             ex.printStackTrace();
         }   

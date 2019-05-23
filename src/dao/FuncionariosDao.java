@@ -103,7 +103,7 @@ public class FuncionariosDao {
         conn = ConectaBD.getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
-        String sql = "select * from funcionarios where funcionarios.login = ?";
+        String sql = "select * from funcionarios where funcionarios.idFuncionario = ?";
         try {
             st = conn.prepareStatement(sql);
             st.setInt(1, id);

@@ -11,6 +11,7 @@ public class Produtos {
     private String codBar;
     private boolean status;
     private String tipo;
+    private int qtd;
 
     public Produtos() {
     }
@@ -26,6 +27,22 @@ public class Produtos {
 
     public void setTipo(String tipo){
         this.tipo = tipo;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public int getQtd() {
+        return qtd;
+    }
+
+    public void setQtd(int qtd) {
+        this.qtd = qtd;
     }
     
     public String getTipo(){

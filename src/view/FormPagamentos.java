@@ -8,18 +8,26 @@ package view;
 import dao.AtendimentoDao;
 import dao.ReceitaDao;
 import java.text.ParseException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.entities.Atendimento;
+import model.entities.Produtos;
 
 public class FormPagamentos extends javax.swing.JFrame {
 
-    FormAtendimento fa = new FormAtendimento();
-    Atendimento a = fa.getAtendimento();
-
-    public FormPagamentos() {
+    private Atendimento atendimento;
+    private ArrayList<Produtos> listaItens = new ArrayList<>();
+    
+    public FormPagamentos(Atendimento a, ArrayList<Produtos> produtos) {
         initComponents();
         txtDesconto.setEditable(false);
         txtValorPago.setFocusable(true);
+        atendimento = a;
+        this.listaItens = produtos;
+        }
 
+    private FormPagamentos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void setTxtVenda(String txtVenda) {
@@ -154,21 +162,22 @@ public class FormPagamentos extends javax.swing.JFrame {
         Double calcTroco = Double.parseDouble(valor);
         Double valorAtendimento = Double.parseDouble(txtValorPago.getText());
         Double troco = valorAtendimento - calcTroco;
-        txtValorPago.setText(valorpago);
+        txtValorPago.setText("R$: " + valorAtendimento);
         txtTroco.setText("R$: " + troco);
     }//GEN-LAST:event_txtValorPagoFocusLost
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        try {
-            if (fa.getReceita() == null) {
-
-            } else {
-                ReceitaDao.insertReceita(fa.getReceita());
-            }
-            AtendimentoDao.insertAtendimento(a.getFuncionario(), a.getCliente(), a.getReceita());
-        } catch (ParseException ex) {
-            ex.printStackTrace();
+        if(atendimento.getReceita() == null || atendimento.getCliente() == null){
+            AtendimentoDao.insertAtendimento(atendimento.getFuncionario());
+        }else if(atendimento.getReceita() == null || atendimento.getCliente() != null){
+            AtendimentoDao.insertAtendimento(atendimento.getFuncionario(), atendimento.getCliente());
+        }else{
+            AtendimentoDao.insertAtendimento(atendimento.getFuncionario(), atendimento.getCliente(), atendimento.getReceita());
         }
+        for(Produtos p: listaItens){
+            AtendimentoDao.insertItens(atendimento.getIdAtendimento(), p.getIdProduto());
+        }
+        JOptionPane.showMessageDialog(this, "Compra finalizada.");
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     /**

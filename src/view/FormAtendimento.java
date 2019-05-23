@@ -3,6 +3,7 @@ package view;
 import dao.AtendimentoDao;
 import dao.ClienteDao;
 import dao.EstoqueDao;
+import dao.FuncionariosDao;
 import dao.ProdutosDao;
 import dao.RemediosDao;
 import java.awt.Color;
@@ -15,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.bean.FuncionarioBean;
 import model.entities.Atendimento;
 import model.entities.Cliente;
 import model.entities.Funcionarios;
@@ -22,8 +24,10 @@ import model.entities.Produtos;
 import model.entities.Receita;
 
 public class FormAtendimento extends javax.swing.JFrame {
-    FormLogin fl;
-    
+
+    Funcionarios f = new Funcionarios();
+    String id = FuncionarioBean.tempReadOrder();
+
     Atendimento a = new Atendimento();
     Receita r;
     ArrayList<Produtos> prodList = new ArrayList<>();
@@ -32,14 +36,16 @@ public class FormAtendimento extends javax.swing.JFrame {
     int enter = 0;
     double valorAtendimento = 0;
     Cliente c = null;
-    
+
     public FormAtendimento() {
         initComponents();
         jListCliente.setVisible(false);
         modelo = new DefaultListModel();
         jListCliente.setModel(modelo);
+        f = FuncionariosDao.selectFuncionarioById(Integer.parseInt(id));
         numeroAtendimento();
-        
+        lbnAtendimento.setText("Atendiemnto " + AtendimentoDao.findNextId());
+
     }
 
     public Receita getReceita() {
@@ -434,7 +440,7 @@ public class FormAtendimento extends javax.swing.JFrame {
         }
 
         qtd = Integer.parseInt(qtdP);
-        
+
         if (!EstoqueDao.verificaEstoque(idProduto, qtd)) {
             JOptionPane.showMessageDialog(this, "Produto nao disponivel");
         } else {
@@ -443,16 +449,22 @@ public class FormAtendimento extends javax.swing.JFrame {
             prodList.add(ProdutosDao.findProdutosbyId(idProduto));
             DefaultTableModel tab = (DefaultTableModel) jTableProdutos.getModel();
             tab.setNumRows(0);
+            ArrayList<Produtos> aux = new ArrayList<>();
+
             for (Produtos p : prodList) {
-                tab.addRow(new String[]{p.getNome(), p.getTipo(), p.getCategoria(), "R$" + p.getValor(), qtd+""});
+                p.setQtd(qtd);
+                aux.add(p);
+                tab.addRow(new String[]{p.getNome(), p.getTipo(), p.getCategoria(), "R$" + p.getValor(), p.getQtd() + ""});
             }
 
+            prodList = 
+          
+            
             for (int i = 0; i < prodList.size(); i++) {
-                valorAtendimento = valorAtendimento + prodList.get(i).getValor() * qtd;
+                valorAtendimento = valorAtendimento + prodList.get(i).getValor() * prodList.get(i).getQtd();
             }
 
             lbnValorfinal.setText("" + valorAtendimento);
-
             txtNomeProduto.setText("");
             txtPesquisa.setText("");
             txtIdProduto.setText("");
@@ -507,21 +519,24 @@ public class FormAtendimento extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Existem medicamentos que possuem prescricao medica obrigatoria"
                     + ". Favor solicitar a receita ao cliente. ");
         } else {
-            FormPagamentos pg = new FormPagamentos();
-            pg.setVisible(true);
-            pg.setTxtVenda("R$: " + valorAtendimento);
+
             a = new Atendimento();
+            a.setIdAtendimento(AtendimentoDao.findNextId());
             a.setCliente(c);
             a.setFuncionario(f);
             a.setReceita(r);
+            FormPagamentos pg = new FormPagamentos(a, prodList);
+
+            pg.setVisible(true);
+            pg.setTxtVenda("R$: " + valorAtendimento);
 
         }
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
-    public Atendimento getAtendimento(){
+    public Atendimento getAtendimento() {
         return a;
     }
-    
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
