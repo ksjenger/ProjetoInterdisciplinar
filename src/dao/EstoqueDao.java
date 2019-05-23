@@ -11,6 +11,8 @@ import model.entities.Remedios;
 
 public class EstoqueDao {
 
+    private static Connection conn;
+
     public static ArrayList<Perfumaria> selectPerfumaria() {
         Connection conn = null;
         Statement st = null;
@@ -90,7 +92,7 @@ public class EstoqueDao {
             }
         }
     }
-    
+
     public static ArrayList<Remedios> selectRemedios() {
         Connection conn = null;
         Statement st = null;
@@ -139,7 +141,7 @@ public class EstoqueDao {
         }
         return lista;
     }
-    
+
     public static void updateRemedio(Remedios other) {
 
         Connection conn = null;
@@ -170,4 +172,77 @@ public class EstoqueDao {
             }
         }
     }
+
+    public static Boolean verificaEstoque(Integer id, int qtd) {
+        Boolean status = false;
+        conn = ConectaBD.getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        String sql = "select quantidade from remedios where idProduto = ?";
+
+        try {
+            st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                int quanditidade = rs.getInt(1);
+                if (quanditidade > qtd) {
+                    status = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return status;
+    }
+
+    public static void debitaEstoque(Integer id, int qtd) {
+        int quantidade = 0;
+        conn = ConectaBD.getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        String sql = "select quantidade from remedios where idProduto = ?";
+
+        try {
+            st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                quantidade = rs.getInt(1);
+            }
+
+            if (quantidade > qtd) {
+                sql = "update remedios set quantidade = ? where idproduto = ?";
+                st = conn.prepareStatement(sql);
+                quantidade = quantidade -1;
+                st.setInt(1, quantidade);
+                st.setInt(2, id);
+                st.execute();
+            }
+
+            sql = "select quantidade from perfumaria where idProduto = ?";
+            st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                quantidade = rs.getInt(1);
+            }
+
+            if (quantidade > qtd) {
+                sql = "update perfumaria set quantidade = ? where idproduto = ?";
+                st = conn.prepareStatement(sql);
+                st.setInt(1, quantidade - 1);
+                st.setInt(2, id);
+                st.execute();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -14,7 +14,7 @@ public class AtendimentoDao {
 
     private static Connection conn = null;
 
-    public static void insertAtendimento(Funcionarios idF, Cliente idC, Receita idR) {
+    public static void insertAtendimento(Funcionarios f, Cliente c, Receita r) {
         conn = ConectaBD.getConnection();
         PreparedStatement st = null;
         String sql = "insert into atendimento "
@@ -31,9 +31,9 @@ public class AtendimentoDao {
         try {
             st = conn.prepareStatement(sql);
             st.setDate(1, sqlDate);
-            st.setInt(2, idF.getIdFuncionario());
-            st.setInt(3, idC.getIdCliente());
-            st.setInt(4, idR.getIdReceita());
+            st.setInt(2, f.getIdFuncionario());
+            st.setInt(3, c.getIdCliente());
+            st.setInt(4, r.getIdReceita());
             st.executeQuery();
 
         } catch (SQLException e) {

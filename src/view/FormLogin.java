@@ -4,13 +4,15 @@ import dao.ConectaBD;
 import dao.FuncionariosDao;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import model.bean.FuncionarioBean;
 import model.entities.Funcionarios;
 
 public class FormLogin extends javax.swing.JFrame {
 
-    FormPrincipal principal = new FormPrincipal();
-    Funcionarios funcionarioLog = new Funcionarios();
-
+    private FormPrincipal principal = new FormPrincipal();
+    private Funcionarios funcionarioLog = null;
+    
+      
     public FormLogin() {
         initComponents();
         txtPassword.setText("");
@@ -165,6 +167,7 @@ public class FormLogin extends javax.swing.JFrame {
             if (senha.equals(funcionarioLog.getPassword())) {
                 JOptionPane.showMessageDialog(this, "BEM VIDO " + funcionarioLog.getFirstName());
                 principal.setVisible(true);
+                FuncionarioBean.tempWriterUser(funcionarioLog.getIdFuncionario());
                 hide();
             } else {
                 JOptionPane.showMessageDialog(this, "Senha invalida!!");

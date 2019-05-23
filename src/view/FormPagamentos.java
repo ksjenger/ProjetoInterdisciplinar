@@ -5,29 +5,27 @@
  */
 package view;
 
+import dao.AtendimentoDao;
 import dao.ReceitaDao;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.entities.Receita;
-
+import model.entities.Atendimento;
 
 public class FormPagamentos extends javax.swing.JFrame {
 
     FormAtendimento fa = new FormAtendimento();
-    
+    Atendimento a = fa.getAtendimento();
+
     public FormPagamentos() {
-        initComponents();    
+        initComponents();
         txtDesconto.setEditable(false);
         txtValorPago.setFocusable(true);
-        
+
     }
 
     public void setTxtVenda(String txtVenda) {
         this.txtVenda.setText(txtVenda);
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -46,7 +44,6 @@ public class FormPagamentos extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
         btnConfirmar = new javax.swing.JButton();
         btnRetorna = new javax.swing.JButton();
-        btnCancela = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -116,7 +113,7 @@ public class FormPagamentos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnConfirmar);
-        btnConfirmar.setBounds(210, 370, 90, 80);
+        btnConfirmar.setBounds(170, 370, 130, 80);
 
         btnRetorna.setText("Retornar");
         btnRetorna.addActionListener(new java.awt.event.ActionListener() {
@@ -125,16 +122,7 @@ public class FormPagamentos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnRetorna);
-        btnRetorna.setBounds(10, 370, 90, 80);
-
-        btnCancela.setText("Cancelar");
-        btnCancela.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnCancela);
-        btnCancela.setBounds(110, 370, 90, 80);
+        btnRetorna.setBounds(10, 370, 130, 80);
 
         jLabel6.setForeground(new java.awt.Color(255, 0, 0));
         jLabel6.setText("EFETUE O PAGAMENTO");
@@ -147,11 +135,6 @@ public class FormPagamentos extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(327, 505));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCancelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelaActionPerformed
-        dispose();
-        
-    }//GEN-LAST:event_btnCancelaActionPerformed
 
     private void btnRetornaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetornaActionPerformed
         dispose();
@@ -171,13 +154,18 @@ public class FormPagamentos extends javax.swing.JFrame {
         Double calcTroco = Double.parseDouble(valor);
         Double valorAtendimento = Double.parseDouble(txtValorPago.getText());
         Double troco = valorAtendimento - calcTroco;
-        txtValorPago.setText("R$: " + valorpago);
-        txtTroco.setText("R$: " + (-1) * troco);
+        txtValorPago.setText(valorpago);
+        txtTroco.setText("R$: " + troco);
     }//GEN-LAST:event_txtValorPagoFocusLost
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         try {
-            ReceitaDao.insertReceita(fa.getReceita());
+            if (fa.getReceita() == null) {
+
+            } else {
+                ReceitaDao.insertReceita(fa.getReceita());
+            }
+            AtendimentoDao.insertAtendimento(a.getFuncionario(), a.getCliente(), a.getReceita());
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
@@ -219,7 +207,6 @@ public class FormPagamentos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancela;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnRetorna;
     private javax.swing.JComboBox jComboBox1;

@@ -2,8 +2,8 @@ package view;
 
 import dao.AtendimentoDao;
 import dao.ClienteDao;
+import dao.EstoqueDao;
 import dao.ProdutosDao;
-import dao.ReceitaDao;
 import dao.RemediosDao;
 import java.awt.Color;
 import java.text.ParseException;
@@ -17,10 +17,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.entities.Atendimento;
 import model.entities.Cliente;
+import model.entities.Funcionarios;
 import model.entities.Produtos;
 import model.entities.Receita;
 
 public class FormAtendimento extends javax.swing.JFrame {
+    FormLogin fl;
+    
     Atendimento a = new Atendimento();
     Receita r;
     ArrayList<Produtos> prodList = new ArrayList<>();
@@ -28,21 +31,21 @@ public class FormAtendimento extends javax.swing.JFrame {
     DefaultListModel modelo;
     int enter = 0;
     double valorAtendimento = 0;
-
+    Cliente c = null;
+    
     public FormAtendimento() {
         initComponents();
         jListCliente.setVisible(false);
         modelo = new DefaultListModel();
         jListCliente.setModel(modelo);
         numeroAtendimento();
+        
     }
 
-    public Receita getReceita(){
+    public Receita getReceita() {
         return r;
     }
-    
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -112,10 +115,10 @@ public class FormAtendimento extends javax.swing.JFrame {
         lbnProduto.setBounds(10, 10, 110, 30);
 
         txtPesquisa.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 txtPesquisaCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +164,7 @@ public class FormAtendimento extends javax.swing.JFrame {
             }
         });
         jPanel3.add(btnIncluir);
-        btnIncluir.setBounds(660, 50, 80, 30);
+        btnIncluir.setBounds(660, 50, 90, 30);
 
         btnIncluirProduto.setBackground(new java.awt.Color(0, 204, 0));
         btnIncluirProduto.setText("Incluir");
@@ -358,7 +361,7 @@ public class FormAtendimento extends javax.swing.JFrame {
 
     private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
         String cpf = txtCpf.getText();
-        Cliente c = new Cliente();
+        c = new Cliente();
         c = ClienteDao.findByCPF(cpf);
         if (c.getFirstName() == null) {
             lbnCliente.setText("Cliente nao cadastrado");
@@ -421,28 +424,39 @@ public class FormAtendimento extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesquisaCaretPositionChanged
 
     private void btnIncluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirProdutoActionPerformed
+        Integer qtd = null;
         String nome = txtNomeProduto.getText();
         int idProduto = Integer.parseInt(txtIdProduto.getText());
-        String qtd = txtQuantidadeProduto.getText();
-        if (qtd.equals("")) {
-            qtd = "1";
-        }
-        prodList.add(ProdutosDao.findProdutosbyId(idProduto));
-        DefaultTableModel tab = (DefaultTableModel) jTableProdutos.getModel();
-        tab.setNumRows(0);
-        for (Produtos p : prodList) {
-            tab.addRow(new String[]{p.getNome(), p.getTipo(), p.getCategoria(), "R$" + p.getValor(), qtd});
+        String qtdP = txtQuantidadeProduto.getText();
+
+        if (qtdP.equals("")) {
+            qtdP = "1";
         }
 
-        for (int i = 0; i < prodList.size(); i++) {
-            valorAtendimento = valorAtendimento + prodList.get(i).getValor();
+        qtd = Integer.parseInt(qtdP);
+        
+        if (!EstoqueDao.verificaEstoque(idProduto, qtd)) {
+            JOptionPane.showMessageDialog(this, "Produto nao disponivel");
+        } else {
+            EstoqueDao.debitaEstoque(idProduto, qtd);
+
+            prodList.add(ProdutosDao.findProdutosbyId(idProduto));
+            DefaultTableModel tab = (DefaultTableModel) jTableProdutos.getModel();
+            tab.setNumRows(0);
+            for (Produtos p : prodList) {
+                tab.addRow(new String[]{p.getNome(), p.getTipo(), p.getCategoria(), "R$" + p.getValor(), qtd+""});
+            }
+
+            for (int i = 0; i < prodList.size(); i++) {
+                valorAtendimento = valorAtendimento + prodList.get(i).getValor() * qtd;
+            }
+
+            lbnValorfinal.setText("" + valorAtendimento);
+
+            txtNomeProduto.setText("");
+            txtPesquisa.setText("");
+            txtIdProduto.setText("");
         }
-
-        lbnValorfinal.setText("" + valorAtendimento);
-
-        txtNomeProduto.setText("");
-        txtPesquisa.setText("");
-        txtIdProduto.setText("");
     }//GEN-LAST:event_btnIncluirProdutoActionPerformed
 
     private void txtNomeProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNomeProdutoMouseClicked
@@ -495,14 +509,19 @@ public class FormAtendimento extends javax.swing.JFrame {
         } else {
             FormPagamentos pg = new FormPagamentos();
             pg.setVisible(true);
-            pg.setTxtVenda("R$: " +valorAtendimento);
+            pg.setTxtVenda("R$: " + valorAtendimento);
             a = new Atendimento();
-            
+            a.setCliente(c);
+            a.setFuncionario(f);
+            a.setReceita(r);
+
         }
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
+    public Atendimento getAtendimento(){
+        return a;
+    }
     
-
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {

@@ -42,30 +42,28 @@ public class FuncionariosDao {
             ConectaBD.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        
-         finally{
+        } finally {
             ConectaBD.closeConnection();
-            try{
-                st.close();           
-            }catch(SQLException e){
+            try {
+                st.close();
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
-    
-    public static Funcionarios getPassaword(String login){
+
+    public static Funcionarios getPassaword(String login) {
         Funcionarios f = null;
         conn = ConectaBD.getConnection();
         PreparedStatement st = null;
-        ResultSet rs = null; 
+        ResultSet rs = null;
         String sql = "select * from funcionarios where funcionarios.login = ?";
-        try{
+        try {
             st = conn.prepareStatement(sql);
             st.setString(1, login);
             rs = st.executeQuery();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 int idFuncionario = rs.getInt(1);
                 String firstName = rs.getString(2);
                 String lastname = rs.getString(3);
@@ -83,24 +81,69 @@ public class FuncionariosDao {
                 String cidade = rs.getString(15);
                 String loginbd = rs.getString(16);
                 String senha = rs.getString(17);
-                f = new Funcionarios(idFuncionario, firstName, lastname, 
-                        logradouro, numero, bairro, complemento, cep, uf, 
+                f = new Funcionarios(idFuncionario, firstName, lastname,
+                        logradouro, numero, bairro, complemento, cep, uf,
                         telefone, email, date, cargo, cidade, CPF, loginbd, senha);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }
-        
-        
-         finally{
+        } finally {
             ConectaBD.closeConnection();
-            try{
-                st.close();           
-            }catch(SQLException e){
+            try {
+                st.close();
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
         return f;
     }
 
+    public static Funcionarios selectFuncionarioById(Integer id) {
+        Funcionarios f = null;
+        conn = ConectaBD.getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        String sql = "select * from funcionarios where funcionarios.login = ?";
+        try {
+            st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                int idFuncionario = rs.getInt(1);
+                String firstName = rs.getString(2);
+                String lastname = rs.getString(3);
+                String logradouro = rs.getString(4);
+                Integer numero = rs.getInt(5);
+                String bairro = rs.getString(6);
+                String complemento = rs.getString(7);
+                String cep = rs.getString(8);
+                String uf = rs.getString(9);
+                String telefone = rs.getString(10);
+                String email = rs.getString(11);
+                Date date = rs.getDate(12);
+                String cargo = rs.getString(13);
+                String CPF = rs.getString(14);
+                String cidade = rs.getString(15);
+                String loginbd = rs.getString(16);
+                String senha = rs.getString(17);
+                f = new Funcionarios(idFuncionario, firstName, lastname,
+                        logradouro, numero, bairro, complemento, cep, uf,
+                        telefone, email, date, cargo, cidade, CPF, loginbd, senha);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConectaBD.closeConnection();
+            try {
+                st.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return f;
+    }
+    
+    
+    
 }
