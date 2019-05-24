@@ -453,11 +453,10 @@ public class FormAtendimento extends javax.swing.JFrame {
 
             for (Produtos p : prodList) {
                 p.setQtd(qtd);
-                aux.add(p);
+                
                 tab.addRow(new String[]{p.getNome(), p.getTipo(), p.getCategoria(), "R$" + p.getValor(), p.getQtd() + ""});
             }
 
-            prodList = 
           
             
             for (int i = 0; i < prodList.size(); i++) {
@@ -529,7 +528,8 @@ public class FormAtendimento extends javax.swing.JFrame {
 
             pg.setVisible(true);
             pg.setTxtVenda("R$: " + valorAtendimento);
-
+            dispose();
+            
         }
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 

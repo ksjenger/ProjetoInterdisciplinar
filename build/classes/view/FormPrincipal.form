@@ -10,19 +10,6 @@
         <Property name="name" type="java.lang.String" value="MenuBar" noResource="true"/>
       </Properties>
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenuCadastros">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Cadastros"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuCadastrosActionPerformed"/>
-          </Events>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenuConfiguracoes">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Configuracoes"/>
-          </Properties>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuSobre">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sobre"/>

@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
 import model.entities.Cliente;
 import model.entities.Convenios;
 
@@ -83,5 +85,53 @@ public class ClienteDao {
         
         return c;
     }
+    
+     public static ArrayList<Cliente> selectClientes(){
+        ArrayList<Cliente> lista = new ArrayList<>();
+        conn = ConectaBD.getConnection();
+        Statement st = null;
+        String sql = "Select * from clientes";
+        ResultSet rs = null;
+        Cliente c = new Cliente();
+        Integer idConvenio = null;
+        
+        try{
+            st = conn.createStatement();         
+            rs = st.executeQuery(sql);
+            
+            while(rs.next()){
+                String firstName = rs.getString("firstname");
+                String lastName = rs.getString("lastname");
+                String CPF = rs.getString("CPF");
+                idConvenio = rs.getInt("idConvenio");
+                c.setFirstName(firstName);
+                c.setLastName(lastName);
+                c.setCPF(CPF);             
+                Convenios convenio = ConveniosDao.selectConvenio(idConvenio);
+                c.setConvenio(convenio);
+                String logradouro = rs.getString("logradouro");
+                int numero = rs.getInt("numero");
+                String bairro = rs.getString("bairro");
+                String complemento = rs.getString("complemento");
+                String cep = rs.getString("cep");
+                String uf = rs.getString("uf");
+                String telefone = rs.getString("telefone");
+                String email = rs.getString("email");
+                String cpf = rs.getString("cpf");
+                Cliente cliente = new Cliente(idConvenio, firstName, lastName, 
+                        logradouro, numero, bairro, complemento, 
+                        cep, uf, telefone, email, cpf, telefone, cpf, convenio);
+                
+                lista.add(cliente);
+            }
+                
+            
+        }catch(SQLException e){
+            
+        }
+        
+        return lista;
+    }
+    
     
 }

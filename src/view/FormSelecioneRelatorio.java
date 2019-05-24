@@ -1,13 +1,11 @@
 package view;
 
-import javax.swing.JOptionPane;
-
 public class FormSelecioneRelatorio extends javax.swing.JFrame {
-
+    
     public FormSelecioneRelatorio() {
         initComponents();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -23,7 +21,7 @@ public class FormSelecioneRelatorio extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
-        jComboBoxCadastro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Vendas" }));
+        jComboBoxCadastro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Funcionarios", "Clientes" }));
         jComboBoxCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxCadastroActionPerformed(evt);
@@ -75,61 +73,20 @@ public class FormSelecioneRelatorio extends javax.swing.JFrame {
 
     private void jComboBoxCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCadastroActionPerformed
         if (jComboBoxCadastro.getSelectedIndex() == 1) {
-            int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Cliente?", "Cadastrar Cliente", 1);
-
-            if (decisao == 0) {
-                FormCadastroCliente cadastro = new FormCadastroCliente();
-                cadastro.setVisible(true);
-            } else {
-                jComboBoxCadastro.setSelectedIndex(0);
-            }
+            
+            FormRelatorioFuncionarios fr = new FormRelatorioFuncionarios();
+            fr.setVisible(true);
+            
         }
         if (jComboBoxCadastro.getSelectedIndex() == 2) {
-            int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Funcionario?", "Cadastrar Funcionario", 1);
-
-            if (decisao == 0) {
-                FormCadastroFuncionario cadastroFuncionario = new FormCadastroFuncionario();
-                cadastroFuncionario.setVisible(true);
-            } else {
-                jComboBoxCadastro.setSelectedIndex(0);
-            }
-        }
-        if(jComboBoxCadastro.getSelectedIndex() == 3){
-            int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Convenio?", "Cadastrar Convenio", 1);
-
-            if (decisao == 0) {
-                FormCadastroConvenio cc = new FormCadastroConvenio();
-                cc.setVisible(true);
-            } else {
-                jComboBoxCadastro.setSelectedIndex(0);
-            }
+            
+            FormRelatorioClientes fr = new FormRelatorioClientes();
+            fr.setVisible(true);
             
         }
         
-        if (jComboBoxCadastro.getSelectedIndex() == 4) {
-            int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Remedio?", "Cadastrar Remedio", 1);
-
-            if (decisao == 0) {
-                FormCadastroMedicamentos cm = new FormCadastroMedicamentos();
-                cm.setVisible(true);
-            } else {
-                jComboBoxCadastro.setSelectedIndex(0);
-            }
-        }
-        
-        if (jComboBoxCadastro.getSelectedIndex() == 5) {
-            int decisao = JOptionPane.showConfirmDialog(this, "Deseja Cadastrar um novo Produto?", "Cadastrar Remedio", 1);
-
-            if (decisao == 0) {
-                FormCadastroPerfumaria cp = new FormCadastroPerfumaria();
-                cp.setVisible(true);
-            } else {
-                jComboBoxCadastro.setSelectedIndex(0);
-            }
-        }
-        
     }//GEN-LAST:event_jComboBoxCadastroActionPerformed
-     
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed

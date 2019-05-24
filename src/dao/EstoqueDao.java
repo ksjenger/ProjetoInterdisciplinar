@@ -191,6 +191,21 @@ public class EstoqueDao {
                     status = true;
                 }
             }
+            
+            sql = "select quantidade from perfumaria where idProduto = ?";
+
+        
+            st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                int quanditidade = rs.getInt(1);
+                if (quanditidade > qtd) {
+                    status = true;
+                }
+            }
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }

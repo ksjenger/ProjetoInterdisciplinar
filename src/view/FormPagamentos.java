@@ -17,14 +17,14 @@ public class FormPagamentos extends javax.swing.JFrame {
 
     private Atendimento atendimento;
     private ArrayList<Produtos> listaItens = new ArrayList<>();
-    
+
     public FormPagamentos(Atendimento a, ArrayList<Produtos> produtos) {
         initComponents();
         txtDesconto.setEditable(false);
         txtValorPago.setFocusable(true);
         atendimento = a;
         this.listaItens = produtos;
-        }
+    }
 
     private FormPagamentos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -167,17 +167,26 @@ public class FormPagamentos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtValorPagoFocusLost
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        if(atendimento.getReceita() == null || atendimento.getCliente() == null){
-            AtendimentoDao.insertAtendimento(atendimento.getFuncionario());
-        }else if(atendimento.getReceita() == null || atendimento.getCliente() != null){
-            AtendimentoDao.insertAtendimento(atendimento.getFuncionario(), atendimento.getCliente());
-        }else{
-            AtendimentoDao.insertAtendimento(atendimento.getFuncionario(), atendimento.getCliente(), atendimento.getReceita());
+        if (txtValorPago.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe o valor recebido");
+        } else {
+            if (atendimento.getReceita() == null || atendimento.getCliente() == null) {
+                AtendimentoDao.insertAtendimento(atendimento.getFuncionario());
+            } else if (atendimento.getReceita() == null || atendimento.getCliente() != null) {
+                AtendimentoDao.insertAtendimento(atendimento.getFuncionario(), atendimento.getCliente());
+            } else {
+                AtendimentoDao.insertAtendimento(atendimento.getFuncionario(), atendimento.getCliente(), atendimento.getReceita());
+            }
+            for (Produtos p : listaItens) {
+                AtendimentoDao.insertItens(atendimento.getIdAtendimento(), p.getIdProduto());
+            }
+            JOptionPane.showMessageDialog(this, "Compra finalizada.");
+            dispose();
+
+            FormAtendimento fa = new FormAtendimento();
+            fa.setVisible(true);
         }
-        for(Produtos p: listaItens){
-            AtendimentoDao.insertItens(atendimento.getIdAtendimento(), p.getIdProduto());
-        }
-        JOptionPane.showMessageDialog(this, "Compra finalizada.");
+
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     /**

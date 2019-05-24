@@ -40,9 +40,10 @@
         <Component class="javax.swing.JComboBox" name="jComboBoxCadastro">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
+              <StringArray count="3">
                 <StringItem index="0" value="Selecione"/>
-                <StringItem index="1" value="Vendas"/>
+                <StringItem index="1" value="Funcionarios"/>
+                <StringItem index="2" value="Clientes"/>
               </StringArray>
             </Property>
           </Properties>

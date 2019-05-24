@@ -27,8 +27,6 @@ public class FormPrincipal extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenuCadastros = new javax.swing.JMenu();
-        jMenuConfiguracoes = new javax.swing.JMenu();
         jMenuSobre = new javax.swing.JMenu();
         jmenuSobre = new javax.swing.JMenuItem();
 
@@ -109,17 +107,6 @@ public class FormPrincipal extends javax.swing.JFrame {
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jMenuBar1.setName("MenuBar"); // NOI18N
 
-        jMenuCadastros.setText("Cadastros");
-        jMenuCadastros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuCadastrosActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenuCadastros);
-
-        jMenuConfiguracoes.setText("Configuracoes");
-        jMenuBar1.add(jMenuConfiguracoes);
-
         jMenuSobre.setText("Sobre");
 
         jmenuSobre.setText("Versao");
@@ -149,7 +136,8 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtendimentoActionPerformed
 
     private void btnTemp2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTemp2ActionPerformed
-        // TODO add your handling code here:
+        FormSelecioneRelatorio fr = new FormSelecioneRelatorio();
+        fr.setVisible(true);
     }//GEN-LAST:event_btnTemp2ActionPerformed
 
     private void jmenuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuSobreActionPerformed
@@ -163,10 +151,6 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
         selecioneCadastro.setVisible(true);
     }//GEN-LAST:event_btnCadastroActionPerformed
-
-    private void jMenuCadastrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrosActionPerformed
-        selecioneCadastro.setVisible(true);
-    }//GEN-LAST:event_jMenuCadastrosActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -209,8 +193,6 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnTemp2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jMenuCadastros;
-    private javax.swing.JMenu jMenuConfiguracoes;
     private javax.swing.JMenu jMenuSobre;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
